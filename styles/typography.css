@@ -1,0 +1,81 @@
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  body {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer utilities {
+  .text-display {
+    font-family: var(--font-heading), Georgia, serif;
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .text-headline {
+    font-family: var(--font-heading), Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .text-title {
+    font-family: var(--font-heading), Georgia, serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    line-height: 1.2;
+    font-weight: 400;
+  }
+
+  .text-subtitle {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .text-body-lg {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .text-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .text-caption {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  .text-editorial {
+    font-family: var(--font-heading), Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.5;
+  }
+}

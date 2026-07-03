@@ -1,0 +1,80 @@
+@layer utilities {
+  .section-padding {
+    padding-block: clamp(5rem, 12vw, 9rem);
+  }
+
+  .section-padding-sm {
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  .container-editorial {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .editorial-grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .image-breathe {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .image-breathe-tall {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+  }
+
+  .image-breathe-wide {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .gradient-kerala {
+    background: linear-gradient(
+      165deg,
+      var(--ivory) 0%,
+      var(--sage-muted) 45%,
+      var(--backwater-light) 100%
+    );
+  }
+
+  .gradient-forest {
+    background: linear-gradient(
+      180deg,
+      var(--forest) 0%,
+      oklch(0.28 0.035 155) 100%
+    );
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

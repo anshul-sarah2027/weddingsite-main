@@ -1,0 +1,35 @@
+:root {
+  /* Kerala-inspired palette */
+  --ivory: oklch(0.97 0.008 85);
+  --ivory-muted: oklch(0.94 0.01 85);
+  --forest: oklch(0.35 0.04 155);
+  --forest-light: oklch(0.45 0.05 155);
+  --gold: oklch(0.72 0.08 85);
+  --gold-muted: oklch(0.82 0.05 85);
+  --sage: oklch(0.68 0.03 145);
+  --sage-muted: oklch(0.88 0.02 145);
+  --brown: oklch(0.45 0.04 55);
+  --brown-light: oklch(0.55 0.04 55);
+  --backwater: oklch(0.48 0.04 230);
+  --backwater-light: oklch(0.72 0.03 230);
+
+  /* Semantic tokens */
+  --background: var(--ivory);
+  --foreground: var(--forest);
+  --card: var(--ivory);
+  --card-foreground: var(--forest);
+  --popover: var(--ivory);
+  --popover-foreground: var(--forest);
+  --primary: var(--forest);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--sage-muted);
+  --secondary-foreground: var(--forest);
+  --muted: var(--ivory-muted);
+  --muted-foreground: var(--brown-light);
+  --accent: var(--gold-muted);
+  --accent-foreground: var(--forest);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.88 0.015 85);
+  --input: oklch(0.88 0.015 85);
+  --ring: var(--gold);
+}
