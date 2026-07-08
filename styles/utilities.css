@@ -77,4 +77,37 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Fine-art ivory mat frame for couple portrait */
+  .couple-art-frame {
+    position: relative;
+    padding: clamp(18px, 2.5vw, 22px);
+    border-radius: 10px;
+    box-shadow:
+      0 18px 45px rgba(0, 0, 0, 0.18),
+      0 3px 10px rgba(0, 0, 0, 0.1);
+    transform: rotate(-0.8deg);
+    background-color: #f7f2e8;
+    overflow: hidden;
+  }
+
+  .couple-art-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background-image: url("/patterns/paperTexture.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.55;
+  }
+
+  .couple-art-frame__photo {
+    position: relative;
+    z-index: 1;
+    display: block;
+    overflow: hidden;
+    line-height: 0;
+  }
 }

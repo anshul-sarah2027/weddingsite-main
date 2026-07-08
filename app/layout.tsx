@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { fontHeading, fontSans } from "@/lib/fonts";
+import {
+  fontAustinPen,
+  fontHeading,
+  fontSans,
+  fontScript,
+} from "@/lib/fonts";
 import { baseMetadata } from "@/lib/metadata";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { QueryProvider } from "@/providers/query-provider";
@@ -16,10 +21,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontSans.variable} ${fontHeading.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontHeading.variable} ${fontScript.variable} ${fontAustinPen.variable} min-h-screen antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-screen flex-col">
         <ThemeProvider>
           <QueryProvider>
             <SmoothScrollProvider>{children}</SmoothScrollProvider>

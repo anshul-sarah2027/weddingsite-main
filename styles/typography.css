@@ -78,4 +78,17 @@
     font-size: clamp(1.25rem, 2vw, 1.75rem);
     line-height: 1.5;
   }
+
+  .font-script {
+    font-family: var(--font-script), cursive;
+  }
+
+  .austin-pen-soft {
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    opacity: 0.92;
+    -webkit-text-stroke: 0.25px transparent;
+  }
 }

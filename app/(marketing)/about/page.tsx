@@ -23,7 +23,7 @@ export default function AboutPage() {
 
         <div className="editorial-grid mt-16 items-start lg:grid-cols-2">
           <FadeIn className="image-breathe">
-            <ImageReveal src={IMAGES.couple} alt="Anshul and Sarah" />
+            <ImageReveal src={IMAGES.couple.primary} alt="Anshul and Sarah" />
           </FadeIn>
 
           <div className="space-y-6">

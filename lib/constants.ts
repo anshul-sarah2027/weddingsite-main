@@ -5,8 +5,10 @@ export const SITE = {
     "Join Anshul and Sarah for an unforgettable wedding celebration on the serene backwaters of Kumarakom, Kerala — January 2027.",
   url: "https://anshulandsarah.com",
   locale: "en_IE",
-  weddingDate: "2027-01-15",
-  weddingDateDisplay: "15 January 2027",
+  weddingDate: "2027-01-30",
+  weddingDateDisplay: "30. 01. 2027",
+  weddingWeekendDisplay: "30 • 31 January 2027",
+  hashtag: "#PintsandPappadams",
   location: "Kumarakom, Kerala, India",
   couple: {
     groom: "Anshul",

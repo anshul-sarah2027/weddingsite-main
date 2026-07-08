@@ -1,12 +1,68 @@
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1602216052126-53fc084ef601?w=2400&q=85",
+  hero: "/hero/hero3.png",
+  heroAlt: {
+    primary: "/hero/hero1.png",
+    sunset: "/hero/hero2.png",
+    celebration: "/hero/hero3.png",
+    couple: "/hero/hero4.png",
+    invitation: "/hero/hero5.png",
+    welcomeNote: "/hero/hero6.png",
+    rsvp: "/hero/hero7.png",
+    footer: "/hero/heroFooter.png",
+  },
+  logo: {
+    light: "/logo/lightlogo.png",
+    dark: "/logo/darklogo.png",
+    wedding: "/logo/weddinglogo.png",
+    main: "/logo/mainLogo.png",
+  },
+  decor: {
+    sandDollar: "/images/decor/line-art-sand-dollar.avif",
+    resortPool: "/images/decor/resortpool.png",
+    weekendHeader: "/images/decor/weekendimage.png",
+    bananaLeaves: "/images/decor/banana-leaves-watercolor.png",
+    bananaPlant: "/images/decor/banana-leaves-plant.png",
+    bananaCorner: "/images/decor/bananacorner.png",
+    bananaFlower: "/images/decor/banana-flower-botanical.png",
+    eucalyptus: "/images/decor/eucalyptus-branch.avif",
+    oliveBranch: "/images/decor/olive-branch.avif",
+    bougainvillea: "/images/decor/pink-bougainvillea.png",
+    hangingJasmine: "/images/decor/hanging-jasmine-bell.jpg",
+    floralElephant: "/images/decor/floral-elephant-stands.png",
+    lotusCluster: "/images/decor/pink-lotus-cluster.png",
+    peonySingle: "/images/decor/white-peony-single.avif",
+    peonyWithBud: "/images/decor/white-peony-with-bud.avif",
+    houseboat: "/images/decor/kerala-backwaters-houseboat.png",
+    coupleIllustration: "/images/decor/anshul&sarah.png",
+    welcomeNoteIllustration: "/images/decor/welcomenote.png",
+    travelAndStayHeader: "/images/decor/travel&StayHeader.png",
+    rsvpHeader: "/images/decor/rsvpHeader.png",
+  },
+  couple: {
+    primary: "/couple/anshulSarah1.jpeg",
+    secondary: "/couple/anshulSarah2.jpeg",
+  },
+  venueKerala: {
+    bridgeEntrance: "/venueKerela/SPN05856.jpg",
+    poolHouseboats: "/venueKerela/SPN06787.jpg",
+    backwatersLawn: "/venueKerela/SPN06795.jpg",
+    timeline: "/venueKerela/timeline.png",
+    kumarakomFull: "/venueKerela/SPN05873.jpg",
+    sunsetPool: "/venueKerela/SPN09791.jpg",
+  },
+  patterns: {
+    divider: "/patterns/divider.png",
+    paperTexture: "/patterns/paperTexture.png",
+    sealButton: "/patterns/sealbutton.png",
+    weekendSeal: "/patterns/weekendSeal.png",
+    rsvpSeal: "/patterns/rsvpSeal.png",
+    ivorySeal: "/patterns/ivorySeal.png",
+  },
+
   keralaBackwaters:
     "https://images.unsplash.com/photo-1587474260587-136574528ed5?w=1600&q=85",
   keralaTemple:
     "https://images.unsplash.com/photo-1593693397690-362cb1bccf97?w=1600&q=85",
-  keralaBotanical:
-    "https://images.unsplash.com/photo-1591604466377-1a63d74d250f?w=1600&q=85",
-  couple: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=85",
   houseboat:
     "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1600&q=85",
   cuisine:

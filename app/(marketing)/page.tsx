@@ -1,10 +1,11 @@
 import { Arrival } from "@/components/home/arrival";
 import { WelcomeToKerala } from "@/components/home/welcome-to-kerala";
+import { WelcomeNote } from "@/components/home/welcome-note";
 import { TheirStory } from "@/components/home/their-story";
 import { WeddingWeekend } from "@/components/home/wedding-weekend";
 import { TheDestination } from "@/components/home/the-destination";
 import { TheExperience } from "@/components/home/the-experience";
-import { YourJourney } from "@/components/home/your-journey";
+import { TravelAndStay } from "@/components/home/travel-and-stay";
 import { RsvpSection } from "@/components/home/rsvp";
 import { SectionDivider } from "@/components/shared/section-divider";
 
@@ -14,16 +15,12 @@ export default function HomePage() {
       <Arrival />
       <SectionDivider />
       <WelcomeToKerala />
-      <SectionDivider />
+      <WelcomeNote />
       <TheirStory />
       <SectionDivider />
       <WeddingWeekend />
       <SectionDivider />
-      <TheDestination />
-      <SectionDivider />
-      <TheExperience />
-      <SectionDivider />
-      <YourJourney />
+      <TravelAndStay />
       <SectionDivider />
       <RsvpSection />
     </>

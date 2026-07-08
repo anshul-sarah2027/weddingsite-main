@@ -1,7 +1,8 @@
 :root {
   /* Kerala-inspired palette */
-  --ivory: oklch(0.97 0.008 85);
-  --ivory-muted: oklch(0.94 0.01 85);
+  /* Warm cream ivory — soft parchment, not white */
+  --ivory: oklch(0.92 0.03 78);
+  --ivory-muted: oklch(0.88 0.032 78);
   --forest: oklch(0.35 0.04 155);
   --forest-light: oklch(0.45 0.05 155);
   --gold: oklch(0.72 0.08 85);

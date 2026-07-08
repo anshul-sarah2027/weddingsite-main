@@ -13,6 +13,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
+  --font-script: var(--font-script), cursive;
   --color-ivory: var(--ivory);
   --color-ivory-muted: var(--ivory-muted);
   --color-forest: var(--forest);

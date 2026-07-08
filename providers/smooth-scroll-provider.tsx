@@ -16,6 +16,12 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       smoothWheel: true,
     });
 
+    const resize = () => lenis.resize();
+    window.addEventListener("resize", resize);
+
+    const observer = new ResizeObserver(resize);
+    observer.observe(document.body);
+
     let frame: number;
     function raf(time: number) {
       lenis.raf(time);
@@ -23,8 +29,17 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     }
     frame = requestAnimationFrame(raf);
 
+    // Recalculate after fonts/images settle
+    resize();
+    const t1 = window.setTimeout(resize, 500);
+    const t2 = window.setTimeout(resize, 1500);
+
     return () => {
       cancelAnimationFrame(frame);
+      window.removeEventListener("resize", resize);
+      observer.disconnect();
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
       lenis.destroy();
     };
   }, [reducedMotion]);

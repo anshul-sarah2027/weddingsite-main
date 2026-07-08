@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { SITE } from "./constants";
 
 export const baseMetadata: Metadata = {
+  icons: {
+    icon: "/patterns/ivorySeal.png",
+    shortcut: "/patterns/ivorySeal.png",
+    apple: "/patterns/ivorySeal.png",
+  },
   title: {
     default: `${SITE.name} | Wedding in Kumarakom`,
     template: `%s | ${SITE.name}`,
