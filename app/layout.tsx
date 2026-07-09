@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {
   fontAustinPen,
   fontHeading,
+  fontPoppins,
   fontSans,
   fontScript,
 } from "@/lib/fonts";
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fontSans.variable} ${fontHeading.variable} ${fontScript.variable} ${fontAustinPen.variable} min-h-screen antialiased`}
+      className={`${fontSans.variable} ${fontHeading.variable} ${fontScript.variable} ${fontAustinPen.variable} ${fontPoppins.variable} min-h-screen antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">

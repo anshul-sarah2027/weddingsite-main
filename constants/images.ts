@@ -9,6 +9,7 @@ export const IMAGES = {
     welcomeNote: "/hero/hero6.png",
     rsvp: "/hero/hero7.png",
     footer: "/hero/heroFooter.png",
+    weddingWeekend: "/hero/weddingweekendHero.png",
   },
   logo: {
     light: "/logo/lightlogo.png",
@@ -50,6 +51,9 @@ export const IMAGES = {
     kumarakomFull: "/venueKerela/SPN05873.jpg",
     sunsetPool: "/venueKerela/SPN09791.jpg",
   },
+  kerala: {
+    spiritOfKerala: "/kerala/images/spiritofkerela.png",
+  },
   patterns: {
     divider: "/patterns/divider.png",
     paperTexture: "/patterns/paperTexture.png",
@@ -57,6 +61,7 @@ export const IMAGES = {
     weekendSeal: "/patterns/weekendSeal.png",
     rsvpSeal: "/patterns/rsvpSeal.png",
     ivorySeal: "/patterns/ivorySeal.png",
+    bulletPoint: "/patterns/bulletpoint.png",
   },
 
   keralaBackwaters:

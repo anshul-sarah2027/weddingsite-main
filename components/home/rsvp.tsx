@@ -103,11 +103,17 @@ function RsvpBotanicals() {
   );
 }
 
-function RsvpSealButton() {
+function RsvpSealButton({
+  lines,
+  ariaLabel,
+}: {
+  lines: [string, string];
+  ariaLabel: string;
+}) {
   return (
     <Link
       href="/rsvp"
-      aria-label="Confirm your attendance"
+      aria-label={ariaLabel}
       className="group relative inline-flex cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A67C3A]/40 focus-visible:ring-offset-4 focus-visible:ring-offset-[#FAF7F0]"
     >
       <span
@@ -134,15 +140,41 @@ function RsvpSealButton() {
             "[text-shadow:0_1px_3px_rgba(0,0,0,0.22)]",
           )}
         >
-          <span>Confirm</span>
-          <span>Your Attendance</span>
+          <span>{lines[0]}</span>
+          <span>{lines[1]}</span>
         </span>
       </span>
     </Link>
   );
 }
 
-export function RsvpSection() {
+const RSVP_CONTENT = {
+  home: {
+    austinLine: "One Final Step",
+    heading: "Confirm Your Attendance",
+    paragraph:
+      "We cannot wait to celebrate this unforgettable weekend with the people who mean the most to us. If you'll be joining us in Kumarakom, we'd be so grateful if you could let us know by confirming your attendance. Your presence will truly make these celebrations complete.",
+    quote: "The celebration begins with your yes.",
+    buttonLines: ["Confirm", "Your Attendance"] as [string, string],
+    buttonAriaLabel: "Confirm your attendance",
+  },
+  events: {
+    austinLine: "Your Journey Awaits",
+    heading: "RSVP",
+    paragraph:
+      "We hope this glimpse into our wedding weekend has you as excited as we are. Whether you're joining us from nearby or travelling across the world, we can't wait to celebrate together in the heart of Kerala.",
+    quote: undefined,
+    buttonLines: ["Respond to Your", "Invitation"] as [string, string],
+    buttonAriaLabel: "Respond to your invitation",
+  },
+} as const;
+
+export function RsvpSection({
+  variant = "home",
+}: {
+  variant?: keyof typeof RSVP_CONTENT;
+}) {
+  const content = RSVP_CONTENT[variant];
   const sectionRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
 
@@ -217,43 +249,49 @@ export function RsvpSection() {
                 "austin-pen-soft mt-6 text-[1.625rem] text-[#8A6C3A] opacity-95 sm:text-[1.875rem]",
               )}
             >
-              One Final Step
+              {content.austinLine}
             </p>
           </FadeIn>
 
           {/* Main heading */}
           <FadeIn duration={0.8} delay={STAGGER * 2}>
             <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.18em] text-forest md:text-4xl lg:text-5xl">
-              Confirm Your Attendance
+              {content.heading}
             </h2>
           </FadeIn>
 
           {/* Editorial paragraph */}
           <FadeIn duration={0.8} delay={STAGGER * 3}>
-            <p className="font-heading mt-8 mb-[42px] max-w-[90%] text-base leading-[2] text-[rgba(70,70,70,0.82)] sm:max-w-[620px] sm:text-lg">
-              We cannot wait to celebrate this unforgettable weekend with the
-              people who mean the most to us. If you&apos;ll be joining us in
-              Kumarakom, we&apos;d be so grateful if you could let us know by
-              confirming your attendance. Your presence will truly make these
-              celebrations complete.
+            <p
+              className={cn(
+                "font-heading mt-8 max-w-[90%] text-base leading-[2] text-[rgba(70,70,70,0.82)] sm:max-w-[620px] sm:text-lg",
+                content.quote ? "mb-[42px]" : "mb-10",
+              )}
+            >
+              {content.paragraph}
             </p>
           </FadeIn>
 
           {/* Quote */}
-          <FadeIn duration={0.8} delay={STAGGER * 4}>
-            <blockquote
-              className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft mb-8 text-2xl text-[#A67C3A] opacity-90 sm:mb-9 sm:text-[1.75rem]",
-              )}
-            >
-              &ldquo;The celebration begins with your yes.&rdquo;
-            </blockquote>
-          </FadeIn>
+          {content.quote && (
+            <FadeIn duration={0.8} delay={STAGGER * 4}>
+              <blockquote
+                className={cn(
+                  fontAustinPen.className,
+                  "austin-pen-soft mb-8 text-2xl text-[#A67C3A] opacity-90 sm:mb-9 sm:text-[1.75rem]",
+                )}
+              >
+                &ldquo;{content.quote}&rdquo;
+              </blockquote>
+            </FadeIn>
+          )}
 
           {/* Seal */}
           <FadeIn duration={0.8} delay={STAGGER * 5}>
-            <RsvpSealButton />
+            <RsvpSealButton
+              lines={content.buttonLines}
+              ariaLabel={content.buttonAriaLabel}
+            />
           </FadeIn>
 
           {/* Deadline */}

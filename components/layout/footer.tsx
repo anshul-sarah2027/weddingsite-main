@@ -4,17 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect } from "react";
 import { IMAGES } from "@/constants/images";
+import { invitationFooterNavigation } from "@/constants/navigation";
 import { SITE, WEDDING } from "@/lib/constants";
 import { fontAustinPen } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
-
-const footerNav = [
-  { label: "Home", href: "/" },
-  { label: "Our Story", href: "/about" },
-  { label: "Weekend", href: "/events" },
-  { label: "Travel", href: "/accommodation" },
-  { label: "RSVP", href: "/rsvp" },
-] as const;
 
 function ClosingDivider() {
   return (
@@ -143,10 +136,10 @@ export function Footer() {
 
         <nav aria-label="Invitation navigation">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            {footerNav.map((item, index) => (
+            {invitationFooterNavigation.map((item, index) => (
               <Fragment key={item.href}>
                 <FooterNavLink href={item.href} label={item.label} />
-                {index < footerNav.length - 1 ? (
+                {index < invitationFooterNavigation.length - 1 ? (
                   <span
                     className="hidden font-heading text-sm text-[#D2B57A]/50 sm:inline"
                     aria-hidden="true"

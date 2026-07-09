@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import { IMAGES } from "@/constants/images";
 import type { NavItem } from "@/types/navigation";
 import { cn } from "@/lib/utils";
 
@@ -107,17 +108,28 @@ export function NavDropdown({
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className={cn(
               "absolute top-full left-1/2 z-50 mt-6 min-w-[15rem] -translate-x-1/2",
-              "overflow-hidden rounded-sm bg-forest/95 backdrop-blur-xl",
-              "shadow-[0_16px_48px_rgba(45,74,62,0.22)]",
-              "ring-1 ring-ivory/10",
+              "overflow-hidden rounded-[22px] border border-ivory/20",
+              "bg-forest/92 backdrop-blur-[10px]",
+              "shadow-[0_12px_40px_rgba(45,74,62,0.18)]",
             )}
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
           >
-            {/* Temple gold accent line */}
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+            {/* Paper texture overlay */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-soft-light"
+              style={{
+                backgroundImage: `url(${IMAGES.patterns.paperTexture})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+              aria-hidden="true"
+            />
 
-            <ul className="flex flex-col px-5 py-4">
+            {/* Temple gold accent line */}
+            <div className="relative z-10 h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+
+            <ul className="relative z-10 flex flex-col px-5 py-4">
               {children.map((child, index) => {
                 const childActive = pathname === child.href;
                 return (

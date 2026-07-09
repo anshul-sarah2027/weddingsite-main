@@ -8,18 +8,21 @@ import { NavLinks } from "@/components/layout/navbar/nav-links";
 import { RsvpButton } from "@/components/layout/navbar/rsvp-button";
 import { cn } from "@/lib/utils";
 
+/** Routes with a full-bleed hero — navbar stays transparent until scroll */
+const HERO_PATHS = ["/", "/events"];
+
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const isHome = pathname === "/";
-  const onHero = isHome && !scrolled;
+  const hasHero = HERO_PATHS.includes(pathname);
+  const onHero = hasHero && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <header

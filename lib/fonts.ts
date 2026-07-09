@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 
 export const fontHeading = Cormorant_Garamond({
@@ -11,6 +11,13 @@ export const fontHeading = Cormorant_Garamond({
 export const fontSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+export const fontPoppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
   weight: ["300", "400", "500"],
   display: "swap",
 });
