@@ -2,24 +2,38 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
 import { Logo } from "@/components/layout/navbar/logo";
 import { RsvpButton } from "@/components/layout/navbar/rsvp-button";
 import { mainNavigation } from "@/constants/navigation";
+import { IMAGES } from "@/constants/images";
+import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
   onHero?: boolean;
 }
 
+const EASE = [0.25, 0.1, 0.25, 1] as const;
+
+/** Solid warm ivory — never transparent */
+const MENU_BG = "#FAF7F2";
+
 export function MobileMenu({ onHero = false }: MobileMenuProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const panelId = useId();
   const infoPanelId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -57,145 +71,235 @@ export function MobileMenu({ onHero = false }: MobileMenuProps) {
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
       >
-        {open ? <X className="size-5" strokeWidth={1.5} /> : <Menu className="size-5" strokeWidth={1.5} />}
+        {open ? (
+          <X className="size-5" strokeWidth={1.5} />
+        ) : (
+          <Menu className="size-5" strokeWidth={1.5} />
+        )}
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id={panelId}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-            className="fixed inset-0 z-50 flex flex-col bg-ivory"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <div className="flex h-28 items-center justify-between px-6 md:h-32">
-              <Logo onClick={() => setOpen(false)} />
-              <button
-                type="button"
-                className="flex size-11 items-center justify-center text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40"
-                aria-label="Close menu"
-                onClick={() => setOpen(false)}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                id={panelId}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation"
+                className="fixed inset-0 z-[200] flex flex-col overflow-hidden"
+                style={{ backgroundColor: MENU_BG }}
+                initial={false}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 1 }}
+                transition={{ duration: 0 }}
               >
-                <X className="size-5" strokeWidth={1.5} />
-              </button>
-            </div>
+                {/* Solid opaque ivory — never transparent */}
+                <div
+                  className="pointer-events-none absolute inset-0"
+                  style={{ backgroundColor: MENU_BG }}
+                  aria-hidden="true"
+                />
 
-            <motion.nav
-              className="flex flex-1 flex-col justify-center px-8 pb-16"
-              aria-label="Mobile navigation"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 12 }}
-              transition={{ duration: 0.45, delay: 0.05, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <ul className="flex flex-col gap-1">
-                {mainNavigation.map((item, index) => {
-                  const hasChildren = Boolean(item.children?.length);
-                  const isActive =
-                    item.href === "/"
-                      ? pathname === "/"
-                      : pathname === item.href ||
-                        item.children?.some((child) => pathname === child.href);
+                {/* Paper texture on solid ivory only */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-[0.22]"
+                  style={{
+                    backgroundImage: `url(${IMAGES.patterns.paperTexture})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  aria-hidden="true"
+                />
 
-                  if (hasChildren) {
-                    return (
-                      <li key={item.href}>
-                        <button
-                          type="button"
-                          aria-expanded={infoOpen}
-                          aria-controls={infoPanelId}
-                          onClick={() => setInfoOpen((value) => !value)}
-                          className={cn(
-                            "font-heading flex w-full items-center justify-between py-4 text-left text-3xl font-medium tracking-[0.04em] text-forest",
-                            "transition-opacity duration-300",
-                            !isActive && "opacity-70",
-                          )}
-                        >
-                          {item.label}
-                          <ChevronDown
-                            className={cn(
-                              "size-5 transition-transform duration-400 ease-luxury",
-                              infoOpen && "rotate-180",
-                            )}
-                            strokeWidth={1.5}
-                          />
-                        </button>
+                <div
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_20%,rgba(181,154,99,0.1),transparent_55%),radial-gradient(ellipse_at_50%_100%,rgba(45,58,48,0.05),transparent_50%)]"
+                  aria-hidden="true"
+                />
 
-                        <AnimatePresence initial={false}>
-                          {infoOpen && (
-                            <motion.ul
-                              id={infoPanelId}
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{
-                                duration: 0.35,
-                                ease: [0.25, 0.1, 0.25, 1],
-                              }}
-                              className="overflow-hidden pl-2"
+                <div
+                  className="pointer-events-none absolute left-1/2 top-1/2 z-[1] w-[min(78vw,22rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.04] mix-blend-multiply"
+                  aria-hidden="true"
+                >
+                  <Image
+                    src={IMAGES.logo.main}
+                    alt=""
+                    width={1254}
+                    height={1254}
+                    className="h-auto w-full"
+                  />
+                </div>
+
+                <div
+                  className="pointer-events-none absolute -left-4 top-24 w-24 opacity-[0.1] sm:w-28"
+                  aria-hidden="true"
+                >
+                  <Image
+                    src={IMAGES.decor.eucalyptus}
+                    alt=""
+                    width={200}
+                    height={260}
+                    className="h-auto w-full"
+                  />
+                </div>
+                <div
+                  className="pointer-events-none absolute -right-3 bottom-28 w-20 opacity-[0.09] sm:w-24"
+                  aria-hidden="true"
+                >
+                  <Image
+                    src={IMAGES.decor.peonyWithBud}
+                    alt=""
+                    width={160}
+                    height={180}
+                    className="h-auto w-full"
+                  />
+                </div>
+
+                <div className="relative z-10 flex h-28 shrink-0 items-center justify-between px-6 md:h-32">
+                  <Logo onClick={() => setOpen(false)} />
+                  <button
+                    type="button"
+                    className="flex size-11 items-center justify-center text-forest/70 transition-colors duration-300 hover:text-forest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40"
+                    aria-label="Close menu"
+                    onClick={() => setOpen(false)}
+                  >
+                    <X className="size-5" strokeWidth={1.5} />
+                  </button>
+                </div>
+
+                <nav
+                  className="relative z-10 flex flex-1 flex-col items-center justify-center overflow-y-auto px-8 pb-10 pt-2"
+                  aria-label="Mobile navigation"
+                >
+                  <p className="font-editorial text-editorial mb-6 text-center text-lg tracking-[0.04em]">
+                    Navigate
+                  </p>
+
+                  <div className="mb-8 flex justify-center">
+                    <Image
+                      src={IMAGES.patterns.divider}
+                      alt=""
+                      width={1716}
+                      height={380}
+                      sizes="140px"
+                      className="h-auto w-28 opacity-50"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <ul className="flex w-full max-w-sm flex-col items-center gap-1 text-center">
+                    {mainNavigation.map((item) => {
+                      const hasChildren = Boolean(item.children?.length);
+                      const isActive =
+                        item.href === "/"
+                          ? pathname === "/"
+                          : pathname === item.href ||
+                            item.children?.some(
+                              (child) => pathname === child.href,
+                            );
+
+                      if (hasChildren) {
+                        return (
+                          <li key={item.href} className="w-full">
+                            <button
+                              type="button"
+                              aria-expanded={infoOpen}
+                              aria-controls={infoPanelId}
+                              onClick={() => setInfoOpen((value) => !value)}
+                              className={cn(
+                                "font-heading mx-auto flex items-center justify-center gap-2 py-3.5 text-center text-[1.75rem] font-medium tracking-[0.1em] text-forest uppercase sm:text-3xl",
+                                "transition-opacity duration-300",
+                                !isActive && "opacity-65",
+                              )}
                             >
-                              {item.children?.map((child) => (
-                                <li key={child.href}>
-                                  <Link
-                                    href={child.href}
-                                    onClick={() => setOpen(false)}
-                                    className={cn(
-                                      "font-heading block py-3 text-lg tracking-[0.08em] text-forest/65 uppercase",
-                                      "transition-colors duration-300 hover:text-forest",
-                                      pathname === child.href && "text-forest",
-                                    )}
-                                  >
-                                    {child.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </motion.ul>
-                          )}
-                        </AnimatePresence>
-                      </li>
-                    );
-                  }
+                              {item.label}
+                              <ChevronDown
+                                className={cn(
+                                  "size-4 shrink-0 text-editorial transition-transform duration-400 ease-luxury sm:size-5",
+                                  infoOpen && "rotate-180",
+                                )}
+                                strokeWidth={1.5}
+                              />
+                            </button>
 
-                  return (
-                    <li key={item.href}>
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.4,
-                          delay: 0.06 * index,
-                          ease: [0.25, 0.1, 0.25, 1],
-                        }}
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={() => setOpen(false)}
-                          className={cn(
-                            "font-heading block py-4 text-3xl font-medium tracking-[0.04em] text-forest",
-                            "transition-opacity duration-300",
-                            isActive ? "opacity-100" : "opacity-70 hover:opacity-100",
-                          )}
-                        >
-                          {item.label}
-                        </Link>
-                      </motion.div>
-                    </li>
-                  );
-                })}
-              </ul>
+                            <AnimatePresence initial={false}>
+                              {infoOpen && (
+                                <motion.ul
+                                  id={infoPanelId}
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.35, ease: EASE }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="flex flex-col items-center gap-0.5 pb-3 pt-1">
+                                    {item.children?.map((child) => (
+                                      <li key={child.href}>
+                                        <Link
+                                          href={child.href}
+                                          onClick={() => setOpen(false)}
+                                          className={cn(
+                                            "font-editorial block py-2.5 text-base tracking-[0.06em] text-forest/55 transition-colors duration-300 hover:text-editorial sm:text-lg",
+                                            pathname === child.href &&
+                                              "text-editorial",
+                                          )}
+                                        >
+                                          {child.label}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </div>
+                                </motion.ul>
+                              )}
+                            </AnimatePresence>
+                          </li>
+                        );
+                      }
 
-              <div className="mt-10">
-                <RsvpButton onClick={() => setOpen(false)} />
-              </div>
-            </motion.nav>
-          </motion.div>
+                      return (
+                        <li key={item.href} className="w-full">
+                          <Link
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className={cn(
+                              "font-heading block py-3.5 text-[1.75rem] font-medium tracking-[0.1em] text-forest uppercase sm:text-3xl",
+                              "transition-opacity duration-300",
+                              isActive
+                                ? "opacity-100"
+                                : "opacity-65 hover:opacity-100",
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <div className="mt-8 flex justify-center">
+                    <Image
+                      src={IMAGES.patterns.divider}
+                      alt=""
+                      width={1716}
+                      height={380}
+                      sizes="140px"
+                      className="h-auto w-28 opacity-50"
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div className="mt-8 flex flex-col items-center">
+                    <RsvpButton onClick={() => setOpen(false)} />
+                    <p className="font-editorial text-editorial mt-5 text-sm tracking-[0.08em]">
+                      {SITE.weddingWeekendDisplay}
+                    </p>
+                  </div>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </div>
   );
 }
