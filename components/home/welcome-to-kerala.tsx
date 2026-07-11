@@ -6,7 +6,6 @@ import Link from "next/link";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -144,8 +143,7 @@ export function WelcomeToKerala() {
           </div>
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft mb-8 text-3xl text-forest md:text-4xl",
+            "font-editorial text-editorial mb-8 text-3xl md:text-4xl",
             )}
           >
             God&apos;s Own Country
@@ -208,7 +206,7 @@ export function WelcomeToKerala() {
         </div>
 
         <motion.p
-          className="font-heading mx-auto mt-14 max-w-lg text-center text-xl text-forest/70 italic md:mt-16 md:text-2xl"
+          className="font-editorial text-editorial-quote mx-auto mt-14 max-w-lg text-center text-xl md:mt-16 md:text-2xl"
           initial={reducedMotion ? {} : { opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-60px" }}
@@ -223,8 +221,7 @@ export function WelcomeToKerala() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl text-[#B59A63] tracking-wide transition-colors duration-300 hover:text-forest md:text-2xl",
+            "font-editorial text-editorial text-xl tracking-wide transition-colors duration-300 hover:text-forest md:text-2xl",
             )}
           >
             View Location

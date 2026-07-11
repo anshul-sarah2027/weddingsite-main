@@ -10,7 +10,6 @@ import {
 } from "@/constants/wedding-weekend-timeline";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { TimelineDayChapter } from "./timeline-day-chapter";
 import { TimelineEditorialQuote } from "./timeline-editorial-quote";
@@ -88,8 +87,7 @@ export function WeddingWeekendTimeline() {
 
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl text-forest/70 md:text-2xl",
+            "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             {SITE.hashtag}

@@ -11,7 +11,9 @@ export function QuoteBlock({ quote, attribution, className }: QuoteBlockProps) {
   return (
     <FadeIn className={cn("max-w-3xl", className)}>
       <blockquote>
-        <p className="text-editorial text-foreground/90">&ldquo;{quote}&rdquo;</p>
+        <p className="font-editorial text-editorial-quote text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.5] font-light">
+          &ldquo;{quote}&rdquo;
+        </p>
         {attribution && (
           <footer className="text-caption text-muted-foreground mt-6">
             — {attribution}

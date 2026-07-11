@@ -3,7 +3,6 @@
 import { FadeIn } from "@/components/animations/fade-in";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import type { TimelineDay } from "@/types/timeline";
 import { cn } from "@/lib/utils";
 
@@ -32,8 +31,7 @@ export function TimelineDayChapter({ day, dayIndex }: TimelineDayChapterProps) {
 
         <p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft mt-4 text-3xl text-forest/80 md:text-4xl lg:text-[2.75rem]",
+            "font-editorial text-editorial mt-4 text-3xl md:text-4xl lg:text-[2.75rem]",
           )}
         >
           {day.chapterTitle}

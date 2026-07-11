@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -72,18 +71,17 @@ export function Arrival() {
           />
         </motion.div>
 
-        {/* Date — Austin Pen */}
+        {/* Date — both wedding days, compact lockup */}
         <motion.h2
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft text-4xl italic text-white md:text-5xl lg:text-6xl",
+            "font-editorial text-white text-[2rem] tracking-[0.04em] md:text-5xl lg:text-6xl",
             "drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]",
           )}
           initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          {SITE.weddingDateDisplay}
+          {SITE.weddingHeroDateDisplay}
         </motion.h2>
 
         {/* Couple names — Cormorant Garamond */}
@@ -99,11 +97,10 @@ export function Arrival() {
           {SITE.couple.groom} & {SITE.couple.bride}
         </motion.h1>
 
-        {/* Venue — Austin Pen */}
+        {/* Venue — Cormorant Garamond */}
         <motion.h3
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft mt-5 text-3xl text-white md:mt-6 md:text-4xl",
+            "font-editorial text-white mt-5 text-3xl md:mt-6 md:text-4xl",
             "drop-shadow-[0_1px_12px_rgba(0,0,0,0.3)]",
           )}
           initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
@@ -124,8 +121,7 @@ export function Arrival() {
         <Link
           href="#welcome"
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft whitespace-nowrap text-center text-xl text-white/75 transition-colors duration-500 hover:text-white md:text-2xl",
+            "font-editorial whitespace-nowrap text-center text-xl text-white/75 transition-colors duration-500 hover:text-white md:text-2xl",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30",
           )}
         >

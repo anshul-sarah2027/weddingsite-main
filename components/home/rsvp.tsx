@@ -7,7 +7,6 @@ import { useRef } from "react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -135,8 +134,7 @@ function RsvpSealButton({
         />
         <span
           className={cn(
-            fontAustinPen.className,
-            "pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-[1.35rem] leading-[1.3] text-[#FAF7F0] sm:text-[1.625rem]",
+            "font-editorial pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-[1.35rem] leading-[1.3] text-[#FAF7F0] sm:text-[1.625rem]",
             "[text-shadow:0_1px_3px_rgba(0,0,0,0.22)]",
           )}
         >
@@ -150,7 +148,7 @@ function RsvpSealButton({
 
 const RSVP_CONTENT = {
   home: {
-    austinLine: "One Final Step",
+    eyebrow: "One Final Step",
     heading: "Confirm Your Attendance",
     paragraph:
       "We cannot wait to celebrate this unforgettable weekend with the people who mean the most to us. If you'll be joining us in Kumarakom, we'd be so grateful if you could let us know by confirming your attendance. Your presence will truly make these celebrations complete.",
@@ -159,13 +157,22 @@ const RSVP_CONTENT = {
     buttonAriaLabel: "Confirm your attendance",
   },
   events: {
-    austinLine: "Your Journey Awaits",
+    eyebrow: "Your Journey Awaits",
     heading: "RSVP",
     paragraph:
       "We hope this glimpse into our wedding weekend has you as excited as we are. Whether you're joining us from nearby or travelling across the world, we can't wait to celebrate together in the heart of Kerala.",
     quote: undefined,
     buttonLines: ["Respond to Your", "Invitation"] as [string, string],
     buttonAriaLabel: "Respond to your invitation",
+  },
+  travel: {
+    eyebrow: "We Can't Wait to Welcome You",
+    heading: "RSVP",
+    paragraph:
+      "Now that you've planned your journey to Kerala, there's just one more thing. Please confirm your attendance so we can prepare for your arrival — we can't wait to welcome you to Kumarakom.",
+    quote: undefined,
+    buttonLines: ["Confirm", "Your Attendance"] as [string, string],
+    buttonAriaLabel: "Confirm your attendance",
   },
 } as const;
 
@@ -241,15 +248,14 @@ export function RsvpSection({
             </motion.div>
           </FadeIn>
 
-          {/* Austin eyebrow */}
+          {/* Eyebrow */}
           <FadeIn duration={0.8} delay={STAGGER * 1}>
             <p
               className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft mt-6 text-[1.625rem] text-[#8A6C3A] opacity-95 sm:text-[1.875rem]",
+            "font-editorial text-editorial mt-6 text-[1.625rem] opacity-95 sm:text-[1.875rem]",
               )}
             >
-              {content.austinLine}
+              {content.eyebrow}
             </p>
           </FadeIn>
 
@@ -277,8 +283,7 @@ export function RsvpSection({
             <FadeIn duration={0.8} delay={STAGGER * 4}>
               <blockquote
                 className={cn(
-                  fontAustinPen.className,
-                  "austin-pen-soft mb-8 text-2xl text-[#A67C3A] opacity-90 sm:mb-9 sm:text-[1.75rem]",
+            "font-editorial text-editorial-quote mb-8 text-2xl opacity-90 sm:mb-9 sm:text-[1.75rem]",
                 )}
               >
                 &ldquo;{content.quote}&rdquo;

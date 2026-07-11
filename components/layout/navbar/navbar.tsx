@@ -8,14 +8,19 @@ import { NavLinks } from "@/components/layout/navbar/nav-links";
 import { RsvpButton } from "@/components/layout/navbar/rsvp-button";
 import { cn } from "@/lib/utils";
 
-/** Routes with a full-bleed hero — navbar stays transparent until scroll */
-const HERO_PATHS = ["/", "/events"];
+/** Routes with a full-bleed dark hero — ivory nav until scroll */
+const DARK_HERO_PATHS = ["/", "/events"];
+/** Routes with a light watercolor hero — transparent nav, forest type */
+const LIGHT_HERO_PATHS = ["/accommodation", "/save-the-date"];
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const hasHero = HERO_PATHS.includes(pathname);
-  const onHero = hasHero && !scrolled;
+  const hasDarkHero = DARK_HERO_PATHS.includes(pathname);
+  const hasLightHero = LIGHT_HERO_PATHS.includes(pathname);
+  const hasHero = hasDarkHero || hasLightHero;
+  const onHero = hasDarkHero && !scrolled;
+  const transparentNav = hasHero && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -28,7 +33,7 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-luxury",
-        onHero
+        transparentNav
           ? "border-b border-transparent bg-transparent"
           : "border-b border-forest/8 bg-ivory/80 shadow-[0_1px_0_rgba(45,74,62,0.04)] backdrop-blur-xl",
       )}

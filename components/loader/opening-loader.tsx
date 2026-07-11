@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { IMAGES } from "@/constants/images";
 import { SITE, WEDDING } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
@@ -224,8 +223,7 @@ export function OpeningLoader({ onExitStart, onComplete }: OpeningLoaderProps) {
         onClick={enableSound}
         aria-label={soundOn ? "Music playing" : "Tap to play music"}
         className={cn(
-          fontAustinPen.className,
-          "group absolute top-5 right-5 z-20 flex items-center gap-2 rounded-full border border-[#B59A63]/40 bg-[rgba(250,246,239,0.55)] px-4 py-2 backdrop-blur-sm transition-colors duration-500 hover:border-[#B59A63]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B59A63]/40 md:top-7 md:right-7",
+            "group absolute top-5 right-5 z-20 flex items-center gap-2 rounded-full border border-[#B59A63]/40 bg-[rgba(250,246,239,0.55)] px-4 py-2 backdrop-blur-sm transition-colors duration-500 hover:border-[#B59A63]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B59A63]/40 md:top-7 md:right-7",
         )}
         initial={{ opacity: 0, y: -6 }}
         animate={
@@ -273,7 +271,7 @@ export function OpeningLoader({ onExitStart, onComplete }: OpeningLoaderProps) {
             </svg>
           )}
         </motion.span>
-        <span className="austin-pen-soft text-sm text-[#8A6C3A] md:text-base">
+        <span className="font-editorial text-editorial text-sm md:text-base">
           {soundOn ? "Music on" : "Tap to hear"}
         </span>
       </motion.button>
@@ -345,8 +343,7 @@ export function OpeningLoader({ onExitStart, onComplete }: OpeningLoaderProps) {
 
         <motion.p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft mt-8 text-xl tracking-[0.08em] text-[#B59A63] md:text-2xl",
+            "font-editorial text-editorial mt-8 text-xl tracking-[0.08em] md:text-2xl",
           )}
           initial={{ opacity: 0, y: 10 }}
           animate={isExiting ? { opacity: 0, y: 0 } : { opacity: 1, y: 0 }}

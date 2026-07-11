@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -144,8 +143,7 @@ export function WeddingWeekendHero() {
 
         <motion.p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft text-2xl text-[#F5F0E6]/90 md:text-[1.75rem] lg:text-[2rem]",
+            "font-editorial text-editorial text-2xl md:text-[1.75rem] lg:text-[2rem]",
             "drop-shadow-[0_1px_14px_rgba(0,0,0,0.35)]",  
           )}
           initial={reducedMotion ? false : { opacity: 0, y: 18 }}

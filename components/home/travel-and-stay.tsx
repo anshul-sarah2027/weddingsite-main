@@ -7,7 +7,6 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
 import { SITE, WEDDING } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -39,8 +38,7 @@ function TravelBoardingPassCta() {
       <div className="flex flex-1 flex-col justify-center lg:items-end lg:text-right">
         <p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft text-xl text-[#B9975B] md:text-2xl",
+            "font-editorial text-editorial text-xl md:text-2xl",
           )}
         >
           Everything you&apos;ll need
@@ -119,8 +117,7 @@ function TravelBoardingPassCta() {
 
         <p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft mt-4 text-sm text-[#B9975B]/80 sm:text-base",
+            "font-editorial text-editorial/80 mt-4 text-sm sm:text-base",
           )}
         >
           {SITE.hashtag}
@@ -155,8 +152,7 @@ function TravelBoardingPassCta() {
           />
           <span
             className={cn(
-              fontAustinPen.className,
-              "pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-[0.72rem] leading-[1.15] text-[#5C4A32] transition-transform duration-500 ease-out group-hover/boarding:-translate-y-0.5 sm:text-[1.05rem]",
+            "font-editorial pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-[0.72rem] leading-[1.15] text-[#5C4A32] transition-transform duration-500 ease-out group-hover/boarding:-translate-y-0.5 sm:text-[1.05rem]",
             )}
           >
             <span>Begin Your</span>
@@ -245,8 +241,7 @@ export function TravelAndStay() {
 
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl text-forest/70 md:text-2xl",
+            "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             YOUR JOURNEY BEGINS HERE
@@ -276,8 +271,7 @@ export function TravelAndStay() {
         <FadeIn className="mt-12 text-center md:mt-14" delay={0.2} duration={0.9}>
           <blockquote
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-2xl text-[#B9975B] md:text-[1.875rem]",
+            "font-editorial text-editorial-quote text-2xl md:text-[1.875rem]",
             )}
           >
             &ldquo;The journey is part of the celebration.&rdquo;
@@ -350,8 +344,7 @@ export function TravelAndStay() {
           />
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft mt-8 text-xl tracking-[0.02em] text-[#B9975B] opacity-75 md:text-2xl",
+            "font-editorial text-editorial mt-8 text-xl tracking-[0.02em] opacity-75 md:text-2xl",
             )}
           >
             {SITE.hashtag}

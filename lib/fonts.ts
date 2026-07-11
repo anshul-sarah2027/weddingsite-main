@@ -1,10 +1,19 @@
-import { Cormorant_Garamond, DM_Sans, Poppins } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, EB_Garamond, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 
 export const fontHeading = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-heading",
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+/** EB Garamond — editorial labels, dates & quotes (replaces Austin Pen) */
+export const fontEditorial = EB_Garamond({
+  subsets: ["latin"],
+  variable: "--font-editorial",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -19,14 +28,6 @@ export const fontPoppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
   weight: ["300", "400", "500"],
-  display: "swap",
-});
-
-/** Austin Pen Bold — hero date & venue script */
-export const fontAustinPen = localFont({
-  src: "../public/fonts/austin pen/austin-pen-bold.ttf",
-  variable: "--font-austin-pen",
-  weight: "700",
   display: "swap",
 });
 

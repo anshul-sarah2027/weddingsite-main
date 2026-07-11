@@ -1,7 +1,6 @@
 "use client";
 
 import { FadeIn } from "@/components/animations/fade-in";
-import { fontAustinPen } from "@/lib/fonts";
 import type { TimelineEvent } from "@/types/timeline";
 import { cn } from "@/lib/utils";
 import { TimelineIllustration } from "./timeline-illustration";
@@ -77,8 +76,7 @@ export function TimelineEventStop({ event, index, isLast }: TimelineEventStopPro
           {event.poeticTitle && (
             <p
               className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft mt-3 text-xl uppercase tracking-[0.06em] text-[#B59A63] md:text-2xl",
+            "font-editorial text-editorial mt-3 text-xl uppercase tracking-[0.06em] md:text-2xl",
               )}
             >
               {event.poeticTitle}

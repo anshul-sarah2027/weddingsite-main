@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 interface RsvpButtonProps {
@@ -53,8 +52,7 @@ export function RsvpButton({ className, onClick }: RsvpButtonProps) {
 
         <span
           className={cn(
-            fontAustinPen.className,
-            "pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-[1.4rem] tracking-[0.08em] text-[#F7F2E8] transition-colors duration-[450ms] ease-out group-hover:text-[#D7BE79] sm:text-[1.65rem]",
+            "font-editorial pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-[1.4rem] tracking-[0.08em] text-[#F7F2E8] transition-colors duration-[450ms] ease-out group-hover:text-[#D7BE79] sm:text-[1.65rem]",
           )}
         >
           Rsvp

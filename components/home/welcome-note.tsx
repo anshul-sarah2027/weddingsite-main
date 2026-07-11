@@ -6,7 +6,6 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -172,8 +171,7 @@ export function WelcomeNote() {
               <p className="font-heading text-forest/70 italic">Lots of love,</p>
               <p
                 className={cn(
-                  fontAustinPen.className,
-                  "austin-pen-soft mt-2 text-2xl text-forest md:text-3xl",
+            "font-editorial text-editorial mt-2 text-2xl md:text-3xl",
                 )}
               >
                 Sarah & Anshul
@@ -189,8 +187,7 @@ export function WelcomeNote() {
         >
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl tracking-[0.02em] text-[#A98B5E] md:text-2xl",
+            "font-editorial text-editorial text-xl tracking-[0.02em] md:text-2xl",
             )}
           >
             {SITE.hashtag}

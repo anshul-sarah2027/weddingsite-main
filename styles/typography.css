@@ -71,24 +71,16 @@
     letter-spacing: 0.02em;
   }
 
-  .text-editorial {
-    font-family: var(--font-heading), Georgia, serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(1.25rem, 2vw, 1.75rem);
-    line-height: 1.5;
+  /**
+   * EB Garamond — former Austin roles (labels, dates, quotes).
+   * Use upright (regular) for editorial accents; gold colour carries hierarchy.
+   * Colors: `text-editorial` (#B59A63) · `text-editorial-quote` (#8F7A52)
+   */
+  .font-editorial {
+    font-family: var(--font-editorial), "EB Garamond", Georgia, serif;
   }
 
   .font-script {
     font-family: var(--font-script), cursive;
-  }
-
-  .austin-pen-soft {
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    opacity: 0.92;
-    -webkit-text-stroke: 0.25px transparent;
   }
 }

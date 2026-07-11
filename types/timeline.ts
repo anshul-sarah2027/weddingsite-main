@@ -6,7 +6,7 @@ export interface TimelineEvent {
   description: string;
   venue: string;
   illustration: string;
-  /** Sarah's poetic chapter title — shown in Austin above the event name */
+  /** Sarah's poetic chapter title — shown in Cormorant above the event name */
   poeticTitle?: string;
   /** e.g. "Followed By" for Sadya Lunch */
   timePrefix?: string;

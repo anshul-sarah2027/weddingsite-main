@@ -1,7 +1,6 @@
 "use client";
 
 import { FadeIn } from "@/components/animations/fade-in";
-import { fontAustinPen } from "@/lib/fonts";
 import type { EditorialQuote } from "@/types/timeline";
 import { cn } from "@/lib/utils";
 
@@ -18,8 +17,7 @@ export function TimelineEditorialQuote({
     <FadeIn duration={0.9} delay={index * 0.06}>
       <blockquote
         className={cn(
-          fontAustinPen.className,
-          "austin-pen-soft relative mx-auto max-w-lg py-10 text-center text-2xl leading-snug text-[#B59A63] md:py-14 md:text-3xl",
+            "font-editorial text-editorial-quote relative mx-auto max-w-lg py-10 text-center text-2xl leading-snug md:py-14 md:text-3xl",
         )}
       >
         <span

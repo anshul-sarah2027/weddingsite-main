@@ -6,7 +6,6 @@ import { Fragment, useEffect } from "react";
 import { IMAGES } from "@/constants/images";
 import { invitationFooterNavigation } from "@/constants/navigation";
 import { SITE, WEDDING } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 function ClosingDivider() {
@@ -109,8 +108,7 @@ export function Footer() {
 
         <p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft mt-1.5 text-2xl text-[#D2B57A]",
+            "font-editorial text-editorial mt-1.5 text-2xl",
           )}
         >
           {SITE.hashtag}
@@ -158,8 +156,7 @@ export function Footer() {
 
         <p
           className={cn(
-            fontAustinPen.className,
-            "austin-pen-soft text-base text-[rgba(255,240,215,0.92)] sm:text-lg",
+            "font-editorial text-editorial text-base sm:text-lg",
           )}
         >
           See you beneath the palms of Kumarakom.
@@ -176,8 +173,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft group relative mt-1.5 inline-block text-xl text-[#D2B57A] transition-colors duration-500 hover:text-[#E8C98A] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D2B57A]/40",
+            "font-editorial group relative mt-1.5 inline-block text-xl text-editorial transition-colors duration-500 hover:text-[#E8C98A] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D2B57A]/40",
             )}
           >
             byMotifStudios

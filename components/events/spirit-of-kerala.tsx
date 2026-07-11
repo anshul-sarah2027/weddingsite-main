@@ -6,7 +6,6 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -105,8 +104,7 @@ export function SpiritOfKerala() {
 
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl text-forest/70 md:text-2xl",
+            "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             Where Traditions Become Memories
@@ -157,8 +155,7 @@ export function SpiritOfKerala() {
           <FadeIn duration={0.9} delay={0.15} className="text-center md:text-left">
             <p
               className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft text-lg text-[#B59A63] md:text-xl",
+            "font-editorial text-editorial text-lg md:text-xl",
               )}
             >
               {SITE.hashtag}
@@ -186,8 +183,7 @@ export function SpiritOfKerala() {
 
             <blockquote
               className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft mx-auto mt-10 max-w-sm text-xl leading-snug text-[#B59A63] md:mx-0 md:text-2xl",
+            "font-editorial text-editorial-quote mx-auto mt-10 max-w-sm text-xl leading-snug md:mx-0 md:text-2xl",
               )}
             >
               &ldquo;Every ritual carries a story&mdash;

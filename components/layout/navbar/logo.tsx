@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -71,8 +70,7 @@ export function Logo({ onHero = false, className, onClick }: LogoProps) {
           {/* Hashtag — replaces logo on hover */}
           <span
             className={cn(
-              fontAustinPen.className,
-              "absolute inset-0 flex items-center justify-center whitespace-nowrap text-center text-[19px] leading-none tracking-[0.02em] transition-[opacity,color] duration-500 ease-out md:text-[24px]",
+            "font-editorial absolute inset-0 flex items-center justify-center whitespace-nowrap text-center text-[19px] leading-none tracking-[0.02em] transition-[opacity,color] duration-500 ease-out md:text-[24px]",
               onHero ? "text-ivory" : "text-[#A98B5E]",
               showHashtag ? "opacity-100" : "pointer-events-none opacity-0",
             )}

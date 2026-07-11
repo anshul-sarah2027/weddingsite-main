@@ -13,6 +13,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
+  --font-editorial: var(--font-editorial);
   --font-script: var(--font-script), cursive;
   --color-ivory: var(--ivory);
   --color-ivory-muted: var(--ivory-muted);
@@ -20,6 +21,8 @@
   --color-forest-light: var(--forest-light);
   --color-gold: var(--gold);
   --color-gold-muted: var(--gold-muted);
+  --color-editorial: var(--editorial);
+  --color-editorial-quote: var(--editorial-quote);
   --color-sage: var(--sage);
   --color-sage-muted: var(--sage-muted);
   --color-brown: var(--brown);

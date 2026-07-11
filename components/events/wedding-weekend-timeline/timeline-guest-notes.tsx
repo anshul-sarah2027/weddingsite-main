@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import type { GuestNote } from "@/types/timeline";
 import { cn } from "@/lib/utils";
 
@@ -94,8 +93,7 @@ export function TimelineGuestNotes({ notes }: TimelineGuestNotesProps) {
         <div className="relative z-10 text-center">
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-2xl text-[#B59A63] md:text-3xl",
+            "font-editorial text-editorial text-2xl md:text-3xl",
             )}
           >
             For Our Guests

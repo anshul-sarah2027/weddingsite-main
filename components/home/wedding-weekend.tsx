@@ -6,7 +6,6 @@ import Link from "next/link";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -28,8 +27,7 @@ function WeekendStampCta() {
         />
         <span
           className={cn(
-            fontAustinPen.className,
-            "pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center text-[1.05rem] leading-tight text-[#5C4A32] transition-transform duration-500 ease-out group-hover:-translate-y-0.5 sm:text-[1.15rem]",
+            "font-editorial pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center text-[1.05rem] leading-tight text-[#5C4A32] transition-transform duration-500 ease-out group-hover:-translate-y-0.5 sm:text-[1.15rem]",
           )}
         >
           <span>Explore</span>
@@ -127,8 +125,7 @@ export function WeddingWeekend() {
 
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl text-forest/70 md:text-2xl",
+            "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             Three unforgettable days
@@ -185,8 +182,7 @@ export function WeddingWeekend() {
           >
             <p
               className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft text-lg text-[#B59A63] md:text-xl",
+            "font-editorial text-editorial text-lg md:text-xl",
               )}
             >
               A Weekend to Remember
@@ -206,8 +202,7 @@ export function WeddingWeekend() {
 
             <blockquote
               className={cn(
-                fontAustinPen.className,
-                "austin-pen-soft mx-auto mt-10 max-w-sm text-xl leading-snug text-[#B59A63] md:mx-0 md:text-2xl",
+            "font-editorial text-editorial-quote mx-auto mt-10 max-w-sm text-xl leading-snug md:mx-0 md:text-2xl",
               )}
             >
               &ldquo;Love deserves more than a day&mdash;

@@ -7,6 +7,10 @@
   --forest-light: oklch(0.45 0.05 155);
   --gold: oklch(0.72 0.08 85);
   --gold-muted: oklch(0.82 0.05 85);
+  /* Editorial accent (EB Garamond labels) */
+  --editorial: #b59a63;
+  /* Muted antique gold for quotes */
+  --editorial-quote: #8f7a52;
   --sage: oklch(0.68 0.03 145);
   --sage-muted: oklch(0.88 0.02 145);
   --brown: oklch(0.45 0.04 55);

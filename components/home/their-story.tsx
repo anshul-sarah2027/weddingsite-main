@@ -6,7 +6,6 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
-import { fontAustinPen } from "@/lib/fonts";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -128,8 +127,7 @@ export function TheirStory() {
           </div>
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-2xl text-ivory/85 md:text-3xl",
+            "font-editorial text-ivory/85 text-2xl md:text-3xl",
             )}
           >
             Two hearts, one beautiful beginning
@@ -171,8 +169,7 @@ export function TheirStory() {
                 <p className="text-ivory/75 italic">With love,</p>
                 <p
                   className={cn(
-                    fontAustinPen.className,
-                    "austin-pen-soft mt-1 text-2xl text-gold",
+            "font-editorial text-editorial mt-1 text-2xl",
                   )}
                 >
                   ~ Anshul & Sarah
@@ -202,8 +199,7 @@ export function TheirStory() {
         <FadeIn className="mt-8 text-center md:mt-10" delay={0.35} duration={0.9}>
           <p
             className={cn(
-              fontAustinPen.className,
-              "austin-pen-soft text-xl tracking-[0.02em] text-gold md:text-2xl",
+            "font-editorial text-editorial text-xl tracking-[0.02em] md:text-2xl",
             )}
           >
             {SITE.hashtag}
