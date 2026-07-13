@@ -17,6 +17,8 @@ export const IMAGES = {
     dark: "/logo/darklogo.png",
     wedding: "/logo/weddinglogo.png",
     main: "/logo/mainLogo.png",
+    paypal: "/logos/paypal.svg",
+    revolut: "/logos/revolut.svg",
   },
   decor: {
     sandDollar: "/images/decor/line-art-sand-dollar.avif",
