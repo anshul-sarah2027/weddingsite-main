@@ -141,7 +141,7 @@ export function WeddingWeekendHero() {
           />
         </motion.div>
 
-        <motion.p
+        {/* <motion.p
           className={cn(
             "font-editorial text-editorial text-2xl md:text-[1.75rem] lg:text-[2rem]",
             "drop-shadow-[0_1px_14px_rgba(0,0,0,0.35)]",  
@@ -155,7 +155,7 @@ export function WeddingWeekendHero() {
           }}
         >
           Three unforgettable days.
-        </motion.p>
+        </motion.p> */}
 
         <motion.h1
           className={cn(
@@ -191,7 +191,7 @@ export function WeddingWeekendHero() {
           />
         </motion.div>
 
-        <motion.p
+        {/* <motion.p
           className={cn(
             "font-heading text-body-lg mt-6 max-w-[640px] leading-[1.9] text-white/92",
             "drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]",
@@ -209,7 +209,7 @@ export function WeddingWeekendHero() {
           thoughtfully planned to bring together the people we love most. We
           can&apos;t wait to share these moments with you in the heart of
           Kerala.
-        </motion.p>
+        </motion.p> */}
 
         <motion.div
           className="mt-9 md:mt-10"

@@ -144,14 +144,11 @@ export function WelcomeNote() {
             </p>
 
             <p className="font-heading text-body-lg text-forest/75 leading-relaxed">
-              For those few days, forget the diet because{" "}
-              <span className={highlight}>
-                calories do not exist at weddings anyway
-              </span>
-              . Dancing is mandatory, shyness is strictly illegal, and smiling is
-              pretty much guaranteed. If you think you are coming just to attend,
-              fair warning,{" "}
-              <span className={highlight}>participation is compulsory.</span>
+              For those few days, forget the diet because calories do not exist
+              at weddings anyway. Dancing is mandatory, shyness is strictly
+              illegal, and smiling is pretty much guaranteed. If you think you
+              are coming just to attend, fair warning, participation is
+              compulsory.
             </p>
 
             <p className="font-heading text-body-lg text-forest/75 leading-relaxed">

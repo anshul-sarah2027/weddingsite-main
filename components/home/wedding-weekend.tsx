@@ -123,13 +123,13 @@ export function WeddingWeekend() {
             />
           </div>
 
-          <p
+          {/* <p
             className={cn(
             "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             Three unforgettable days
-          </p>
+          </p> */}
 
           <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.18em] text-forest md:text-4xl lg:text-5xl">
             Wedding Weekend
@@ -180,13 +180,13 @@ export function WeddingWeekend() {
             delay={0.15}
             className="text-center md:text-left"
           >
-            <p
+            {/* <p
               className={cn(
             "font-editorial text-editorial text-lg md:text-xl",
               )}
             >
               A Weekend to Remember
-            </p>
+            </p> */}
 
             <h3 className="font-heading mt-3 text-3xl font-medium text-forest md:text-4xl lg:text-[2.75rem] lg:leading-tight">
               Celebrate With Us

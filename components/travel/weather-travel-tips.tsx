@@ -4,105 +4,30 @@ import Image from "next/image";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
-import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const CLIMATE = [
-  "Warm tropical weather",
-  "24–31°C daytime temperatures",
-  "Pleasant evenings",
-  "Light humidity",
-  "January is one of the best months to visit Kerala",
-] as const;
-
-const EXPECT = [
-  "Sunny mornings",
-  "Lush tropical greenery",
-  "Beautiful sunsets",
-  "Peaceful backwaters",
-] as const;
-
-const PACK = [
-  "Lightweight breathable clothing",
-  "Comfortable walking shoes or sandals",
-  "Sunglasses & sunscreen",
-  "Traditional outfits for wedding celebrations",
-  "Light shawl or stole for evenings",
-] as const;
-
-const GOOD_TO_KNOW = [
-  "Cards are widely accepted, though carrying a little cash is helpful for local shops.",
-  "Uber is available in Kochi, while local taxis are recommended around Kumarakom.",
-  "Drinking bottled water is recommended throughout your stay.",
-] as const;
-
-function GoldenBullet({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "relative mt-1.5 h-3.5 w-9 shrink-0 overflow-hidden md:h-4 md:w-10",
-        className,
-      )}
-      aria-hidden="true"
-    >
-      <img
-        src={IMAGES.patterns.bulletPoint}
-        alt=""
-        width={1536}
-        height={1024}
-        draggable={false}
-        className="absolute left-1/2 top-1/2 h-[3.75rem] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 object-contain opacity-90 md:h-[4.25rem]"
-      />
-    </div>
-  );
-}
-
-function TipList({ items }: { items: readonly string[] }) {
-  return (
-    <ul className="mt-4 space-y-3">
-      {items.map((item) => (
-        <li key={item} className="flex items-start gap-3">
-          <GoldenBullet />
-          <p className="font-heading text-[0.95rem] leading-[1.7] text-forest/65 md:text-base">
-            {item}
-          </p>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 function TipCard({
   title,
   illustration,
   illustrationAlt,
-  artSize = "default",
   children,
   delay = 0,
 }: {
   title: string;
   illustration: string;
   illustrationAlt: string;
-  artSize?: "default" | "wide";
   children: React.ReactNode;
   delay?: number;
 }) {
   return (
     <FadeIn duration={0.7} delay={delay} className="h-full">
       <article className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-forest/8 bg-[#FFFCF7] px-6 py-7 shadow-[0_8px_28px_rgba(45,58,48,0.05)] md:px-8 md:py-8">
-        <div
-          className={cn(
-            "relative mx-auto mb-5 opacity-90",
-            artSize === "wide"
-              ? "h-20 w-44 md:h-24 md:w-52"
-              : "h-14 w-24 md:h-16 md:w-28",
-          )}
-        >
+        <div className="relative mx-auto mb-5 h-14 w-24 opacity-90 md:h-16 md:w-28">
           <Image
             src={illustration}
             alt={illustrationAlt}
             fill
-            sizes={artSize === "wide" ? "208px" : "112px"}
+            sizes="112px"
             className="object-contain"
           />
         </div>
@@ -117,35 +42,11 @@ function TipCard({
   );
 }
 
-function ClosingNote() {
-  return (
-    <FadeIn duration={0.75} className="mx-auto mt-14 max-w-md text-center md:mt-16">
-      <p
-        className={cn(
-            "font-editorial text-editorial-quote text-2xl leading-snug md:text-3xl",
-        )}
-      >
-        Safe travels,
-        <br />
-        and we&apos;ll see you in Kerala.
-      </p>
-
-      <p
-        className={cn(
-            "font-editorial text-editorial mt-5 text-lg md:text-xl",
-        )}
-      >
-        — {SITE.couple.bride} & {SITE.couple.groom}
-      </p>
-    </FadeIn>
-  );
-}
-
 export function WeatherTravelTips() {
   return (
     <section
       id="weather-travel-tips"
-      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] py-16 md:py-20 lg:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
+      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] pt-2 pb-16 md:pt-3 md:pb-20 lg:pt-4 lg:pb-24 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
       aria-label="Weather & Travel Tips"
     >
       <div
@@ -194,89 +95,42 @@ export function WeatherTravelTips() {
               aria-hidden="true"
             />
           </div>
-
-          <p className="font-heading mx-auto mt-6 max-w-2xl text-base leading-[1.9] text-forest/60 md:text-lg">
-            January is one of the most beautiful times to visit Kerala. Here are
-            a few helpful tips to make your journey comfortable and stress-free.
-          </p>
         </FadeIn>
 
         <div className="mt-12 grid grid-cols-1 gap-5 md:mt-14 md:grid-cols-2 md:gap-7">
           <TipCard
-            title="January in Kerala"
+            title="Weather in January"
             illustration={IMAGES.decor.peonyWithBud}
             illustrationAlt=""
-            artSize="default"
             delay={0.06}
           >
-            <div>
-              <p
-                className={cn(
-            "font-editorial text-editorial text-lg md:text-xl",
-                )}
-              >
-                Climate
-              </p>
-              <TipList items={CLIMATE} />
-            </div>
-
-            <div className="mt-8 border-t border-forest/8 pt-7">
-              <p
-                className={cn(
-            "font-editorial text-editorial text-lg md:text-xl",
-                )}
-              >
-                Expect
-              </p>
-              <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                {EXPECT.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2.5"
-                  >
-                    <span className="text-[#B59A63]" aria-hidden="true">
-                      ◆
-                    </span>
-                    <p className="font-heading text-[0.95rem] text-forest/65 md:text-base">
-                      {item}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <p className="font-heading text-center text-[0.95rem] leading-[1.85] text-forest/65 md:text-left md:text-base">
+              January is one of the best times of year to visit Kumarakom, dry,
+              sunny, and at the coolest point in the local calendar. Expect warm
+              days with highs around 31 to 32°C (88 to 90°F), dropping to a more
+              comfortable 22 to 24°C (72 to 75°F) in the evenings. Rainfall is
+              minimal, this is the driest month of the year, so pack light,
+              breathable fabrics, comfortable shoes, and clothes you&apos;d
+              normally wear in summer.
+            </p>
           </TipCard>
 
           <TipCard
-            title="Helpful Travel Tips"
+            title="A Quick Note on Food & Water Safety"
             illustration={IMAGES.decor.oliveBranch}
             illustrationAlt=""
             delay={0.1}
           >
-            <div>
-              <p
-                className={cn(
-            "font-editorial text-editorial text-lg md:text-xl",
-                )}
-              >
-                What to Pack
-              </p>
-              <TipList items={PACK} />
-            </div>
-
-            <div className="mt-8 border-t border-forest/8 pt-7">
-              <p
-                className={cn(
-            "font-editorial text-editorial text-lg md:text-xl",
-                )}
-              >
-                Good to Know
-              </p>
-              <TipList items={GOOD_TO_KNOW} />
-            </div>
+            <p className="font-heading text-center text-[0.95rem] leading-[1.85] text-forest/65 md:text-left md:text-base">
+              As with travel anywhere in India, we&apos;d recommend sticking to
+              bottled water throughout your stay, and being a little cautious
+              with raw vegetables, salads, or pre-cut fruit from street stalls.
+              Freshly cooked, hot food from reputable spots is generally very
+              safe and part of the fun, just worth keeping in mind so an upset
+              stomach doesn&apos;t get in the way of the celebrations.
+            </p>
           </TipCard>
         </div>
-
-        <ClosingNote />
       </Container>
     </section>
   );

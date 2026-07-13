@@ -1,6 +1,7 @@
 export type DestinationHighlight = {
   title: string;
   detail?: string;
+  sarahFavourite?: boolean;
 };
 
 export type TravelFact = {
@@ -34,15 +35,33 @@ export const keralaDestinations: KeralaDestination[] = [
     story:
       "Wander through colonial streets lined with cafés, art galleries, spice markets and beautiful heritage buildings. Kochi is best explored slowly — whether you're shopping in Fort Kochi, enjoying a sunset cruise across the harbour, or discovering Kerala's rich cultural traditions.",
     travel: [
-      { label: "From Kumarakom", value: "Approx. 2 hours" },
-      { label: "Best Way", value: "Private Cab / Hotel Transport" },
-      { label: "Local Option", value: "Train · Kottayam → Ernakulam" },
+      { label: "From Kumarakom", value: "Approx. 2 hours | ≈ 50 km" },
+      { label: "Recommended", value: "Private Cab" },
     ],
     highlights: [
       {
         title: "Fort Kochi",
         detail:
-          "Colonial streets, cafés, boutiques and seaside walks. Shop Princess Street for antiques and handicrafts.",
+          "Don't rush. Wander through the old streets, stop for coffee, explore small boutiques and simply enjoy the atmosphere.",
+        sarahFavourite: true,
+      },
+      {
+        title: "Anokhi",
+        detail:
+          "One of my favourite places to browse beautiful hand block-printed clothing, home textiles and thoughtful gifts. I never leave without discovering something special. Fort Kochi.",
+        sarahFavourite: true,
+      },
+      {
+        title: "Sunrise SUP",
+        detail:
+          "Watching the sun rise while paddling quietly through the backwaters is one of the most peaceful ways to experience Kerala.",
+        sarahFavourite: true,
+      },
+      {
+        title: "Sunset Harbour Cruise",
+        detail:
+          "A slow cruise across Kochi Harbour as the sun sets behind the Chinese fishing nets. It's one of those evenings you'll remember long after you leave. Brunton Boatyard.",
+        sarahFavourite: true,
       },
       {
         title: "Mattancherry & Jew Town",
@@ -72,7 +91,14 @@ export const keralaDestinations: KeralaDestination[] = [
       {
         title: "Kathakali & Kalaripayattu",
         detail:
-          "Evening performances at Fort Kochi cultural centres — wonderful for first-time visitors.",
+          "If it's your first visit to Kerala, this is a wonderful introduction to its art, storytelling and martial traditions.",
+        sarahFavourite: true,
+      },
+      {
+        title: "Sunrise by the Backwaters",
+        detail:
+          "Sometimes the best plan is no plan at all. Find a quiet spot by the water with a coffee and simply enjoy the peaceful surroundings.",
+        sarahFavourite: true,
       },
     ],
   },

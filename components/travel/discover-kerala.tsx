@@ -8,7 +8,6 @@ import {
   type KeralaDestination,
 } from "@/constants/discover-kerala";
 import { IMAGES } from "@/constants/images";
-import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 function FadedDestinationArt({
@@ -18,7 +17,7 @@ function FadedDestinationArt({
 }: {
   src: string;
   alt: string;
-  size?: "default" | "featured" | "closing";
+  size?: "default" | "featured";
 }) {
   return (
     <div
@@ -26,7 +25,6 @@ function FadedDestinationArt({
         "relative mx-auto w-full",
         size === "featured" && "max-w-[340px] md:max-w-[480px] lg:max-w-[520px]",
         size === "default" && "max-w-[320px] md:max-w-[480px] lg:max-w-[560px]",
-        size === "closing" && "max-w-[280px] md:max-w-[360px]",
       )}
     >
       <img
@@ -54,6 +52,8 @@ function FadedDestinationArt({
 }
 
 function TravelStrip({ travel }: { travel: KeralaDestination["travel"] }) {
+  if (travel.length === 0) return null;
+
   return (
     <div className="mt-6 flex flex-wrap items-stretch justify-center gap-y-3 border-y border-forest/10 py-4 md:justify-start md:gap-0 md:divide-x md:divide-forest/10">
       {travel.map((item) => (
@@ -92,7 +92,17 @@ function CompactHighlights({
         {highlights.map((item) => (
           <li key={item.title} className="text-center sm:text-left">
             <p className="font-heading text-[0.95rem] font-medium text-forest md:text-base">
+              {item.sarahFavourite && (
+                <span className="mr-1.5 text-[#B59A63]" aria-hidden="true">
+                  ★
+                </span>
+              )}
               {item.title}
+              {item.sarahFavourite && (
+                <span className="font-heading ml-1.5 text-sm font-normal text-[#B59A63]">
+                  (Sarah Favorite)
+                </span>
+              )}
             </p>
             {item.detail && (
               <p className="font-heading mt-1 text-sm leading-[1.65] text-forest/55">
@@ -233,8 +243,10 @@ function DestinationChapter({
       duration={0.75}
       delay={0.04 * index}
       className={cn(
-        "relative py-14 md:py-16 lg:py-20",
-        index !== keralaDestinations.length - 1 && "border-b border-forest/8",
+        "relative pt-14 md:pt-16 lg:pt-20",
+        index !== keralaDestinations.length - 1
+          ? "border-b border-forest/8 pb-14 md:pb-16 lg:pb-20"
+          : "pb-2 md:pb-3",
       )}
     >
       <div
@@ -255,60 +267,11 @@ function DestinationChapter({
   );
 }
 
-function ClosingEditorial() {
-  return (
-    <FadeIn duration={0.8} className="mx-auto mt-6 max-w-2xl text-center md:mt-10">
-      <FadedDestinationArt
-        src={IMAGES.kerala.spiritOfKerala}
-        alt=""
-        size="closing"
-      />
-
-      <p
-        className={cn(
-            "font-editorial text-editorial-quote mt-6 text-2xl leading-snug md:mt-8 md:text-3xl lg:text-[2.15rem]",
-        )}
-      >
-        The Best Journeys
-        <br />
-        Often Begin
-        <br />
-        With One Celebration
-      </p>
-
-      <blockquote className="font-editorial text-editorial-quote mx-auto mt-8 max-w-lg text-base leading-[1.9] md:text-lg">
-        &ldquo;However long you choose to stay, we hope you leave Kerala with
-        memories that last long after the wedding weekend.&rdquo;
-      </blockquote>
-
-      <p
-        className={cn(
-            "font-editorial text-editorial mt-5 text-xl md:text-2xl",
-        )}
-      >
-        — {SITE.couple.bride} & {SITE.couple.groom}
-      </p>
-
-      <div className="mx-auto mt-8 flex justify-center">
-        <Image
-          src={IMAGES.patterns.divider}
-          alt=""
-          width={1716}
-          height={380}
-          sizes="180px"
-          className="h-auto w-36 opacity-50 md:w-44"
-          aria-hidden="true"
-        />
-      </div>
-    </FadeIn>
-  );
-}
-
 export function DiscoverKerala() {
   return (
     <section
       id="discover-kerala"
-      className="relative scroll-mt-32 overflow-hidden bg-[#F4F6F2] py-16 md:py-20 lg:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_1400px]"
+      className="relative scroll-mt-32 overflow-hidden bg-[#F4F6F2] pt-10 pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14 [content-visibility:auto] [contain-intrinsic-size:auto_1400px]"
       aria-label="Discover Kerala"
     >
       <div
@@ -361,14 +324,6 @@ export function DiscoverKerala() {
               aria-hidden="true"
             />
           </div>
-
-          <p className="font-heading mx-auto mt-6 max-w-2xl text-base leading-[1.9] text-forest/60 md:text-lg">
-            If you&apos;re travelling all the way to Kerala, we hope you&apos;ll
-            take a little extra time to experience it. From colonial streets and
-            tea-covered mountains to dramatic coastlines and peaceful beaches,
-            these are some of our favourite places to explore before or after the
-            wedding.
-          </p>
         </FadeIn>
 
         <div className="mt-8 md:mt-10">
@@ -380,8 +335,6 @@ export function DiscoverKerala() {
             />
           ))}
         </div>
-
-        <ClosingEditorial />
       </Container>
     </section>
   );

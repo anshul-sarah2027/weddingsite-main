@@ -2,29 +2,20 @@ export interface TimelineEvent {
   id: string;
   time: string;
   name: string;
-  subtitle: string;
+  subtitle?: string;
   description: string;
   venue: string;
   illustration: string;
   /** Sarah's poetic chapter title — shown in Cormorant above the event name */
   poeticTitle?: string;
-  /** e.g. "Followed By" for Sadya Lunch */
+  /** e.g. "Followed By" for Sadhya Lunch */
   timePrefix?: string;
 }
 
 export interface TimelineDay {
   id: string;
   label: string;
-  chapterTitle: string;
-  chapterIntro: string;
   events: TimelineEvent[];
-}
-
-export interface EditorialQuote {
-  id: string;
-  text: string;
-  /** Insert after this day's events */
-  afterDayId: string;
 }
 
 export interface GuestNote {

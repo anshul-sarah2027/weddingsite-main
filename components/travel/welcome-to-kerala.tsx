@@ -4,10 +4,7 @@ import Image from "next/image";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
-import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const highlight = "text-[#B59A63]";
 
 const BOTANICALS = [
   {
@@ -114,75 +111,23 @@ export function WelcomeToKerala() {
           </div>
         </FadeIn>
 
-        <div className="mt-12 grid items-center gap-12 md:mt-14 md:grid-cols-[48%_52%] md:gap-14 lg:gap-20">
-          <FadeIn
-            duration={0.7}
-            delay={0.08}
-            className="flex justify-center md:justify-end"
-          >
-            <div className="animate-editorial-float w-full max-w-[320px] md:max-w-[520px] lg:max-w-[620px]">
-              <Image
-                src={IMAGES.kerala.placesArt}
-                alt="Handcrafted illustration of Kerala — backwaters, houseboats, palms and places to explore"
-                width={1536}
-                height={1024}
-                sizes="(max-width: 768px) 320px, 620px"
-                quality={80}
-                className="h-auto w-full object-contain"
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn duration={0.7} delay={0.12} className="text-center md:text-left">
-            <p
-              className={cn(
-            "font-editorial text-editorial text-lg md:text-xl",
-              )}
-            >
-              {SITE.hashtag}
-            </p>
-
-            <h3 className="font-heading mt-3 text-3xl font-medium text-forest md:text-4xl lg:text-[2.75rem] lg:leading-tight">
-              A Journey Worth Taking
-            </h3>
-
-            <div className="font-heading mx-auto mt-6 max-w-[560px] space-y-5 text-base leading-[1.85] text-forest/65 md:mx-0 md:text-lg">
-              <p>
-                Kerala has a way of{" "}
-                <span className={highlight}>slowing life down</span> in the most
-                beautiful way. Mornings begin with birdsong over the{" "}
-                <span className={highlight}>backwaters</span>, afternoons drift
-                beneath swaying coconut palms, and evenings glow with golden
-                sunsets reflected across the lake. It is a place where{" "}
-                <span className={highlight}>
-                  nature, tradition and hospitality
-                </span>{" "}
-                exist in perfect harmony.
-              </p>
-
-              <p>
-                When we began dreaming about our wedding, we knew we wanted more
-                than a beautiful venue—we wanted to{" "}
-                <span className={highlight}>create an experience</span>. A place
-                where family and friends could pause, explore, celebrate and make
-                memories together. We hope you&apos;ll take time to wander, savour
-                every meal, watch the houseboats drift by and discover why this
-                little corner of the world has{" "}
-                <span className={highlight}>captured our hearts</span>.
-              </p>
-            </div>
-
-            <blockquote
-              className={cn(
-            "font-editorial text-editorial-quote mx-auto mt-10 max-w-sm text-xl leading-snug md:mx-0 md:text-2xl",
-              )}
-            >
-              &ldquo;Some places stay with you forever.
-              <br />
-              Kerala is one of them.&rdquo;
-            </blockquote>
-          </FadeIn>
-        </div>
+        <FadeIn
+          duration={0.7}
+          delay={0.08}
+          className="mx-auto mt-12 flex justify-center md:mt-14"
+        >
+          <div className="animate-editorial-float w-full max-w-[min(100%,420px)] sm:max-w-[560px] md:max-w-[720px] lg:max-w-[860px] xl:max-w-[920px]">
+            <Image
+              src={IMAGES.kerala.placesArt}
+              alt="Handcrafted illustration of Kerala — backwaters, houseboats, palms and places to explore"
+              width={1536}
+              height={1024}
+              sizes="(max-width: 640px) 420px, (max-width: 768px) 560px, (max-width: 1024px) 720px, 920px"
+              quality={80}
+              className="mx-auto h-auto w-full object-contain"
+            />
+          </div>
+        </FadeIn>
       </Container>
     </section>
   );

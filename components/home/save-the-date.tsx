@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   differenceInDays,
@@ -7,6 +8,9 @@ import {
   differenceInMinutes,
   differenceInSeconds,
 } from "date-fns";
+import { FadeIn } from "@/components/animations/fade-in";
+import { Container } from "@/components/layout/container";
+import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +32,7 @@ function getTimeLeft(targetDate: string): TimeLeft {
   };
 }
 
-export function InvitationCountdown() {
+function Countdown() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
     getTimeLeft(SITE.weddingDate),
   );
@@ -77,5 +81,71 @@ export function InvitationCountdown() {
         </div>
       ))}
     </div>
+  );
+}
+
+export function SaveTheDate() {
+  return (
+    <section
+      id="save-the-date"
+      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] py-16 md:py-20 lg:py-24"
+      aria-label="Save the Date"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.22]"
+        style={{
+          backgroundImage: `url(${IMAGES.patterns.paperTexture})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        aria-hidden="true"
+      />
+
+      <Container className="relative z-10">
+        <FadeIn className="mx-auto max-w-3xl text-center" duration={0.8}>
+          <p
+            className={cn(
+            "font-editorial text-editorial text-xl md:text-2xl",
+            )}
+          >
+            The Countdown Begins
+          </p>
+
+          <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.2em] text-forest md:text-5xl lg:text-[3.25rem]">
+            Save the Date
+          </h2>
+
+          <p className="font-editorial text-editorial mt-4 text-base tracking-[0.12em] md:mt-5 md:text-lg">
+            {SITE.weddingWeekendDisplay}
+          </p>
+
+          <div className="mx-auto mt-5 flex justify-center md:mt-6">
+            <Image
+              src={IMAGES.patterns.divider}
+              alt=""
+              width={1716}
+              height={380}
+              sizes="180px"
+              className="h-auto w-36 opacity-55 md:w-44"
+              aria-hidden="true"
+            />
+          </div>
+
+          <blockquote
+            className={cn(
+            "font-editorial text-editorial-quote mx-auto mt-6 max-w-md text-xl leading-snug md:mt-7 md:text-2xl",
+            )}
+          >
+            Every great journey begins
+            <br />
+            with something worth waiting for.
+          </blockquote>
+        </FadeIn>
+
+        <FadeIn duration={0.85} delay={0.12} className="mx-auto mt-9 max-w-2xl md:mt-11">
+          <Countdown />
+        </FadeIn>
+      </Container>
+    </section>
   );
 }

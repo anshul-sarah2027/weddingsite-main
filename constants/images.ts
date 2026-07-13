@@ -1,5 +1,5 @@
 export const IMAGES = {
-  hero: "/hero/hero3.png",
+  hero: "/hero/hero8.png",
   heroAlt: {
     primary: "/hero/hero1.png",
     sunset: "/hero/hero2.png",
@@ -54,6 +54,10 @@ export const IMAGES = {
     sunsetPool: "/venueKerela/SPN09791.jpg",
     resortFacade: "/venueKerela/SPN05850.jpg",
     resortGardens: "/venueKerela/SPN05912.jpg",
+    heritageLakeVillas: "/venueKerela/heritage-lake-view-villas-4.jpg",
+    houseboats: "/venueKerela/houseboats-6.jpg",
+    meanderingPoolVillas: "/venueKerela/meandering-pool-duplex-villas-3.jpg",
+    vembanadSeafoodBar: "/venueKerela/vembanad-the-seafood-bar-2.jpg",
   },
   kerala: {
     spiritOfKerala: "/kerala/images/spiritofkerela.png",

@@ -1,8 +1,4 @@
-import type {
-  EditorialQuote,
-  GuestNote,
-  TimelineDay,
-} from "@/types/timeline";
+import type { GuestNote, TimelineDay } from "@/types/timeline";
 
 const T = "/timeline";
 
@@ -10,58 +6,41 @@ export const weddingWeekendTimeline: TimelineDay[] = [
   {
     id: "saturday",
     label: "SATURDAY • 30 JANUARY 2027",
-    chapterTitle: "An Evening in Marigold",
-    chapterIntro:
-      "The celebrations begin with laughter, music and the joyful gathering of family and friends as we welcome everyone to Kerala.",
     events: [
       {
         id: "nichayathartham",
         time: "10:30 AM",
-        name: "Nichayathartham",
-        subtitle: "Our Engagement Ceremony",
+        name: "Nichayathartam",
         description:
-          "Our families come together to celebrate the beginning of this beautiful weekend with blessings, traditions and the exchange of rings.",
+          "Our celebrations begin with the Nichayathartam, the traditional engagement ceremony where our families come together to formally exchange blessings. A welcome lunch will follow shortly after, giving everyone a chance to relax and get to know one another before the festivities continue.",
         venue: "Banquet Hall",
         illustration: `${T}/Nichayathartham.png`,
       },
       {
-        id: "welcome-lunch",
-        time: "12:30 PM",
-        name: "Welcome Lunch",
-        subtitle: "A Taste of Kerala",
-        description:
-          "Your first introduction to Kerala hospitality begins with a traditional welcome lunch served on banana leaves.",
-        venue: "Vembanad Lawn",
-        illustration: `${T}/WelcomeLunch.png`,
-      },
-      {
         id: "hotel-check-in",
-        time: "2:00 PM Onwards",
-        name: "Hotel Check-In",
-        subtitle: "Settle Into Paradise",
+        time: "2:00 PM",
+        name: "Check In",
         description:
-          "Relax, explore the resort and make yourself at home before the evening celebrations begin.",
+          "Check in will open at 2 PM, and unfortunately we will not be able to facilitate an earlier time. You will receive a full itinerary of the events for both days at check in. All guests are asked to bring ID proof for the check in process, and international guests should have their passport on hand.",
         venue: "Kumarakom Lake Resort",
         illustration: `${T}/Hotel-Check-in.png`,
       },
       {
         id: "baraat",
-        time: "5:30 PM",
+        time: "5:00 PM",
         name: "Baraat",
-        subtitle: "The Groom's Grand Procession",
         description:
-          "Music fills the air as friends and family dance together while welcoming the groom in true Indian wedding tradition.",
+          "The Baraat begins, a lively procession that marks the arrival of the couple, filled with music, dancing, and the joyful energy of family and friends escorting them to the venue. It's less a walk and more a celebration in motion, so come ready to dance your way there with us, and expect a surprise along the way. The Sangeet picks up right where the Baraat leaves off.",
         venue: "Throughout the Resort",
         illustration: `${T}/Baraat.png`,
       },
       {
         id: "sangeet",
-        time: "7:00 PM Onwards",
+        time: "6:30 PM",
         name: "Sangeet",
-        subtitle: "An Evening in Marigold",
         poeticTitle: "An Evening in Marigold",
         description:
-          "A joyful evening of music, performances and dancing beneath glowing lights surrounded by the people we love most.",
+          "An evening of performances, dance battles between our families and friends, and plenty of laughter, all set against a backdrop of colour we are saving for you to see in person. We promise you a night of great tunes, so dust off your dancing shoes. Come hungry, come ready to move, and do not be surprised if you end up on the dance floor before you even realise it.",
         venue: "Vembanad Lawn",
         illustration: `${T}/Sangeet(An Evening in Marigold).png`,
       },
@@ -70,17 +49,13 @@ export const weddingWeekendTimeline: TimelineDay[] = [
   {
     id: "sunday",
     label: "SUNDAY • 31 JANUARY 2027",
-    chapterTitle: "Where the Backwaters Turn to Gold",
-    chapterIntro:
-      "The day our forever begins, surrounded by Kerala's timeless traditions and the people who have travelled across the world to celebrate with us.",
     events: [
       {
         id: "upanayanam",
         time: "7:30 AM",
         name: "Upanayanam",
-        subtitle: "Sacred Morning Ritual",
         description:
-          "A traditional Hindu ceremony marking the beginning of the wedding day with prayers and blessings.",
+          "A sacred thread ceremony traditionally performed for the groom. Anshul will be presented with a sacred thread worn across the shoulder, marking a rite of passage into a new stage of life and the responsibilities that come with it. It is a quieter and more reflective ceremony rooted in generations of family tradition.",
         venue: "Tea Lawn",
         illustration: `${T}/Upanayanam.png`,
       },
@@ -88,9 +63,8 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         id: "kashi-yatra",
         time: "8:30 AM",
         name: "Kashi Yatra",
-        subtitle: "A Cherished Wedding Tradition",
         description:
-          "One of the most playful moments of a Hindu wedding, where tradition meets laughter before the ceremony begins.",
+          "One of the more lighthearted moments of the celebrations. In a playful nod to tradition, the groom pretends to abandon married life altogether in favour of a pilgrimage to Kashi in pursuit of higher wisdom, only to be talked out of it by the bride's family, who convince him that a life of love is the better path after all. It is a small piece of theatre, equal parts humour and heritage, and always a crowd favourite.",
         venue: "Tea Lawn",
         illustration: `${T}/KaashiYatra.png`,
       },
@@ -98,54 +72,48 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         id: "muhurtham",
         time: "9:15 AM",
         name: "Muhurtham",
-        subtitle: "The Wedding Ceremony",
+        subtitle: "Wedding Ceremony",
         poeticTitle: "Where the Backwaters Turn to Gold",
         description:
-          "The moment we exchange vows, blessings and begin the next chapter of our lives together.",
+          "The morning builds towards the wedding ceremony itself, the heart of the entire celebration. During the ceremony, the couple is formally united through a series of sacred rituals guided by a priest, including the exchange of garlands and vows made in front of family, before the union is sealed. It is a ceremony steeped in centuries of tradition, and the moment every other event across these two days has been building towards.",
         venue: "Tea Lawn",
         illustration: `${T}/Muhurtham.png`,
       },
       {
-        id: "sadya-lunch",
-        timePrefix: "Followed By",
+        id: "sadhya-lunch",
         time: "",
-        name: "Sadya Lunch",
-        subtitle: "Kerala's Grand Wedding Feast",
+        name: "Sadhya Lunch",
         description:
-          "Join us for an authentic Sadya served on traditional banana leaves as we celebrate together through Kerala's most beloved culinary tradition.",
+          "Following the Muhurtham, the celebrations move to the table for Sadhya, Kerala's traditional feast, served the way it has been for generations, on a banana leaf, with dish after dish arriving in careful sequence. It is less a meal than an experience, sweet, spicy, tangy and comforting all at once, and a proper introduction to Kerala on a plate. Come with an appetite, because this is a lunch meant to be savoured slowly, surrounded by the people who made the morning's ceremony so meaningful.",
         venue: "Vembanad Lawn",
         illustration: `${T}/SadyaLunch.png`,
       },
       {
         id: "sunset-cruise",
-        time: "4:30 PM",
+        time: "5:30 PM",
         name: "Sunset Cruise",
-        subtitle: "Where the Backwaters Turn to Gold",
-        poeticTitle: "Where the Backwaters Turn to Gold",
         description:
-          "Unwind aboard traditional Kerala houseboats as the sun sets across the tranquil backwaters of Kumarakom.",
+          "As the afternoon settles, we take the celebrations onto the water for a sunset cruise along the Kumarakom backwaters, watching the light shift over the lake as the day winds down. It's a moment to simply take in the beauty of the place that brought everyone here in the first place.",
         venue: "Departure from the Jetty",
         illustration: `${T}/SunsetCruise.png`,
       },
       {
         id: "reception",
-        time: "7:00 PM Onwards",
+        time: "7:30 PM",
         name: "Reception",
-        subtitle: "Under a Thousand Lights",
         poeticTitle: "Under a Thousand Lights",
         description:
-          "An elegant evening of dinner, heartfelt toasts and celebration beneath the stars.",
+          "The evening moves into our reception, where the day opens up into something a little more glamorous, with toasts, a first dance, and a night dedicated purely to celebration. It is our chance to properly thank everyone who made the journey to be here, and to celebrate the two of us officially becoming one, surrounded by the people who mean the most to us.",
         venue: "Vembanad Lawn",
         illustration: `${T}/Reception(Under a Thousand Lights).png`,
       },
       {
         id: "after-party",
-        time: "10:30 PM Onwards",
+        time: "11:00 PM",
         name: "After Party",
-        subtitle: "The After Hours Club",
         poeticTitle: "The After Hours Club",
         description:
-          "The music continues, the dance floor opens and the celebrations carry on long into the night.",
+          "For those who have decided that sleep is a tomorrow problem. There will be music, there will be questionable dance moves, and there is a very real chance someone's uncle steals the show. Enter at your own risk.",
         venue: "Banquet Hall",
         illustration: `${T}/AfterParty.png`,
       },
@@ -154,44 +122,17 @@ export const weddingWeekendTimeline: TimelineDay[] = [
   {
     id: "monday",
     label: "MONDAY • 1 FEBRUARY 2027",
-    chapterTitle: "Until We Meet Again",
-    chapterIntro:
-      "Every beautiful journey eventually comes to an end—but the memories made here will stay with us forever.",
     events: [
       {
         id: "check-out",
         time: "12:00 PM",
         name: "Check-Out",
-        subtitle: "Safe Travels",
         description:
           "Thank you for travelling across the world to celebrate with us. We hope you leave Kerala with wonderful memories, new friendships and a small piece of this beautiful place in your heart.",
         venue: "Kumarakom Lake Resort",
         illustration: `${T}/Farewell.png`,
       },
     ],
-  },
-];
-
-export const timelineEditorialQuotes: EditorialQuote[] = [
-  {
-    id: "calories",
-    text: "Calories do not exist at weddings anyway.",
-    afterDayId: "saturday",
-  },
-  {
-    id: "participation",
-    text: "Participation is compulsory.",
-    afterDayId: "saturday",
-  },
-  {
-    id: "sleep",
-    text: "Sleep is a tomorrow problem.",
-    afterDayId: "sunday",
-  },
-  {
-    id: "journey",
-    text: "We promise it'll be worth the journey.",
-    afterDayId: "monday",
   },
 ];
 

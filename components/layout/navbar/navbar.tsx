@@ -9,9 +9,9 @@ import { RsvpButton } from "@/components/layout/navbar/rsvp-button";
 import { cn } from "@/lib/utils";
 
 /** Routes with a full-bleed dark hero — ivory nav until scroll */
-const DARK_HERO_PATHS = ["/", "/events"];
-/** Routes with a light watercolor hero — transparent nav, forest type */
-const LIGHT_HERO_PATHS = ["/accommodation", "/save-the-date"];
+const DARK_HERO_PATHS = ["/events"];
+/** Routes with a light ivory/watercolor hero — transparent nav, forest type */
+const LIGHT_HERO_PATHS = ["/", "/accommodation", "/guest-guide", "/gifts", "/contact"];
 
 export function Navbar() {
   const pathname = usePathname();

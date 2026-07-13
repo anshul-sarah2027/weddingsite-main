@@ -8,6 +8,18 @@ import { cn } from "@/lib/utils";
 
 const gold = "text-[#B59A63]";
 
+const VENUE = {
+  name: "Kumarakom Lake Resort",
+  mapUrl: "https://maps.app.goo.gl/DSu5W2zY3zqcuPaT9",
+  websiteUrl: "https://www.kumarakomlakeresort.in/index.php",
+  websiteLabel: "kumarakomlakeresort.in",
+  phone: "+91 481 252 4900",
+  phoneHref: "tel:+914812524900",
+  address: "Kumarakom North Post, Kottayam 686563, Kerala, India",
+  description:
+    "Set on the edge of Vembanad Lake, Kumarakom Lake Resort is surrounded by coconut groves, paddy fields, and the quiet backwaters that Kerala is known for. It's a place where nature does most of the talking, calm waters, swaying palms, and views that change colour with the time of day, making it the perfect backdrop for these two days.",
+} as const;
+
 type TravelBlock = {
   id: string;
   title: string;
@@ -22,25 +34,47 @@ const TRAVEL_BLOCKS: TravelBlock[] = [
     id: "airport",
     title: "Arrival Airport",
     lead: "Cochin International Airport (COK)",
-    facts: ["≈ 75 km from the resort", "≈ 2 hours by road"],
-    body: [
-      "Nearest international airport serving Kumarakom. Travel time may vary slightly depending on traffic.",
+    facts: [
+      "≈ 80 km from the resort",
+      "From COK — 2–2.5 hours approx.",
+      "From Kochi (city) — 2 hours approx. | ≈ 50 km",
+      "From Trivandrum (TRV) — ≈ 4.5 hours | ≈ 165 km",
     ],
+    body: [
+      "To arrive at the resort, please fly into Cochin International Airport (COK), located approximately 80 kilometres away.",
+    ],
+  },
+  {
+    id: "rail",
+    title: "By Rail",
+    facts: [
+      "Kottayam Railway Station — ≈ 15 km | 30 minutes",
+      "Ernakulam Junction (South) — ≈ 60 km | ≈ 1.5 hours",
+      "Ernakulam Town (North) — ≈ 62 km | ≈ 1.5 hours",
+    ],
+    body: [],
   },
   {
     id: "transfers",
     title: "Transfers",
     body: [
-      "Private taxi transfers are the easiest and most comfortable option from the airport.",
-      "Uber is available from Kochi Airport, although pre-booked taxis are recommended for international guests arriving with luggage.",
+      "The most reliable way to reach Kumarakom Lake Resort from Cochin International Airport is by private taxi or pre-arranged transfer, approximately 2 to 2.5 hours depending on traffic. We'd recommend booking a transfer in advance through the resort or a trusted local operator rather than arranging a taxi on arrival.",
+      "There are also multiple reliable taxi apps operating in Kochi, such as Uber, Ola, and Rapido. These offer a fixed price and journey map, so if you'd rather not book a private taxi, we'd highly recommend using one of these instead. Around Kumarakom, local taxis are recommended.",
     ],
   },
   {
     id: "self-drive",
     title: "Self Drive",
     body: [
-      "If you're planning to explore Kerala before or after the wedding, hiring a car is a wonderful option.",
-      "Roads are generally excellent between Kochi and Kumarakom. Google Maps navigation works reliably throughout the route.",
+      "Most international guests usually find private car transfers the easiest and safest option within Kerala, especially for routes from Kumarakom to Kochi, Munnar, or the beaches.",
+    ],
+  },
+  {
+    id: "flying-in",
+    title: "Flying In",
+    body: [
+      "We recommend flying into Cochin International Airport (COK). For guests coming from Ireland, the easiest route is flying out of Dublin, connecting through a Middle Eastern hub such as Dubai, Abu Dhabi, or Doha, all of which have good onward connections to Kochi. This tends to be the most reliable and comfortable route for international guests.",
+      "There are also multiple daily domestic flights connecting Kochi from other Indian airports, so guests already travelling within India can easily route through Delhi, Mumbai, or Bangalore etc.",
     ],
   },
   {
@@ -51,14 +85,20 @@ const TRAVEL_BLOCKS: TravelBlock[] = [
       "If you're travelling internationally, we recommend arriving at least one day before the celebrations begin — to rest and enjoy the resort before the festivities.",
     ],
   },
-  {
-    id: "note",
-    title: "Helpful Note",
-    body: [
-      "Most major airlines connect through Kochi via Dubai, Doha, Abu Dhabi, Singapore, Kuala Lumpur or Mumbai, making Kerala easily accessible from around the world.",
-    ],
-  },
 ];
+
+function highlightRideApps(text: string) {
+  const parts = text.split(/(Uber|Ola|Rapido)/g);
+  return parts.map((part, index) =>
+    part === "Uber" || part === "Ola" || part === "Rapido" ? (
+      <strong key={`${part}-${index}`} className="font-semibold text-[#2F3A2E]">
+        {part}
+      </strong>
+    ) : (
+      <span key={`${part}-${index}`}>{part}</span>
+    ),
+  );
+}
 
 function GoldenBullet({ className }: { className?: string }) {
   return (
@@ -85,7 +125,6 @@ function JourneyStrip() {
   return (
     <FadeIn duration={0.8} delay={0.15} className="mt-14 md:mt-16">
       <div className="mx-auto max-w-5xl">
-        {/* Glance labels */}
         <div className="mb-5 hidden items-center justify-between px-4 text-center md:flex md:px-8 lg:px-12">
           <p className="text-caption tracking-[0.16em] text-[#5B6D6A]/70 uppercase">
             Kochi Airport
@@ -121,13 +160,6 @@ function JourneyStrip() {
           />
         </div>
 
-        <p
-          className={cn(
-            "font-editorial text-editorial mt-6 text-center text-xl md:text-2xl",
-          )}
-        >
-          Airport → Scenic Drive → Home
-        </p>
       </div>
     </FadeIn>
   );
@@ -140,7 +172,6 @@ export function GettingHere() {
       className="relative scroll-mt-32 overflow-hidden bg-[#F3F5F1] py-16 md:py-20 lg:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
       aria-label="Getting Here"
     >
-      {/* Cooler travel wash — mist sage undertone */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.18]"
         style={{
@@ -156,7 +187,6 @@ export function GettingHere() {
       />
 
       <Container size="wide" className="relative z-10">
-        {/* Section header */}
         <FadeIn className="mx-auto max-w-3xl text-center" duration={0.7}>
           <div className="relative mx-auto mb-4 h-16 w-36 md:mb-5 md:h-20 md:w-44">
             <Image
@@ -194,9 +224,7 @@ export function GettingHere() {
           </div>
         </FadeIn>
 
-        {/* Editorial + practical panel */}
         <div className="mt-12 grid items-start gap-12 md:mt-14 md:grid-cols-[42%_58%] md:gap-12 lg:gap-16">
-          {/* Left — editorial story */}
           <FadeIn duration={0.7} delay={0.06} className="text-center md:text-left">
             <p
               className={cn(
@@ -220,26 +248,62 @@ export function GettingHere() {
                 peaceful villages and shimmering backwaters.
               </p>
 
-              <p>
-                The journey itself is part of the experience. As the city slowly
-                gives way to lush tropical landscapes, you&apos;ll begin to
-                understand why Kerala is known as{" "}
-                <span className={gold}>God&apos;s Own Country</span>.
-              </p>
+            <dl className="mx-auto mt-8 max-w-[480px] space-y-3 border-t border-[#2F3A2E]/10 pt-6 text-left md:mx-0">
+              <div>
+                <dt className="text-caption tracking-[0.14em] text-[#5B6D6A]/70 uppercase">
+                  Address
+                </dt>
+                <dd className="font-heading mt-1 text-sm text-[#3E4A45]/75 md:text-base">
+                  {VENUE.address}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-caption tracking-[0.14em] text-[#5B6D6A]/70 uppercase">
+                  Phone
+                </dt>
+                <dd className="font-heading mt-1 text-sm md:text-base">
+                  <a
+                    href={VENUE.phoneHref}
+                    className={cn("underline-offset-4 hover:underline", gold)}
+                  >
+                    {VENUE.phone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-caption tracking-[0.14em] text-[#5B6D6A]/70 uppercase">
+                  Website
+                </dt>
+                <dd className="font-heading mt-1 text-sm md:text-base">
+                  <a
+                    href={VENUE.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn("underline-offset-4 hover:underline", gold)}
+                  >
+                    {VENUE.websiteLabel}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-caption tracking-[0.14em] text-[#5B6D6A]/70 uppercase">
+                  Map
+                </dt>
+                <dd className="font-heading mt-1 text-sm md:text-base">
+                  <a
+                    href={VENUE.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn("underline-offset-4 hover:underline", gold)}
+                  >
+                    Open in Google Maps
+                  </a>
+                </dd>
+              </div>
+            </dl>
             </div>
-
-            <blockquote
-              className={cn(
-            "font-editorial text-editorial-quote mx-auto mt-10 max-w-sm text-xl leading-snug md:mx-0 md:text-2xl",
-              )}
-            >
-              &ldquo;Some journeys are simply the beginning
-              <br />
-              of unforgettable memories.&rdquo;
-            </blockquote>
           </FadeIn>
 
-          {/* Right — paper travel panel */}
           <FadeIn duration={0.7} delay={0.12}>
             <aside
               className="relative overflow-hidden rounded-sm border border-[#2F3A2E]/8 bg-[#FAF8F3]/90 px-5 py-8 shadow-[0_1px_0_rgba(45,74,62,0.04)] md:px-8 md:py-10"
@@ -259,24 +323,24 @@ export function GettingHere() {
                   <div key={block.id} className="py-5 first:pt-0 last:pb-0">
                     <div className="flex items-center gap-2.5">
                       <GoldenBullet />
-                      <h4 className="text-caption tracking-[0.14em] text-[#5B6D6A] uppercase">
+                      <h4 className="font-heading text-[0.7rem] font-semibold tracking-[0.16em] text-[#2F3A2E] uppercase md:text-xs">
                         {block.title}
                       </h4>
                     </div>
 
                     {block.lead && (
-                      <p className="font-heading mt-2.5 text-lg font-medium text-[#2F3A2E] md:text-xl">
+                      <p className="font-heading mt-2.5 text-lg font-semibold text-[#2F3A2E] md:text-xl">
                         {block.lead}
                       </p>
                     )}
 
                     {block.facts && (
-                      <ul className="mt-2.5 flex flex-wrap gap-x-5 gap-y-1">
+                      <ul className="mt-2.5 flex flex-col gap-y-1.5">
                         {block.facts.map((fact) => (
                           <li
                             key={fact}
                             className={cn(
-                              "font-heading text-sm font-medium md:text-[0.9375rem]",
+                              "font-heading text-sm font-semibold md:text-base",
                               gold,
                             )}
                           >
@@ -289,7 +353,7 @@ export function GettingHere() {
                     {block.highlight && (
                       <p
                         className={cn(
-            "font-editorial text-editorial mt-2.5 text-lg md:text-xl",
+            "font-editorial text-editorial mt-2.5 text-lg font-medium md:text-xl",
                           gold,
                         )}
                       >
@@ -297,16 +361,18 @@ export function GettingHere() {
                       </p>
                     )}
 
-                    <div className="mt-2.5 space-y-2">
-                      {block.body.map((line) => (
-                        <p
-                          key={line}
-                          className="font-heading text-sm leading-[1.75] text-[#3E4A45]/72 md:text-[0.9375rem]"
-                        >
-                          {line}
-                        </p>
-                      ))}
-                    </div>
+                    {block.body.length > 0 && (
+                      <div className="mt-2.5 space-y-2.5">
+                        {block.body.map((line) => (
+                          <p
+                            key={line}
+                            className="font-heading text-[0.9375rem] font-medium leading-[1.8] text-[#2F3A2E]/88 md:text-base"
+                          >
+                            {highlightRideApps(line)}
+                          </p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -314,7 +380,6 @@ export function GettingHere() {
           </FadeIn>
         </div>
 
-        {/* Bottom journey illustration */}
         <JourneyStrip />
       </Container>
     </section>

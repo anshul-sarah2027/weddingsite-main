@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -14,13 +13,13 @@ export function Arrival() {
   return (
     <section
       id="arrival"
-      className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden"
+      className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#F3EEE4]"
       aria-label="Welcome"
     >
       <div className="absolute inset-0">
         <motion.div
           className="relative size-full"
-          initial={reducedMotion ? {} : { scale: 1.06 }}
+          initial={reducedMotion ? {} : { scale: 1.04 }}
           animate={{ scale: 1 }}
           transition={{
             duration: reducedMotion ? 0 : 2.8,
@@ -29,53 +28,55 @@ export function Arrival() {
         >
           <Image
             src={IMAGES.hero}
-            alt="Illustrated Kerala backwaters — houseboats, temple, and tropical landscape at golden hour"
+            alt="Illustrated Kerala wedding scene — houseboat, elephant, and tropical botanicals"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_35%] md:object-center"
+            className="object-cover object-center"
             quality={90}
           />
         </motion.div>
 
-        <div className="absolute inset-0 bg-forest/20" aria-hidden="true" />
+        {/* Soft ivory washes — strengthen slightly for text clarity */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-forest/40 via-transparent to-transparent"
+          className="absolute inset-0 bg-[rgba(250,247,242,0.16)]"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-forest/75 via-forest/15 to-transparent"
+          className="absolute inset-0 bg-gradient-to-b from-[#FAF7F2]/40 via-transparent to-transparent"
+          aria-hidden="true"
+        />
+        {/* Soften baked-in hashtag / lower art so type stays clear */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-[#F3EEE4]/85 via-[#F3EEE4]/45 to-transparent"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(45,74,62,0.25)_100%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,rgba(250,247,242,0.38)_0%,transparent_56%)]"
           aria-hidden="true"
         />
       </div>
 
-      <div className="relative z-10 flex w-full flex-col items-center px-6 pb-28 pt-36 text-center md:pb-32 md:pt-40">
-        {/* Sand dollar ornament */}
+      <div className="relative z-10 flex w-full flex-col items-center px-6 pb-20 pt-36 text-center md:pb-24 md:pt-40">
         <motion.div
-          className="relative mb-6 size-16 md:mb-8 md:size-20"
+          className="relative mb-5 size-14 opacity-75 md:mb-7 md:size-16"
           initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 0.75, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <Image
             src={IMAGES.decor.sandDollar}
             alt=""
             fill
-            sizes="80px"
-            className="object-contain brightness-0 invert"
+            sizes="64px"
+            className="object-contain opacity-85 [filter:brightness(0)_saturate(100%)_invert(35%)_sepia(18%)_saturate(550%)_hue-rotate(70deg)_brightness(92%)]"
             aria-hidden="true"
           />
         </motion.div>
 
-        {/* Date — both wedding days, compact lockup */}
         <motion.h2
           className={cn(
-            "font-editorial text-white text-[2rem] tracking-[0.04em] md:text-5xl lg:text-6xl",
-            "drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]",
+            "font-editorial text-[1.65rem] tracking-[0.04em] text-[#2F3A2E] sm:text-[1.85rem] md:text-4xl lg:text-[2.75rem]",
           )}
           initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,11 +85,9 @@ export function Arrival() {
           {SITE.weddingHeroDateDisplay}
         </motion.h2>
 
-        {/* Couple names — Cormorant Garamond */}
         <motion.h1
           className={cn(
-            "font-heading mt-2 max-w-4xl text-5xl font-medium tracking-wide text-white md:mt-3 md:text-7xl lg:text-8xl",
-            "drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)]",
+            "font-heading mt-2 max-w-4xl text-5xl font-medium tracking-wide text-[#2F3A2E] md:mt-3 md:text-7xl lg:text-8xl",
           )}
           initial={reducedMotion ? {} : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -97,11 +96,9 @@ export function Arrival() {
           {SITE.couple.groom} & {SITE.couple.bride}
         </motion.h1>
 
-        {/* Venue — Cormorant Garamond */}
         <motion.h3
           className={cn(
-            "font-editorial text-white mt-5 text-3xl md:mt-6 md:text-4xl",
-            "drop-shadow-[0_1px_12px_rgba(0,0,0,0.3)]",
+            "font-editorial mt-5 text-2xl text-[#2F3A2E] md:mt-6 md:text-3xl lg:text-4xl",
           )}
           initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,24 +107,6 @@ export function Arrival() {
           Kumarakom, Kerala
         </motion.h3>
       </div>
-
-      {/* Bottom — text link only */}
-      <motion.div
-        className="absolute inset-x-0 bottom-8 z-10 flex justify-center px-4 md:bottom-10"
-        initial={reducedMotion ? {} : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.1 }}
-      >
-        <Link
-          href="#welcome"
-          className={cn(
-            "font-editorial whitespace-nowrap text-center text-xl text-white/75 transition-colors duration-500 hover:text-white md:text-2xl",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30",
-          )}
-        >
-          {SITE.hashtag}
-        </Link>
-      </motion.div>
     </section>
   );
 }

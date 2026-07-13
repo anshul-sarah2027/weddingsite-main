@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import { Check, Copy, ExternalLink, MapPin } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
+import { weddingVenue } from "@/constants/accommodation";
 import { IMAGES } from "@/constants/images";
 import { cn } from "@/lib/utils";
-
-const highlight = "text-[#B59A63]";
 
 const VENUE_DETAILS = [
   { label: "Location", value: "Kumarakom, Kerala" },
@@ -48,7 +49,6 @@ function FadedResortArt() {
           )}
         />
 
-        {/* Ivory vignette — feathers all edges into section background */}
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_85%_at_50%_50%,transparent_38%,#FAF7F2_100%)] opacity-80"
           aria-hidden="true"
@@ -58,11 +58,72 @@ function FadedResortArt() {
   );
 }
 
+function VenueActions() {
+  const [copied, setCopied] = useState(false);
+
+  const copyMapsLink = async () => {
+    try {
+      await navigator.clipboard.writeText(weddingVenue.mapsUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.open(weddingVenue.mapsUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  return (
+    <div className="mx-auto mt-8 flex max-w-[560px] flex-col items-center gap-3 md:mx-0 md:items-start">
+      <a
+        href={weddingVenue.mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-heading inline-flex items-center gap-2.5 rounded-sm bg-forest px-5 py-3 text-[0.9375rem] tracking-[0.04em] text-ivory transition-[background-color,transform] duration-300 hover:bg-forest/90"
+      >
+        <MapPin className="size-4 text-[#D7BE79]" aria-hidden="true" />
+        View on Google Maps
+        <span aria-hidden="true" className="text-[#D7BE79]">
+          →
+        </span>
+      </a>
+
+      <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
+        <button
+          type="button"
+          onClick={copyMapsLink}
+          className="font-heading inline-flex items-center gap-2 rounded-sm border border-[#B59A63]/35 bg-[#B59A63]/8 px-4 py-2.5 text-sm text-forest transition-[background-color,border-color] duration-300 hover:border-[#B59A63]/55 hover:bg-[#B59A63]/14"
+        >
+          {copied ? (
+            <>
+              <Check className="size-3.5 text-[#B59A63]" aria-hidden="true" />
+              Link copied
+            </>
+          ) : (
+            <>
+              <Copy className="size-3.5 text-[#B59A63]" aria-hidden="true" />
+              Copy Maps Link
+            </>
+          )}
+        </button>
+
+        <a
+          href={weddingVenue.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-heading inline-flex items-center gap-2 rounded-sm border border-forest/18 bg-transparent px-4 py-2.5 text-sm text-forest/75 transition-[background-color,border-color,color] duration-300 hover:border-forest/30 hover:bg-forest/5 hover:text-forest"
+        >
+          Visit Resort Website
+          <ExternalLink className="size-3.5 text-[#B59A63]" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export function KumarakomLakeResort() {
   return (
     <section
       id="kumarakom-lake-resort"
-      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] py-16 md:min-h-[640px] md:py-20 lg:min-h-[680px] [content-visibility:auto] [contain-intrinsic-size:auto_800px]"
+      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] pt-14 pb-4 md:pt-16 md:pb-6 [content-visibility:auto] [contain-intrinsic-size:auto_700px]"
       aria-label="Kumarakom Lake Resort"
     >
       <div
@@ -163,27 +224,19 @@ export function KumarakomLakeResort() {
 
             <div className="font-heading mx-auto mt-6 max-w-[560px] space-y-5 text-base leading-[1.85] text-forest/65 md:mx-0 md:text-lg">
               <p>
-                Nestled along the tranquil shores of{" "}
-                <span className={highlight}>Vembanad Lake</span>, Kumarakom Lake
-                Resort is where every chapter of our wedding weekend unfolds.
-                Surrounded by{" "}
-                <span className={highlight}>peaceful backwaters</span>, tropical
-                gardens and traditional Kerala architecture, it offers the perfect
-                setting to{" "}
-                <span className={highlight}>
-                  slow down, reconnect and celebrate
-                </span>{" "}
-                together.
+                Nestled along the tranquil shores of Vembanad Lake, Kumarakom
+                Lake Resort is where every chapter of our wedding weekend
+                unfolds. Surrounded by peaceful backwaters, tropical gardens and
+                traditional Kerala architecture, it offers the perfect setting to
+                slow down, reconnect and celebrate together.
               </p>
 
               <p>
-                Over the next few days, this beautiful resort will{" "}
-                <span className={highlight}>become home</span> to morning
-                conversations over breakfast, joyful celebrations beneath the
-                palms, quiet walks by the lake and unforgettable evenings shared
-                with family and friends. We hope you&apos;ll{" "}
-                <span className={highlight}>make yourself at home</span> and enjoy
-                every moment.
+                Over the next few days, this beautiful resort will become home to
+                morning conversations over breakfast, joyful celebrations beneath
+                the palms, quiet walks by the lake and unforgettable evenings
+                shared with family and friends. We hope you&apos;ll make yourself
+                at home and enjoy every moment.
               </p>
             </div>
 
@@ -203,15 +256,7 @@ export function KumarakomLakeResort() {
               ))}
             </dl>
 
-            <blockquote
-              className={cn(
-            "font-editorial text-editorial-quote mx-auto mt-10 max-w-sm text-xl leading-snug md:mx-0 md:text-2xl",
-              )}
-            >
-              &ldquo;Some of the best memories
-              <br />
-              are made between the celebrations.&rdquo;
-            </blockquote>
+            <VenueActions />
           </FadeIn>
 
           <FadeIn

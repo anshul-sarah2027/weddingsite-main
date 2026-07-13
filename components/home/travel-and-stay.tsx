@@ -1,13 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import { IMAGES } from "@/constants/images";
 import { SITE, WEDDING } from "@/lib/constants";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 function BoardingPassField({
@@ -166,12 +164,10 @@ function TravelBoardingPassCta() {
 }
 
 export function TravelAndStay() {
-  const reducedMotion = useReducedMotion();
-
   return (
     <section
       id="travel-stay"
-      className="relative scroll-mt-32 overflow-hidden py-20 md:min-h-[900px] md:py-24 lg:min-h-[1000px]"
+      className="relative scroll-mt-32 overflow-hidden pt-0 pb-20 md:min-h-[900px] md:pt-0 md:pb-24 lg:min-h-[1000px]"
       aria-label="Travel and Stay Preview"
     >
       {/* Ivory paper background */}
@@ -217,91 +213,28 @@ export function TravelAndStay() {
         />
       </div>
 
-      <Container size="wide" className="relative z-10">
-        {/* Header illustration */}
-        <FadeIn className="flex flex-col items-center text-center" duration={0.9}>
-          <motion.div
-            className="relative h-[150px] w-[150px] opacity-95 md:h-[180px] md:w-[180px]"
-            animate={reducedMotion ? undefined : { y: [0, -4, 0] }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <Image
-              src={IMAGES.decor.travelAndStayHeader}
-              alt=""
-              fill
-              sizes="180px"
-              className="object-contain"
-              aria-hidden="true"
-            />
-          </motion.div>
-
-          <p
-            className={cn(
-            "font-editorial text-editorial text-xl md:text-2xl",
-            )}
-          >
-            YOUR JOURNEY BEGINS HERE
-          </p>
-
-          <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.18em] text-forest md:text-4xl lg:text-5xl">
-            Travel & Stay
-          </h2>
-        </FadeIn>
-
-        {/* Editorial copy */}
-        <FadeIn
-          className="mx-auto mt-10 max-w-[720px] text-center md:mt-12"
-          delay={0.1}
-          duration={0.9}
-        >
-          <p className="font-heading text-lg leading-[2] text-[#56524A] md:text-2xl">
-            We are incredibly grateful that many of you will be travelling across
-            the world to celebrate with us in Kerala. To make your journey as
-            relaxed and memorable as the wedding itself, we&apos;ve prepared a
-            dedicated guide with everything you&apos;ll need from travel advice
-            and accommodation to local recommendations and beautiful experiences
-            waiting to be discovered.
-          </p>
-        </FadeIn>
-
-        <FadeIn className="mt-12 text-center md:mt-14" delay={0.2} duration={0.9}>
-          <blockquote
-            className={cn(
-            "font-editorial text-editorial-quote text-2xl md:text-[1.875rem]",
-            )}
-          >
-            &ldquo;The journey is part of the celebration.&rdquo;
-          </blockquote>
-        </FadeIn>
-
-      </Container>
-
-      {/* Full-bleed editorial images */}
-      <div className="relative z-10 mt-14 md:mt-16">
+      {/* Full-bleed editorial images — Kumarakom Lake Resort */}
+      <div className="relative z-10 mt-0">
         <FadeIn delay={0.3} duration={0.9}>
           <div className="group relative h-[280px] w-full overflow-hidden sm:h-[360px] md:h-[420px]">
             <Image
-              src={IMAGES.venueKerala.kumarakomFull}
-              alt="Panoramic view of Kumarakom backwaters and resort"
+              src={IMAGES.venueKerala.heritageLakeVillas}
+              alt="Heritage lake-view villas at Kumarakom Lake Resort"
               fill
               sizes="100vw"
-              className="object-cover object-[50%_88%] transition-transform duration-[600ms] ease-out group-hover:scale-[1.02]"
+              className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.02]"
             />
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 md:grid-cols-3">
           <FadeIn delay={0.4} duration={0.9}>
             <div className="relative h-[200px] overflow-hidden sm:h-[260px] md:h-[320px]">
               <Image
-                src={IMAGES.venueKerala.poolHouseboats}
-                alt="Pool overlooking Kerala backwaters with houseboats"
+                src={IMAGES.venueKerala.houseboats}
+                alt="Traditional Kerala houseboats on the backwaters"
                 fill
-                sizes="50vw"
+                sizes="(max-width: 768px) 50vw, 33vw"
                 className="object-cover"
               />
             </div>
@@ -310,10 +243,22 @@ export function TravelAndStay() {
           <FadeIn delay={0.5} duration={0.9}>
             <div className="relative h-[200px] overflow-hidden sm:h-[260px] md:h-[320px]">
               <Image
-                src={IMAGES.venueKerala.sunsetPool}
-                alt="Sunset over the Kumarakom resort pool and backwaters"
+                src={IMAGES.venueKerala.meanderingPoolVillas}
+                alt="Meandering pool and duplex villas at Kumarakom Lake Resort"
                 fill
-                sizes="50vw"
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.55} duration={0.9} className="col-span-2 md:col-span-1">
+            <div className="relative h-[200px] overflow-hidden sm:h-[260px] md:h-[320px]">
+              <Image
+                src={IMAGES.venueKerala.vembanadSeafoodBar}
+                alt="Vembanad the Seafood Bar at Kumarakom Lake Resort"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
               />
             </div>

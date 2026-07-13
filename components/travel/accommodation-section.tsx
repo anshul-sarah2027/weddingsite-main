@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Check, Copy, ExternalLink, MapPin } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import {
   kochiStayGroups,
   kumarakomStayGroups,
-  weddingVenue,
   type HotelGroup,
   type HotelListing,
 } from "@/constants/accommodation";
@@ -87,119 +86,6 @@ function HotelCategoryBlock({ group }: { group: HotelGroup }) {
   );
 }
 
-function VenueFeatureCard() {
-  const [copied, setCopied] = useState(false);
-
-  const copyMapsLink = async () => {
-    try {
-      await navigator.clipboard.writeText(weddingVenue.mapsUrl);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      window.open(weddingVenue.mapsUrl, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  return (
-    <FadeIn duration={0.7}>
-      <article className="grid items-center gap-10 md:grid-cols-[48%_52%] md:gap-14 lg:gap-16">
-        {/* Soft full-bleed photo — edges fade into ivory, no card frame */}
-        <div className="relative mx-auto w-full max-w-[520px] md:max-w-none">
-          <div className="relative aspect-[4/3] w-full overflow-hidden">
-            <Image
-              src={weddingVenue.images.primary}
-              alt="Kumarakom Lake Resort on the shores of Vembanad Lake"
-              fill
-              sizes="(max-width: 768px) 100vw, 48vw"
-              className={cn(
-                "object-cover object-[center_60%]",
-                "[mask-image:linear-gradient(to_right,transparent_0%,#000_8%,#000_92%,transparent_100%),linear-gradient(to_bottom,transparent_0%,#000_8%,#000_92%,transparent_100%)]",
-                "[mask-composite:intersect]",
-                "[webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_8%,#000_92%,transparent_100%),linear-gradient(to_bottom,transparent_0%,#000_8%,#000_92%,transparent_100%)]",
-                "[webkit-mask-composite:source-in]",
-              )}
-              quality={85}
-            />
-            <div
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_85%_at_50%_50%,transparent_40%,#FAF7F2_100%)] opacity-80"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-
-        {/* Editorial copy — open, calm, no boxed panel */}
-        <div className="text-center md:text-left">
-          <p
-            className={cn(
-            "font-editorial text-editorial text-lg md:text-xl",
-            )}
-          >
-            Wedding Venue
-          </p>
-
-          <h3 className="font-heading mt-3 text-3xl font-medium leading-[1.2] text-forest md:text-4xl lg:text-[2.65rem]">
-            {weddingVenue.name}
-          </h3>
-
-          <p className="font-heading mx-auto mt-5 max-w-[520px] text-base leading-[1.9] text-forest/65 md:mx-0 md:mt-6 md:text-lg">
-            {weddingVenue.description}
-          </p>
-
-          <p className="mt-6 text-caption tracking-[0.12em] text-forest/40 uppercase">
-            {weddingVenue.address}
-          </p>
-
-          {/* Primary actions — clear at a glance, still editorial */}
-          <div className="mt-8 flex flex-col items-center gap-3 md:items-start">
-            <a
-              href={weddingVenue.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-heading inline-flex items-center gap-2.5 rounded-sm bg-forest px-5 py-3 text-[0.9375rem] tracking-[0.04em] text-ivory transition-[background-color,transform] duration-300 hover:bg-forest/90"
-            >
-              <MapPin className="size-4 text-[#D7BE79]" aria-hidden="true" />
-              View on Google Maps
-              <span aria-hidden="true" className="text-[#D7BE79]">
-                →
-              </span>
-            </a>
-
-            <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
-              <button
-                type="button"
-                onClick={copyMapsLink}
-                className="font-heading inline-flex items-center gap-2 rounded-sm border border-[#B59A63]/35 bg-[#B59A63]/8 px-4 py-2.5 text-sm text-forest transition-[background-color,border-color] duration-300 hover:border-[#B59A63]/55 hover:bg-[#B59A63]/14"
-              >
-                {copied ? (
-                  <>
-                    <Check className="size-3.5 text-[#B59A63]" aria-hidden="true" />
-                    Link copied
-                  </>
-                ) : (
-                  <>
-                    <Copy className="size-3.5 text-[#B59A63]" aria-hidden="true" />
-                    Copy Maps Link
-                  </>
-                )}
-              </button>
-
-              <a
-                href={weddingVenue.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-heading inline-flex items-center gap-2 rounded-sm border border-forest/18 bg-transparent px-4 py-2.5 text-sm text-forest/75 transition-[background-color,border-color,color] duration-300 hover:border-forest/30 hover:bg-forest/5 hover:text-forest"
-              >
-                Visit Resort Website
-                <ExternalLink className="size-3.5 text-[#B59A63]" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </article>
-    </FadeIn>
-  );
-}
-
 export function AccommodationSection() {
   return (
     <section
@@ -218,7 +104,6 @@ export function AccommodationSection() {
       />
 
       <Container size="wide" className="relative z-10">
-        {/* Section header */}
         <FadeIn className="mx-auto max-w-3xl text-center" duration={0.7}>
           <div className="relative mx-auto mb-4 h-16 w-36 md:mb-5 md:h-20 md:w-44">
             <Image
@@ -262,13 +147,8 @@ export function AccommodationSection() {
           </p>
         </FadeIn>
 
-        {/* 1 — Wedding Venue */}
-        <div className="mt-12 md:mt-14">
-          <VenueFeatureCard />
-        </div>
-
-        {/* 2 — Kochi */}
-        <FadeIn duration={0.7} delay={0.06} className="mt-16 md:mt-20">
+        {/* Kochi */}
+        <FadeIn duration={0.7} delay={0.06} className="mt-12 md:mt-14">
           <div className="text-center md:text-left">
             <p
               className={cn(
@@ -293,7 +173,7 @@ export function AccommodationSection() {
           </div>
         </FadeIn>
 
-        {/* 3 — Near Kumarakom */}
+        {/* Near Kumarakom */}
         <FadeIn duration={0.7} delay={0.08} className="mt-16 md:mt-20">
           <div className="text-center md:text-left">
             <p

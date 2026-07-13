@@ -134,7 +134,7 @@ function RsvpSealButton({
         />
         <span
           className={cn(
-            "font-editorial pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-[1.35rem] leading-[1.3] text-[#FAF7F0] sm:text-[1.625rem]",
+            "font-editorial pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-[1.15rem] leading-[1.3] text-[#FAF7F0] sm:text-[1.35rem]",
             "[text-shadow:0_1px_3px_rgba(0,0,0,0.22)]",
           )}
         >
@@ -152,7 +152,7 @@ const RSVP_CONTENT = {
     heading: "Confirm Your Attendance",
     paragraph:
       "We cannot wait to celebrate this unforgettable weekend with the people who mean the most to us. If you'll be joining us in Kumarakom, we'd be so grateful if you could let us know by confirming your attendance. Your presence will truly make these celebrations complete.",
-    quote: "The celebration begins with your yes.",
+    quote: undefined,
     buttonLines: ["Confirm", "Your Attendance"] as [string, string],
     buttonAriaLabel: "Confirm your attendance",
   },

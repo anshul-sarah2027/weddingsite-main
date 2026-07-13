@@ -9,14 +9,28 @@ export const SITE = {
   /** Single-day format (countdown anchors, etc.) */
   weddingDateDisplay: "30. 01. 2027",
   /** Full weekend phrasing for body / footer copy */
-  weddingWeekendDisplay: "30 • 31 January 2027",
+  weddingWeekendDisplay: "30th & 31st January 2027",
   /** Compact two-day lockup for the home hero */
-  weddingHeroDateDisplay: "30 · 31. 01. 2027",
+  weddingHeroDateDisplay: "30th & 31st January 2027",
   hashtag: "#PintsandPappadams",
   location: "Kumarakom, Kerala, India",
   couple: {
     groom: "Anshul",
     bride: "Sarah",
+    groomFullName: "Anshul Nama",
+    brideFullName: "Sarah Ninan",
+  },
+  contact: {
+    anshul: {
+      fullName: "Anshul Nama",
+      phoneDisplay: "+353 87 168 4811",
+      phoneHref: "tel:+353871684811",
+    },
+    sarah: {
+      fullName: "Sarah Ninan",
+      phoneDisplay: "+353 85 831 4664",
+      phoneHref: "tel:+353858314664",
+    },
   },
 } as const;
 

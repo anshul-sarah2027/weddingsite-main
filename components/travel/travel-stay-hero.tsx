@@ -164,46 +164,6 @@ export function TravelStayHero() {
           God&apos;s Own Country
         </motion.p>
 
-        <motion.p
-          className={cn(
-            "font-editorial text-editorial mt-5 max-w-md text-[1.65rem] leading-[1.35]",
-            "drop-shadow-[0_1px_14px_rgba(250,246,238,0.8)]",
-            "md:mt-6 md:max-w-lg md:text-[2rem] lg:text-[2.25rem]",
-          )}
-          initial={reducedMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.2,
-            delay: 0.6,
-            ease: EASE_OUT_EXPO,
-          }}
-        >
-          Where Every Journey
-          <br className="hidden sm:block" />
-          {" "}
-          Begins With Wonder
-        </motion.p>
-
-        <motion.p
-          className={cn(
-            "font-heading mt-6 max-w-[34rem] text-[1.05rem] leading-[1.9] text-forest/80",
-            "drop-shadow-[0_1px_10px_rgba(250,246,238,0.75)]",
-            "md:mt-7 md:text-[1.125rem] md:leading-[1.95]",
-          )}
-          initial={reducedMotion ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.15,
-            delay: 0.78,
-            ease: EASE_OUT_EXPO,
-          }}
-        >
-          From tranquil backwaters and swaying palms to timeless traditions and
-          warm hospitality, Kerala is more than a destination—it&apos;s an
-          experience. We can&apos;t wait to welcome you to the place where our
-          celebration begins.
-        </motion.p>
-
         <BotanicalDivider reducedMotion={reducedMotion} />
       </div>
 

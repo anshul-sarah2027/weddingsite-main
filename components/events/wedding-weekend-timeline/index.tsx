@@ -3,32 +3,18 @@
 import Image from "next/image";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
-import {
-  timelineEditorialQuotes,
-  timelineGuestNotes,
-  weddingWeekendTimeline,
-} from "@/constants/wedding-weekend-timeline";
+import { weddingWeekendTimeline } from "@/constants/wedding-weekend-timeline";
 import { IMAGES } from "@/constants/images";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { TimelineDayChapter } from "./timeline-day-chapter";
-import { TimelineEditorialQuote } from "./timeline-editorial-quote";
 import { TimelineEventStop } from "./timeline-event-stop";
-import { TimelineGuestNotes } from "./timeline-guest-notes";
 
 export function WeddingWeekendTimeline() {
-  const quotesByDay = timelineEditorialQuotes.reduce<
-    Record<string, typeof timelineEditorialQuotes>
-  >((acc, quote) => {
-    if (!acc[quote.afterDayId]) acc[quote.afterDayId] = [];
-    acc[quote.afterDayId].push(quote);
-    return acc;
-  }, {});
-
   return (
     <section
       id="our-wedding-weekend"
-      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] py-16 md:py-20 lg:py-24"
+      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] pt-2 pb-16 md:pt-4 md:pb-20 lg:pb-24"
       aria-label="Our Wedding Weekend"
     >
       {/* Paper texture */}
@@ -116,60 +102,42 @@ export function WeddingWeekendTimeline() {
           </div>
         </FadeIn>
 
-        {/* Guest notes — centered panel, does not affect timeline layout */}
-        <div className="mx-auto mt-12 max-w-4xl md:mt-14">
-          <TimelineGuestNotes notes={timelineGuestNotes} />
-        </div>
-
         {/* Timeline journey — always centred */}
-        <div className="relative mx-auto mt-14 max-w-5xl md:mt-16 lg:max-w-6xl">
+        <div className="relative mx-auto mt-6 max-w-5xl md:mt-8 lg:max-w-6xl">
           {/* Central scroll path — desktop */}
           <div
             className="pointer-events-none absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#B59A63]/30 to-transparent md:block"
             aria-hidden="true"
           />
 
-          {weddingWeekendTimeline.map((day, dayIndex) => {
-            const dayQuotes = quotesByDay[day.id] ?? [];
+          {weddingWeekendTimeline.map((day, dayIndex) => (
+            <div key={day.id} className="relative">
+              <TimelineDayChapter day={day} dayIndex={dayIndex} />
 
-            return (
-              <div key={day.id} className="relative">
-                <TimelineDayChapter day={day} dayIndex={dayIndex} />
+              <div className="relative">
+                {day.events.map((event, eventIndex) => {
+                  const globalIndex =
+                    weddingWeekendTimeline
+                      .slice(0, dayIndex)
+                      .reduce((sum, d) => sum + d.events.length, 0) +
+                    eventIndex;
+                  const isLastInDay = eventIndex === day.events.length - 1;
+                  const isLastOverall =
+                    dayIndex === weddingWeekendTimeline.length - 1 &&
+                    isLastInDay;
 
-                <div className="relative">
-                  {day.events.map((event, eventIndex) => {
-                    const globalIndex =
-                      weddingWeekendTimeline
-                        .slice(0, dayIndex)
-                        .reduce((sum, d) => sum + d.events.length, 0) +
-                      eventIndex;
-                    const isLastInDay = eventIndex === day.events.length - 1;
-                    const isLastOverall =
-                      dayIndex === weddingWeekendTimeline.length - 1 &&
-                      isLastInDay;
-
-                    return (
-                      <TimelineEventStop
-                        key={event.id}
-                        event={event}
-                        index={globalIndex}
-                        isLast={isLastOverall}
-                      />
-                    );
-                  })}
-                </div>
-
-                {/* Sarah's editorial quotes between chapters */}
-                {dayQuotes.map((quote, quoteIndex) => (
-                  <TimelineEditorialQuote
-                    key={quote.id}
-                    quote={quote}
-                    index={quoteIndex}
-                  />
-                ))}
+                  return (
+                    <TimelineEventStop
+                      key={event.id}
+                      event={event}
+                      index={globalIndex}
+                      isLast={isLastOverall}
+                    />
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </Container>
     </section>
