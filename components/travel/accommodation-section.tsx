@@ -199,10 +199,7 @@ export function AccommodationSection() {
           </div>
         </FadeIn>
 
-        <p className="font-heading mx-auto mt-14 max-w-xl text-center text-sm leading-relaxed text-forest/45 md:mt-16">
-          Preferential rates and booking guidance will be shared with confirmed
-          guests. If you need help choosing a stay, we&apos;re happy to advise.
-        </p>
+        
       </Container>
     </section>
   );
