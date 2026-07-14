@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
-import { SITE } from "@/lib/constants";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -48,74 +47,15 @@ export function Arrival() {
           />
         </motion.div>
 
-        {/* Soft ivory washes — strengthen slightly for text clarity */}
+        {/* Very light wash so the image still leads */}
         <div
-          className="absolute inset-0 bg-[rgba(250,247,242,0.16)]"
+          className="absolute inset-0 bg-[rgba(250,247,242,0.06)]"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-[#FAF7F2]/40 via-transparent to-transparent"
+          className="absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-t from-[#F3EEE4]/28 via-[#F3EEE4]/10 to-transparent"
           aria-hidden="true"
         />
-        <div
-          className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-[#F3EEE4]/85 via-[#F3EEE4]/45 to-transparent"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_42%,rgba(250,247,242,0.38)_0%,transparent_56%)]"
-          aria-hidden="true"
-        />
-      </div>
-
-      <div className="relative z-10 flex w-full flex-col items-center px-6 pb-24 pt-36 text-center md:pb-28 md:pt-40">
-        <motion.div
-          className="relative mb-5 size-14 opacity-75 md:mb-7 md:size-16"
-          initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
-          animate={{ opacity: 0.75, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <Image
-            src={IMAGES.decor.sandDollar}
-            alt=""
-            fill
-            sizes="64px"
-            className="object-contain opacity-85 [filter:brightness(0)_saturate(100%)_invert(35%)_sepia(18%)_saturate(550%)_hue-rotate(70deg)_brightness(92%)]"
-            aria-hidden="true"
-          />
-        </motion.div>
-
-        <motion.h2
-          className={cn(
-            "font-editorial text-[1.65rem] tracking-[0.04em] text-[#2F3A2E] sm:text-[1.85rem] md:text-4xl lg:text-[2.75rem]",
-          )}
-          initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          {SITE.weddingHeroDateDisplay}
-        </motion.h2>
-
-        <motion.h1
-          className={cn(
-            "font-heading mt-2 max-w-4xl text-5xl font-medium tracking-wide text-[#2F3A2E] md:mt-3 md:text-7xl lg:text-8xl",
-          )}
-          initial={reducedMotion ? {} : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          {SITE.couple.bride} & {SITE.couple.groom}
-        </motion.h1>
-
-        <motion.h3
-          className={cn(
-            "font-editorial mt-5 text-2xl text-[#2F3A2E] md:mt-6 md:text-3xl lg:text-4xl",
-          )}
-          initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.85, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          Kumarakom, Kerala
-        </motion.h3>
       </div>
 
       {/* Hashtag — desktop only (mobile art already includes it) */}
@@ -125,7 +65,7 @@ export function Arrival() {
         )}
         initial={reducedMotion ? {} : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
         aria-label="Pints and Pappadams"
       >
         <span aria-hidden="true">#&nbsp;PINTS </span>

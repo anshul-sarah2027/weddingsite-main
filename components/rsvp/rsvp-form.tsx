@@ -228,7 +228,7 @@ export function RsvpForm() {
               aria-label="Attendance"
             >
               {[
-                { value: true, label: "Joyfully yes" },
+                { value: true, label: "Yes, can't wait!" },
                 { value: false, label: "Regretfully no" },
               ].map((option) => {
                 const selected = field.value === option.value;
