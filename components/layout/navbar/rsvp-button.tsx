@@ -55,7 +55,7 @@ export function RsvpButton({ className, onClick }: RsvpButtonProps) {
             "font-editorial pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-[1.4rem] tracking-[0.08em] text-[#F7F2E8] transition-colors duration-[450ms] ease-out group-hover:text-[#D7BE79] sm:text-[1.65rem]",
           )}
         >
-          Rsvp
+          RSVP
         </span>
       </span>
     </motion.button>

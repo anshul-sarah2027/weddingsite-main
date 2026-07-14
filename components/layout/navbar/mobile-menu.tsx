@@ -15,6 +15,7 @@ import {
   isHashNavActive,
   useLocationHash,
 } from "@/hooks/use-location-hash";
+import { navigateToSectionHash } from "@/lib/hash-navigation";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -259,7 +260,14 @@ export function MobileMenu({ onHero = false }: MobileMenuProps) {
                                         <li key={child.href}>
                                           <Link
                                             href={child.href}
-                                            onClick={() => setOpen(false)}
+                                            onClick={(event) => {
+                                              if (
+                                                navigateToSectionHash(child.href)
+                                              ) {
+                                                event.preventDefault();
+                                              }
+                                              setOpen(false);
+                                            }}
                                             className={cn(
                                               "font-editorial block py-2.5 text-base tracking-[0.06em] text-forest/55 transition-colors duration-300 hover:text-editorial sm:text-lg",
                                               childActive && "text-editorial",

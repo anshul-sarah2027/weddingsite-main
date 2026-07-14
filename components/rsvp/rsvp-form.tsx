@@ -30,7 +30,7 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="font-heading mb-2.5 block text-[0.7rem] tracking-[0.2em] text-forest/55 uppercase"
+      className="font-heading mb-2.5 block text-[0.7rem] tracking-[0.2em] text-forest/78 uppercase"
     >
       {children}
       {required ? <span className="text-[#B59A63]"> *</span> : null}
@@ -149,7 +149,7 @@ export function RsvpForm() {
           {success === "yes" ? "You're on the list" : "RSVP received"}
         </h2>
         <div className="mx-auto mt-5 h-px w-16 bg-[#B59A63]/45" />
-        <p className="font-heading mx-auto mt-5 max-w-sm text-base leading-[1.85] text-forest/65 md:text-lg">
+        <p className="font-heading mx-auto mt-5 max-w-sm text-base leading-[1.85] text-forest/85 md:text-lg">
           {success === "yes"
             ? "We've saved your details, including your party and any dietary notes. If anything changes, write to us anytime."
             : "We're sorry you can't join us in Kumarakom. If your plans change before 14 August, you're always welcome to update us."}
@@ -212,7 +212,7 @@ export function RsvpForm() {
       </div>
 
       <div>
-        <p className="font-heading mb-4 text-[0.7rem] tracking-[0.2em] text-forest/55 uppercase">
+        <p className="font-heading mb-4 text-[0.7rem] tracking-[0.2em] text-forest/78 uppercase">
           Will you attend the wedding? <span className="text-[#B59A63]">*</span>
         </p>
         <Controller
@@ -241,7 +241,7 @@ export function RsvpForm() {
                       "font-heading rounded-none border px-5 py-4 text-sm tracking-[0.14em] uppercase transition-[border-color,background-color,color] duration-300",
                       selected
                         ? "border-[#B59A63] bg-[#B59A63]/12 text-forest"
-                        : "border-[#2F3A2E]/15 bg-transparent text-forest/60 hover:border-[#B59A63]/40 hover:text-forest",
+                        : "border-[#2F3A2E]/15 bg-transparent text-forest/85 hover:border-[#B59A63]/40 hover:text-forest",
                     )}
                     aria-pressed={selected}
                   >
@@ -283,7 +283,7 @@ export function RsvpForm() {
           </div>
 
           <div>
-            <p className="font-heading mb-4 text-[0.7rem] tracking-[0.2em] text-forest/55 uppercase">
+            <p className="font-heading mb-4 text-[0.7rem] tracking-[0.2em] text-forest/78 uppercase">
               Guest names <span className="text-[#B59A63]">*</span>
             </p>
             <div className="space-y-5">

@@ -131,8 +131,8 @@ export function WelcomeNote() {
           duration={0.9}
         >
           <div className="space-y-6 text-center">
-            <p className="font-heading text-body-lg text-forest/75 leading-relaxed">
-              With great excitement, we welcome you to our wedding celebration,
+            <p className="font-heading text-body-lg text-forest/85 leading-relaxed">
+              With great excitement, we invite you to our wedding celebration,
               taking place on the{" "}
               <span className={highlight}>
                 30th and 31st of January 2027 at Kumarakom Lake Resort, Kerala.
@@ -143,7 +143,7 @@ export function WelcomeNote() {
               the joy of the occasion.
             </p>
 
-            <p className="font-heading text-body-lg text-forest/75 leading-relaxed">
+            <p className="font-heading text-body-lg text-forest/85 leading-relaxed">
               For those few days, forget the diet because calories do not exist
               at weddings anyway. Dancing is mandatory, shyness is strictly
               illegal, and smiling is pretty much guaranteed. If you think you
@@ -151,7 +151,7 @@ export function WelcomeNote() {
               compulsory.
             </p>
 
-            <p className="font-heading text-body-lg text-forest/75 leading-relaxed">
+            <p className="font-heading text-body-lg text-forest/85 leading-relaxed">
               So start planning your sherwanis, lehengas, and sarees, and practise
               those secret dance moves you have been perfecting in front of the
               mirror. Get ready to dance the night away, laugh a little louder,
@@ -159,13 +159,13 @@ export function WelcomeNote() {
               years.
             </p>
 
-            <p className="font-heading text-body-lg text-forest/75 leading-relaxed">
+            <p className="font-heading text-body-lg text-forest/85 leading-relaxed">
               We kindly ask that you RSVP by{" "}
               <span className={highlight}>14th August 2026</span>.
             </p>
 
             <div className="pt-4">
-              <p className="font-heading text-forest/70 italic">Lots of love,</p>
+              <p className="font-heading text-forest/78 italic">Lots of love,</p>
               <p
                 className={cn(
             "font-editorial text-editorial mt-2 text-2xl md:text-3xl",

@@ -35,7 +35,7 @@ function WeekendStampCta() {
         </span>
       </span>
 
-      <span className="font-heading mt-4 flex items-center gap-1 text-[12px] text-forest/55 transition-[gap] duration-500 ease-out group-hover:gap-2 sm:text-[13px]">
+      <span className="font-heading mt-4 flex items-center gap-1 text-[12px] text-forest/78 transition-[gap] duration-500 ease-out group-hover:gap-2 sm:text-[13px]">
         Discover every celebration
         <span aria-hidden="true">→</span>
       </span>
@@ -192,7 +192,7 @@ export function WeddingWeekend() {
               Celebrate With Us
             </h3>
 
-            <p className="font-heading mx-auto mt-6 max-w-[470px] text-base leading-[1.85] text-forest/65 md:mx-0 md:text-lg">
+            <p className="font-heading mx-auto mt-6 max-w-[470px] text-base leading-[1.85] text-forest/85 md:mx-0 md:text-lg">
               From golden sunsets across the tranquil backwaters to heartfelt
               celebrations beneath swaying coconut palms, our wedding weekend has
               been thoughtfully planned to bring together family, friends,

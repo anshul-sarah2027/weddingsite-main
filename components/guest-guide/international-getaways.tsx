@@ -23,7 +23,7 @@ export function InternationalGetaways() {
               <p className="font-editorial text-editorial mt-2 text-sm md:text-base">
                 {destination.flightTime}
               </p>
-              <p className="font-heading mt-3 text-sm leading-[1.75] text-forest/60 md:text-[0.9375rem]">
+              <p className="font-heading mt-3 text-sm leading-[1.75] text-forest/85 md:text-[0.9375rem]">
                 {destination.description}
               </p>
             </GuideCard>

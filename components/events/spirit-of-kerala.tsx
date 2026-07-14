@@ -165,7 +165,7 @@ export function SpiritOfKerala() {
               {SITE.weddingWeekendDisplay}
             </h3>
 
-            <p className="font-heading mx-auto mt-6 max-w-[560px] text-base leading-[1.85] text-forest/65 md:mx-0 md:text-lg">
+            <p className="font-heading mx-auto mt-6 max-w-[560px] text-base leading-[1.85] text-forest/85 md:mx-0 md:text-lg">
               Kerala weddings are more than ceremonies—they are stories told
               through{" "}
               <span className={highlight}>

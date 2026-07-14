@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import {
+  HASH_NAV_LOCK_MS,
+  isHashNavigationLocked,
+  lockHashNavigation,
+} from "@/lib/hash-navigation";
 
 type UseSectionScrollSpyOptions = {
   /**
@@ -47,16 +52,24 @@ export function useSectionScrollSpy(
       if (managedIds.has(id)) return true;
       if (fallbackHash && hash === fallbackHash) return true;
       return prefixes.some(
-        (prefix) => id === prefix || id.startsWith(`${prefix}-`) || id.startsWith(prefix),
+        (prefix) =>
+          id === prefix || id.startsWith(`${prefix}-`) || id.startsWith(prefix),
       );
     };
 
     const ratios = new Map<string, number>();
-    let lockedUntil = 0;
+    let localLockedUntil = 0;
 
     const lockSpy = () => {
-      lockedUntil = Date.now() + 1300;
+      lockHashNavigation(HASH_NAV_LOCK_MS);
+      localLockedUntil = Date.now() + HASH_NAV_LOCK_MS;
     };
+
+    // Deep link / nav click: lock for ANY landing hash so sibling spies
+    // (e.g. venue spy vs dress-code spy) cannot steal the target.
+    if (window.location.hash && window.location.hash !== "#") {
+      lockSpy();
+    }
 
     window.addEventListener("hashchange", lockSpy);
 
@@ -64,9 +77,16 @@ export function useSectionScrollSpy(
       window.dispatchEvent(new Event("locationhashchange"));
     };
 
-    const writeHash = (nextHash: string) => {
+    const writeHash = (nextHash: string, strength = 1) => {
       const current = window.location.hash;
       if (current === nextHash) return;
+
+      // Another spy / deep-link owns this hash — only strong takeovers allowed
+      if (current && !isManagedHash(current)) {
+        if (!nextHash || !isManagedHash(nextHash) || strength < 0.4) {
+          return;
+        }
+      }
 
       if (!nextHash) {
         if (isManagedHash(current)) {
@@ -97,8 +117,11 @@ export function useSectionScrollSpy(
       );
     };
 
+    const isLocked = () =>
+      isHashNavigationLocked() || Date.now() < localLockedUntil;
+
     const syncFromRatios = () => {
-      if (Date.now() < lockedUntil) return;
+      if (isLocked()) return;
 
       let bestId: string | null = null;
       let bestRatio = 0;
@@ -110,12 +133,12 @@ export function useSectionScrollSpy(
       }
 
       if (bestId && bestRatio >= 0.08) {
-        writeHash(`#${bestId}`);
+        writeHash(`#${bestId}`, bestRatio);
         return;
       }
 
       if (parentEl && fallbackHash && parentInView()) {
-        writeHash(fallbackHash);
+        writeHash(fallbackHash, 0.5);
         return;
       }
 
@@ -136,7 +159,8 @@ export function useSectionScrollSpy(
         }
 
         if (nearestId) {
-          writeHash(`#${nearestId}`);
+          // Weak nearest-match — never steal a foreign deep-link hash
+          writeHash(`#${nearestId}`, 0.2);
           return;
         }
 

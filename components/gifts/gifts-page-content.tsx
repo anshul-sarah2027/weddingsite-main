@@ -66,7 +66,7 @@ export function GiftsPageContent() {
             />
           </div>
 
-          <p className="font-heading mx-auto mt-8 max-w-xl text-base leading-[1.95] text-[#2F3A2E]/78 md:mt-10 md:text-lg md:leading-[2]">
+          <p className="font-heading mx-auto mt-8 max-w-xl text-base leading-[1.95] text-[#2F3A2E]/85 md:mt-10 md:text-lg md:leading-[2]">
             {GIFT_INTRO}
           </p>
 

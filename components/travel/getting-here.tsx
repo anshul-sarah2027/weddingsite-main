@@ -238,7 +238,7 @@ export function GettingHere() {
               Your Journey to Kumarakom
             </h3>
 
-            <div className="font-heading mx-auto mt-6 max-w-[480px] space-y-5 text-base leading-[1.85] text-[#3E4A45]/75 md:mx-0 md:text-lg">
+            <div className="font-heading mx-auto mt-6 max-w-[480px] space-y-5 text-base leading-[1.85] text-[#2F3A2E]/85 md:mx-0 md:text-lg">
               <p>
                 Whether you&apos;re travelling from across India or flying in from
                 overseas, getting to Kumarakom is wonderfully straightforward.
@@ -253,7 +253,7 @@ export function GettingHere() {
                 <dt className="text-caption tracking-[0.14em] text-[#5B6D6A]/70 uppercase">
                   Address
                 </dt>
-                <dd className="font-heading mt-1 text-sm text-[#3E4A45]/75 md:text-base">
+                <dd className="font-heading mt-1 text-sm text-[#2F3A2E]/85 md:text-base">
                   {VENUE.address}
                 </dd>
               </div>

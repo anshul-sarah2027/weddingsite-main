@@ -6,6 +6,7 @@ import { Fragment, useEffect } from "react";
 import { IMAGES } from "@/constants/images";
 import { invitationFooterNavigation } from "@/constants/navigation";
 import { SITE, WEDDING } from "@/lib/constants";
+import { navigateToSectionHash } from "@/lib/hash-navigation";
 import { cn } from "@/lib/utils";
 
 function ClosingDivider() {
@@ -39,6 +40,11 @@ function FooterNavLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
+      onClick={(event) => {
+        if (navigateToSectionHash(href)) {
+          event.preventDefault();
+        }
+      }}
       className="group relative font-heading text-base text-[rgba(250,246,238,0.88)] transition-colors duration-500 ease-luxury hover:text-[#E2C78D] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D2B57A]/50"
     >
       {label}

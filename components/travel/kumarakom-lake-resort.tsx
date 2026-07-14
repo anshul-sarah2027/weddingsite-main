@@ -103,7 +103,7 @@ function VenueActions() {
           href={weddingVenue.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-heading inline-flex items-center gap-2 rounded-sm border border-forest/18 bg-transparent px-4 py-2.5 text-sm text-forest/75 transition-[background-color,border-color,color] duration-300 hover:border-forest/30 hover:bg-forest/5 hover:text-forest"
+          className="font-heading inline-flex items-center gap-2 rounded-sm border border-forest/18 bg-transparent px-4 py-2.5 text-sm text-forest/85 transition-[background-color,border-color,color] duration-300 hover:border-forest/30 hover:bg-forest/5 hover:text-forest"
         >
           Visit Resort Website
           <ExternalLink className="size-3.5 text-[#B59A63]" aria-hidden="true" />
@@ -209,7 +209,7 @@ export function KumarakomLakeResort() {
               A Place Made For Gathering
             </h3>
 
-            <div className="font-heading mx-auto mt-6 max-w-[560px] space-y-5 text-base leading-[1.85] text-forest/65 md:mx-0 md:text-lg">
+            <div className="font-heading mx-auto mt-6 max-w-[560px] space-y-5 text-base leading-[1.85] text-forest/85 md:mx-0 md:text-lg">
               <p>
                 Nestled along the tranquil shores of Vembanad Lake, Kumarakom
                 Lake Resort is where every chapter of our wedding weekend
@@ -236,7 +236,7 @@ export function KumarakomLakeResort() {
                   <dt className="text-caption min-w-[5.5rem] tracking-[0.14em] text-forest/40 uppercase">
                     {detail.label}
                   </dt>
-                  <dd className="font-heading text-sm text-forest/70 md:text-base">
+                  <dd className="font-heading text-sm text-forest/78 md:text-base">
                     {detail.value}
                   </dd>
                 </div>

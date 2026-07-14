@@ -52,7 +52,7 @@ export function ContactPageContent() {
             />
           </div>
 
-          <p className="font-heading mx-auto mt-8 max-w-lg text-base leading-[1.95] text-[#2F3A2E]/78 md:mt-10 md:text-lg md:leading-[2]">
+          <p className="font-heading mx-auto mt-8 max-w-lg text-base leading-[1.95] text-[#2F3A2E]/85 md:mt-10 md:text-lg md:leading-[2]">
             If you have any questions about the wedding weekend, travel, or
             your stay — please feel free to reach out to either of us.
           </p>
@@ -71,7 +71,7 @@ export function ContactPageContent() {
                 </h2>
                 <a
                   href={person.phoneHref}
-                  className="font-heading mt-4 inline-block text-base text-[#2F3A2E]/75 underline decoration-[#B59A63]/35 underline-offset-[5px] transition-colors hover:text-[#B59A63] md:text-lg"
+                  className="font-heading mt-4 inline-block text-base text-[#2F3A2E]/85 underline decoration-[#B59A63]/35 underline-offset-[5px] transition-colors hover:text-[#B59A63] md:text-lg"
                 >
                   {person.phoneDisplay}
                 </a>
@@ -94,7 +94,7 @@ export function ContactPageContent() {
                 Connect on WhatsApp
               </p>
             </div>
-            <p className="font-heading max-w-sm text-sm leading-relaxed text-[#2F3A2E]/60 md:text-[0.95rem]">
+            <p className="font-heading max-w-sm text-sm leading-relaxed text-[#2F3A2E]/85 md:text-[0.95rem]">
               Both numbers above are on WhatsApp — tap a name to message us.
             </p>
             <div className="flex items-center gap-3">

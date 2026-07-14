@@ -76,7 +76,7 @@ export function WeddingShopping() {
               {shoppingTip.paragraphs.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="font-heading text-sm leading-[1.85] text-forest/65 md:text-base"
+                  className="font-heading text-sm leading-[1.85] text-forest/85 md:text-base"
                 >
                   {paragraph}
                 </p>

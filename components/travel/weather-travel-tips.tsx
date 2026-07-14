@@ -104,7 +104,7 @@ export function WeatherTravelTips() {
             illustrationAlt=""
             delay={0.06}
           >
-            <p className="font-heading text-center text-[0.95rem] leading-[1.85] text-forest/65 md:text-left md:text-base">
+            <p className="font-heading text-center text-[0.95rem] leading-[1.85] text-forest/85 md:text-left md:text-base">
               January is one of the best times of year to visit Kumarakom, dry,
               sunny, and at the coolest point in the local calendar. Expect warm
               days with highs around 31 to 32°C (88 to 90°F), dropping to a more
@@ -121,7 +121,7 @@ export function WeatherTravelTips() {
             illustrationAlt=""
             delay={0.1}
           >
-            <p className="font-heading text-center text-[0.95rem] leading-[1.85] text-forest/65 md:text-left md:text-base">
+            <p className="font-heading text-center text-[0.95rem] leading-[1.85] text-forest/85 md:text-left md:text-base">
               As with travel anywhere in India, we&apos;d recommend sticking to
               bottled water throughout your stay, and being a little cautious
               with raw vegetables, salads, or pre-cut fruit from street stalls.

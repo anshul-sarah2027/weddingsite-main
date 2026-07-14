@@ -29,7 +29,7 @@ export function TravelPartners() {
                   <h3 className="font-heading text-base font-medium text-forest transition-colors group-hover:text-[#B59A63] md:text-lg">
                     {partner.name}
                   </h3>
-                  <p className="font-heading mt-1.5 text-sm text-forest/50">
+                  <p className="font-heading mt-1.5 text-sm text-forest/78">
                     {partner.label}
                   </p>
                 </div>

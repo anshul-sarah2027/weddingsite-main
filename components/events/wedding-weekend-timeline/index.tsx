@@ -83,7 +83,7 @@ export function WeddingWeekendTimeline() {
             Our Wedding Weekend
           </h2>
 
-          <p className="font-heading mx-auto mt-6 max-w-2xl text-base leading-[1.85] text-forest/60 md:text-lg">
+          <p className="font-heading mx-auto mt-6 max-w-2xl text-base leading-[1.85] text-forest/85 md:text-lg">
             Scroll through the celebrations — each moment thoughtfully planned,
             each tradition lovingly honoured, each gathering an invitation to be
             part of our story.

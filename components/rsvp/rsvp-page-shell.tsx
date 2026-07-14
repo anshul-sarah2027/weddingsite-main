@@ -111,12 +111,12 @@ export function RsvpPageShell() {
 
             <FadeIn duration={0.9} delay={STAGGER * 2}>
               <h1 className="font-heading mt-3 text-3xl font-medium tracking-[0.2em] text-forest uppercase md:text-4xl lg:text-[2.75rem]">
-                Kindly Respond
+                RSVP
               </h1>
             </FadeIn>
 
             <FadeIn duration={0.9} delay={STAGGER * 3}>
-              <p className="font-heading mx-auto mt-5 max-w-md text-base leading-[1.9] text-[#2F3A2E]/72 md:text-lg">
+              <p className="font-heading mx-auto mt-5 max-w-md text-base leading-[1.9] text-[#2F3A2E]/85 md:text-lg">
                 One reply for the whole wedding weekend. Tell us who will join
                 you in Kumarakom — and any food notes for your party.
               </p>

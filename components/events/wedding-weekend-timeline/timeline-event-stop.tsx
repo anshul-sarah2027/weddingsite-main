@@ -6,6 +6,7 @@ import {
   timelineEventsWithDressCode,
 } from "@/constants/dress-code";
 import type { TimelineEvent } from "@/types/timeline";
+import { navigateToSectionHash } from "@/lib/hash-navigation";
 import { cn } from "@/lib/utils";
 import { TimelineIllustration } from "./timeline-illustration";
 
@@ -94,7 +95,7 @@ export function TimelineEventStop({ event, index, isLast }: TimelineEventStopPro
             </p>
           )}
 
-          <p className="font-heading mx-auto mt-4 max-w-md text-base leading-[1.85] text-forest/60 md:mx-0 md:text-lg">
+          <p className="font-heading mx-auto mt-4 max-w-md text-base leading-[1.85] text-forest/85 md:mx-0 md:text-lg">
             {event.description}
           </p>
 
@@ -106,11 +107,16 @@ export function TimelineEventStop({ event, index, isLast }: TimelineEventStopPro
           </p>
 
           {dressCodeHref && (
-            <p className="font-heading mx-auto mt-5 max-w-md text-sm leading-relaxed text-forest/55 md:mx-0">
+            <p className="font-heading mx-auto mt-5 max-w-md text-sm leading-relaxed text-forest/78 md:mx-0">
               <span className="text-[#B59A63]">Dress code · </span>
               Scroll below for the full look.{" "}
               <a
                 href={dressCodeHref}
+                onClick={(eventClick) => {
+                  if (navigateToSectionHash(dressCodeHref)) {
+                    eventClick.preventDefault();
+                  }
+                }}
                 className="font-medium text-[#B59A63] underline-offset-4 transition-colors hover:underline"
               >
                 View dress code ↓

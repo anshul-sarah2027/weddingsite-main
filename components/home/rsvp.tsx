@@ -149,12 +149,12 @@ function RsvpSealButton({
 const RSVP_CONTENT = {
   home: {
     eyebrow: "",
-    heading: "Confirm Your Attendance",
+    heading: "RSVP",
     paragraph:
       "We cannot wait to celebrate this unforgettable weekend with the people who mean the most to us. If you'll be joining us in Kumarakom, we'd be so grateful if you could let us know by confirming your attendance. Your presence will truly make these celebrations complete.",
     quote: undefined,
     buttonLines: ["Confirm", "Your Attendance"] as [string, string],
-    buttonAriaLabel: "Confirm your attendance",
+    buttonAriaLabel: "RSVP — Confirm your attendance",
   },
   events: {
     eyebrow: "",
@@ -163,7 +163,7 @@ const RSVP_CONTENT = {
       "We hope this glimpse into our wedding weekend has you as excited as we are. Whether you're joining us from nearby or travelling across the world, we can't wait to celebrate together in the heart of Kerala.",
     quote: undefined,
     buttonLines: ["Respond to Your", "Invitation"] as [string, string],
-    buttonAriaLabel: "Respond to your invitation",
+    buttonAriaLabel: "RSVP — Respond to your invitation",
   },
   travel: {
     eyebrow: "",
@@ -172,7 +172,7 @@ const RSVP_CONTENT = {
       "Now that you've planned your journey to Kerala, there's just one more thing. Please confirm your attendance so we can prepare for your arrival — we can't wait to welcome you to Kumarakom.",
     quote: undefined,
     buttonLines: ["Confirm", "Your Attendance"] as [string, string],
-    buttonAriaLabel: "Confirm your attendance",
+    buttonAriaLabel: "RSVP — Confirm your attendance",
   },
 } as const;
 

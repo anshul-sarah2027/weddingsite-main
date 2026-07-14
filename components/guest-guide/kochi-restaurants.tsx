@@ -24,7 +24,7 @@ export function KochiRestaurants() {
                 {category.places.map((place) => (
                   <li
                     key={place}
-                    className="font-heading flex items-start gap-2 text-sm leading-[1.65] text-forest/65 md:text-[0.9375rem]"
+                    className="font-heading flex items-start gap-2 text-sm leading-[1.65] text-forest/85 md:text-[0.9375rem]"
                   >
                     <span className="mt-1.5 text-[#B59A63]" aria-hidden="true">
                       ◆

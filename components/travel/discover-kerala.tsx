@@ -105,7 +105,7 @@ function CompactHighlights({
               )}
             </p>
             {item.detail && (
-              <p className="font-heading mt-1 text-sm leading-[1.65] text-forest/55">
+              <p className="font-heading mt-1 text-sm leading-[1.65] text-forest/78">
                 {item.detail}
               </p>
             )}
@@ -181,7 +181,7 @@ function KochiChapter({ destination }: { destination: KeralaDestination }) {
             {destination.subtitle}
           </p>
 
-          <p className="font-heading mx-auto mt-5 max-w-[540px] text-base leading-[1.85] text-forest/65 md:mx-0 md:text-lg">
+          <p className="font-heading mx-auto mt-5 max-w-[540px] text-base leading-[1.85] text-forest/85 md:mx-0 md:text-lg">
             {destination.story}
           </p>
 
@@ -229,7 +229,7 @@ function DestinationChapter({
         {destination.subtitle}
       </p>
 
-      <p className="font-heading mx-auto mt-5 max-w-[520px] text-base leading-[1.9] text-forest/65 md:mx-0 md:mt-6 md:text-lg">
+      <p className="font-heading mx-auto mt-5 max-w-[520px] text-base leading-[1.9] text-forest/85 md:mx-0 md:mt-6 md:text-lg">
         {destination.story}
       </p>
 

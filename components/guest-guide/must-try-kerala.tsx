@@ -24,7 +24,7 @@ export function MustTryKerala() {
                 {category.dishes.map((dish) => (
                   <li
                     key={dish}
-                    className="font-heading flex items-start gap-2 text-sm leading-[1.65] text-forest/65 md:text-[0.9375rem]"
+                    className="font-heading flex items-start gap-2 text-sm leading-[1.65] text-forest/85 md:text-[0.9375rem]"
                   >
                     <span className="mt-1.5 text-[#B59A63]" aria-hidden="true">
                       ◆
@@ -54,7 +54,7 @@ export function DietaryPreferences() {
             <h3 className="font-heading text-center text-xl font-medium text-forest md:text-2xl">
               Dietary Preferences
             </h3>
-            <p className="font-heading mx-auto mt-4 max-w-2xl text-center text-sm leading-[1.85] text-forest/65 md:text-base">
+            <p className="font-heading mx-auto mt-4 max-w-2xl text-center text-sm leading-[1.85] text-forest/85 md:text-base">
               {dietaryPreferences}
             </p>
           </GuideCard>

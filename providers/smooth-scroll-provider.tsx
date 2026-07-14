@@ -4,15 +4,24 @@ import Lenis from "lenis";
 import { useEffect, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { lockHashNavigation } from "@/lib/hash-navigation";
 
 const NAV_OFFSET = 120;
 
-function scrollToHash(lenis: Lenis | null, hash: string) {
+function scrollToHash(lenis: Lenis | null, hash: string, attempt = 0) {
   if (!hash || hash === "#") return;
 
   const id = decodeURIComponent(hash.replace(/^#/, ""));
   const el = document.getElementById(id);
-  if (!el) return;
+
+  if (!el) {
+    if (attempt < 12) {
+      window.setTimeout(() => scrollToHash(lenis, hash, attempt + 1), 80);
+    }
+    return;
+  }
+
+  lockHashNavigation();
 
   if (lenis) {
     lenis.scrollTo(el, { offset: -NAV_OFFSET, duration: 1.05 });
@@ -29,8 +38,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (reducedMotion) {
       const onHash = () => scrollToHash(null, window.location.hash);
-      // Delay so the target section is in the DOM after route change
-      const t = window.setTimeout(onHash, 80);
+      const t = window.setTimeout(onHash, 100);
       window.addEventListener("hashchange", onHash);
       return () => {
         window.clearTimeout(t);
@@ -63,7 +71,8 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     const t2 = window.setTimeout(resize, 1500);
 
     const onHash = () => scrollToHash(lenis, window.location.hash);
-    const tHash = window.setTimeout(onHash, 120);
+    // After route change, wait a beat so sections (and scrollspy lock) settle
+    const tHash = window.setTimeout(onHash, 160);
     window.addEventListener("hashchange", onHash);
 
     return () => {

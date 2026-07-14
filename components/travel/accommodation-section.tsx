@@ -20,7 +20,7 @@ function HotelLogo({ hotel }: { hotel: HotelListing }) {
   if (!hotel.logo || failed) {
     return (
       <span
-        className="font-heading flex size-full items-center justify-center text-sm font-medium tracking-[0.08em] text-forest/55"
+        className="font-heading flex size-full items-center justify-center text-sm font-medium tracking-[0.08em] text-forest/78"
         aria-hidden="true"
       >
         {hotel.monogram}
@@ -62,7 +62,7 @@ function HotelCard({ hotel }: { hotel: HotelListing }) {
         href={hotel.website}
         target="_blank"
         rel="noopener noreferrer"
-        className="font-heading mt-auto inline-flex items-center gap-1.5 pt-4 text-sm text-forest/60 transition-colors duration-300 hover:text-[#B59A63]"
+        className="font-heading mt-auto inline-flex items-center gap-1.5 pt-4 text-sm text-forest/85 transition-colors duration-300 hover:text-[#B59A63]"
       >
         Visit Website
         <ExternalLink className="size-3.5 opacity-70" aria-hidden="true" />
@@ -140,7 +140,7 @@ export function AccommodationSection() {
             />
           </div>
 
-          <p className="font-heading mx-auto mt-6 max-w-2xl text-base leading-[1.85] text-forest/60 md:text-lg">
+          <p className="font-heading mx-auto mt-6 max-w-2xl text-base leading-[1.85] text-forest/85 md:text-lg">
             Whether you&apos;re arriving early, extending your holiday, or
             exploring beyond the wedding weekend, here are a few wonderful places
             to stay.
@@ -160,7 +160,7 @@ export function AccommodationSection() {
             <h3 className="font-heading mt-2 text-2xl font-medium uppercase tracking-[0.14em] text-forest md:text-3xl">
               Staying in Kochi
             </h3>
-            <p className="font-heading mt-3 max-w-xl text-sm leading-relaxed text-forest/55 md:text-base">
+            <p className="font-heading mt-3 max-w-xl text-sm leading-relaxed text-forest/78 md:text-base">
               Ideal for guests arriving early or extending their stay in Fort
               Kochi and the city.
             </p>
@@ -186,7 +186,7 @@ export function AccommodationSection() {
             <h3 className="font-heading mt-2 text-2xl font-medium uppercase tracking-[0.14em] text-forest md:text-3xl">
               Staying Near Kumarakom
             </h3>
-            <p className="font-heading mt-3 max-w-xl text-sm leading-relaxed text-forest/55 md:text-base">
+            <p className="font-heading mt-3 max-w-xl text-sm leading-relaxed text-forest/78 md:text-base">
               Beautiful lakeside stays close to the celebrations — including
               Coconut Lagoon, accessible only by boat.
             </p>

@@ -98,7 +98,7 @@ export function TimelineGuestNotes({ notes }: TimelineGuestNotesProps) {
           >
             For Our Guests
           </p>
-          <p className="font-heading mx-auto mt-3 max-w-md text-sm leading-relaxed text-forest/55 md:text-base">
+          <p className="font-heading mx-auto mt-3 max-w-md text-sm leading-relaxed text-forest/78 md:text-base">
             A few gentle notes to help you enjoy the weekend with ease.
           </p>
         </div>
@@ -113,7 +113,7 @@ export function TimelineGuestNotes({ notes }: TimelineGuestNotesProps) {
                     {note.title}
                   </p>
                 </div>
-                <p className="font-heading mt-1.5 text-sm leading-[1.75] text-forest/55 sm:ml-[3.25rem] sm:text-left md:ml-[3.5rem] md:text-[0.9375rem]">
+                <p className="font-heading mt-1.5 text-sm leading-[1.75] text-forest/78 sm:ml-[3.25rem] sm:text-left md:ml-[3.5rem] md:text-[0.9375rem]">
                   <HighlightedText text={note.text} highlights={note.highlights} />
                 </p>
               </div>

@@ -9,6 +9,7 @@ import {
   isHashNavActive,
   useLocationHash,
 } from "@/hooks/use-location-hash";
+import { navigateToSectionHash } from "@/lib/hash-navigation";
 import type { NavItem } from "@/types/navigation";
 import { cn } from "@/lib/utils";
 
@@ -148,7 +149,12 @@ export function NavDropdown({
                     <Link
                       href={child.href}
                       role="menuitem"
-                      onClick={() => setOpen(false)}
+                      onClick={(event) => {
+                        if (navigateToSectionHash(child.href)) {
+                          event.preventDefault();
+                        }
+                        setOpen(false);
+                      }}
                       className={cn(
                         "group/item font-heading relative block py-3 text-[0.9375rem] font-semibold tracking-[0.12em]",
                         "text-ivory/70 transition-all duration-500 ease-luxury",
