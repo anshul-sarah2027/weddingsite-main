@@ -150,7 +150,7 @@ export function TravelStayHero() {
 
         <motion.p
           className={cn(
-            "font-editorial text-editorial mt-4 text-2xl md:mt-5 md:text-[1.85rem] lg:text-[2.125rem]",
+            "font-editorial mt-4 text-2xl text-forest md:mt-5 md:text-[1.85rem] lg:text-[2.125rem]",
             "drop-shadow-[0_1px_12px_rgba(250,246,238,0.8)]",
           )}
           initial={reducedMotion ? false : { opacity: 0, y: 14 }}

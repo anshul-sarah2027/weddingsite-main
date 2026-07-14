@@ -1,7 +1,10 @@
 "use client";
 
 import { FadeIn } from "@/components/animations/fade-in";
-import { timelineEventsWithDressCode } from "@/constants/dress-code";
+import {
+  getTimelineDressCodeHref,
+  timelineEventsWithDressCode,
+} from "@/constants/dress-code";
 import type { TimelineEvent } from "@/types/timeline";
 import { cn } from "@/lib/utils";
 import { TimelineIllustration } from "./timeline-illustration";
@@ -14,7 +17,9 @@ interface TimelineEventStopProps {
 
 export function TimelineEventStop({ event, index, isLast }: TimelineEventStopProps) {
   const imageOnLeft = index % 2 === 0;
-  const showDressCodeNote = timelineEventsWithDressCode.has(event.id);
+  const dressCodeHref = timelineEventsWithDressCode.has(event.id)
+    ? getTimelineDressCodeHref(event.id)
+    : null;
 
   return (
     <FadeIn duration={1} delay={index * 0.04} className="relative">
@@ -100,12 +105,12 @@ export function TimelineEventStop({ event, index, isLast }: TimelineEventStopPro
             {event.venue}
           </p>
 
-          {showDressCodeNote && (
+          {dressCodeHref && (
             <p className="font-heading mx-auto mt-5 max-w-md text-sm leading-relaxed text-forest/55 md:mx-0">
               <span className="text-[#B59A63]">Dress code · </span>
               Scroll below for the full look.{" "}
               <a
-                href="#dress-code"
+                href={dressCodeHref}
                 className="font-medium text-[#B59A63] underline-offset-4 transition-colors hover:underline"
               >
                 View dress code ↓

@@ -27,7 +27,7 @@ function CouplePhotoFrame({ reducedMotion }: { reducedMotion: boolean }) {
           <div className="couple-art-frame__photo">
             <Image
               src={IMAGES.couple.primary}
-              alt="Anshul Nama and Sarah Ninan"
+              alt="Sarah Ninan and Anshul Nama"
               width={1200}
               height={1600}
               sizes="(max-width: 640px) 280px, (max-width: 768px) 300px, 320px"
@@ -78,14 +78,7 @@ export function TheirStory() {
               aria-hidden="true"
             />
           </div>
-          <p
-            className={cn(
-              "font-editorial text-ivory/85 text-2xl md:text-3xl",
-            )}
-          >
-            Two hearts, one beautiful beginning
-          </p>
-          <h2 className="font-heading mt-5 text-3xl font-medium uppercase tracking-[0.14em] text-ivory md:text-4xl">
+          <h2 className="font-heading mt-2 text-3xl font-medium uppercase tracking-[0.14em] text-ivory md:mt-3 md:text-4xl">
             The Couple
           </h2>
         </FadeIn>
@@ -98,7 +91,7 @@ export function TheirStory() {
           <FadeIn delay={0.15} duration={0.9} className="text-left">
             <div className="space-y-5 text-justify font-heading text-base leading-relaxed text-ivory/80 md:text-lg">
               <p>
-                Anshul and Sarah are proof that opposites attract. She talks, he
+                Sarah and Anshul are proof that opposites attract. She talks, he
                 listens (someone has to), and somehow it works. Bonus points if
                 there&apos;s a good film, a witty comeback, or dessert involved,
                 ideally all three.
@@ -126,7 +119,7 @@ export function TheirStory() {
                     "font-editorial text-editorial mt-1 text-2xl",
                   )}
                 >
-                  Anshul & Sarah
+                  Sarah & Anshul
                 </p>
               </div>
             </div>

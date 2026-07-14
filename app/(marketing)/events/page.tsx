@@ -1,5 +1,6 @@
 import { WeddingWeekendHero } from "@/components/events/wedding-weekend-hero";
 // import { SpiritOfKerala } from "@/components/events/spirit-of-kerala";
+import { WeddingWeekendScrollSpy } from "@/components/events/wedding-weekend-scroll-spy";
 import { WeddingWeekendTimeline } from "@/components/events/wedding-weekend-timeline";
 import { DressCodeSection } from "@/components/events/dress-code-section";
 import { RsvpSection } from "@/components/home/rsvp";
@@ -15,6 +16,7 @@ export const metadata = createPageMetadata(
 export default function EventsPage() {
   return (
     <>
+      <WeddingWeekendScrollSpy />
       <WeddingWeekendHero />
       {/* <SpiritOfKerala /> */}
       <KumarakomLakeResort />

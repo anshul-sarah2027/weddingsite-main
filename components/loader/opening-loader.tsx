@@ -332,7 +332,7 @@ export function OpeningLoader({ onExitStart, onComplete }: OpeningLoaderProps) {
         >
           <Image
             src={IMAGES.logo.wedding}
-            alt={`${SITE.couple.groom} & ${SITE.couple.bride}`}
+            alt={`${SITE.couple.bride} & ${SITE.couple.groom}`}
             width={440}
             height={200}
             priority

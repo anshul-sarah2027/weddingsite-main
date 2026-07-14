@@ -1,4 +1,5 @@
 import { TravelStayHero } from "@/components/travel/travel-stay-hero";
+import { TravelStayScrollSpy } from "@/components/travel/travel-stay-scroll-spy";
 import { WelcomeToKerala } from "@/components/travel/welcome-to-kerala";
 import { GettingHere } from "@/components/travel/getting-here";
 import { AccommodationSection } from "@/components/travel/accommodation-section";
@@ -15,6 +16,7 @@ export const metadata = createPageMetadata(
 export default function AccommodationPage() {
   return (
     <>
+      <TravelStayScrollSpy />
       <TravelStayHero />
       <WelcomeToKerala />
       <GettingHere />

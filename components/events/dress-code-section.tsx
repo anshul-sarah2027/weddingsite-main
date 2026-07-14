@@ -7,11 +7,13 @@ import { Download, Expand, X } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Container } from "@/components/layout/container";
 import {
+  dressCodeAnchorId,
   dressCodeEvents,
   type DressCodeEvent,
   type DressCodeImage,
 } from "@/constants/dress-code";
 import { IMAGES } from "@/constants/images";
+import { useDressCodeScrollSpy } from "@/hooks/use-dress-code-scroll-spy";
 import { cn } from "@/lib/utils";
 
 function downloadFilename(src: string) {
@@ -183,10 +185,11 @@ function DressCodeChapter({
 
   return (
     <FadeIn
+      id={dressCodeAnchorId(event.id)}
       duration={0.8}
       delay={0.04 * index}
       className={cn(
-        "relative py-12 md:py-16",
+        "relative scroll-mt-32 py-12 md:py-16",
         index !== dressCodeEvents.length - 1 && "border-b border-forest/8",
       )}
     >
@@ -269,6 +272,7 @@ function DressCodeChapter({
 
 export function DressCodeSection() {
   const [activeImage, setActiveImage] = useState<DressCodeImage | null>(null);
+  useDressCodeScrollSpy();
 
   return (
     <section

@@ -26,13 +26,24 @@ export function Arrival() {
             ease: [0.25, 0.1, 0.25, 1],
           }}
         >
+          {/* Desktop / tablet — no hashtag in art */}
           <Image
             src={IMAGES.hero}
             alt="Illustrated Kerala wedding scene — houseboat, elephant, and tropical botanicals"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="hidden object-cover object-center md:block"
+            quality={90}
+          />
+          {/* Mobile — hashtag already in the image */}
+          <Image
+            src={IMAGES.heroMobile}
+            alt="Illustrated Kerala wedding scene — houseboat, elephant, and tropical botanicals"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center md:hidden"
             quality={90}
           />
         </motion.div>
@@ -46,7 +57,6 @@ export function Arrival() {
           className="absolute inset-0 bg-gradient-to-b from-[#FAF7F2]/40 via-transparent to-transparent"
           aria-hidden="true"
         />
-        {/* Soften baked-in hashtag / lower art so type stays clear */}
         <div
           className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-[#F3EEE4]/85 via-[#F3EEE4]/45 to-transparent"
           aria-hidden="true"
@@ -57,7 +67,7 @@ export function Arrival() {
         />
       </div>
 
-      <div className="relative z-10 flex w-full flex-col items-center px-6 pb-20 pt-36 text-center md:pb-24 md:pt-40">
+      <div className="relative z-10 flex w-full flex-col items-center px-6 pb-24 pt-36 text-center md:pb-28 md:pt-40">
         <motion.div
           className="relative mb-5 size-14 opacity-75 md:mb-7 md:size-16"
           initial={reducedMotion ? {} : { opacity: 0, y: 12 }}
@@ -93,7 +103,7 @@ export function Arrival() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          {SITE.couple.groom} & {SITE.couple.bride}
+          {SITE.couple.bride} & {SITE.couple.groom}
         </motion.h1>
 
         <motion.h3
@@ -107,6 +117,26 @@ export function Arrival() {
           Kumarakom, Kerala
         </motion.h3>
       </div>
+
+      {/* Hashtag — desktop only (mobile art already includes it) */}
+      <motion.p
+        className={cn(
+          "font-heading pointer-events-none absolute inset-x-0 bottom-8 z-10 hidden px-6 text-center text-sm font-medium tracking-[0.22em] text-[#2F3A2E] uppercase md:bottom-10 md:block md:text-base lg:bottom-12 lg:text-lg",
+        )}
+        initial={reducedMotion ? {} : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
+        aria-label="Pints and Pappadams"
+      >
+        <span aria-hidden="true">#&nbsp;PINTS </span>
+        <span
+          className="font-heading font-normal tracking-[0.14em] text-[#B59A63] italic normal-case"
+          aria-hidden="true"
+        >
+          and
+        </span>
+        <span aria-hidden="true"> PAPPADAMS</span>
+      </motion.p>
     </section>
   );
 }

@@ -557,6 +557,22 @@ export const shoppingTip = {
 export const guestFaqsIntro =
   "For any friends and family with questions, please see below. If there's something we haven't covered, feel free to reach out to Sarah or Anshul directly.";
 
+/** In-page section anchors for Guest Guide scrollspy / deep links */
+export const guestGuideSections = [
+  { id: "discover-kerala", label: "Discover Kerala" },
+  { id: "beyond-kerala", label: "Beyond Kerala" },
+  { id: "international-getaways", label: "International" },
+  { id: "travel-partners", label: "Travel Partners" },
+  { id: "kochi-restaurants", label: "Kochi Restaurants" },
+  { id: "must-try-kerala", label: "Must Try" },
+  { id: "dietary-preferences", label: "Dietary" },
+  { id: "wedding-shopping", label: "Shopping" },
+  { id: "faqs", label: "FAQs" },
+] as const;
+
+export const guestGuideSectionIds = guestGuideSections.map(
+  (section) => section.id,
+);
 export const guestFaqs: GuestFaq[] = [
   {
     id: "wear",
@@ -572,7 +588,7 @@ export const guestFaqs: GuestFaq[] = [
     id: "dietary",
     question: "Is there anything specific for dietary requirements?",
     paragraphs: [
-      "If you have any dietary needs, please let Anshul/Sarah know ahead of time. There will be vegetarian and vegan options available throughout the weekend.",
+      "If you have any dietary needs, please let Sarah/Anshul know ahead of time. There will be vegetarian and vegan options available throughout the weekend.",
     ],
   },
   {

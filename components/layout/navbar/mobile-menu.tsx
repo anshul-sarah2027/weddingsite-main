@@ -11,6 +11,10 @@ import { Logo } from "@/components/layout/navbar/logo";
 import { RsvpButton } from "@/components/layout/navbar/rsvp-button";
 import { mainNavigation } from "@/constants/navigation";
 import { IMAGES } from "@/constants/images";
+import {
+  isHashNavActive,
+  useLocationHash,
+} from "@/hooks/use-location-hash";
 import { SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -25,11 +29,11 @@ const MENU_BG = "#FAF7F2";
 
 export function MobileMenu({ onHero = false }: MobileMenuProps) {
   const pathname = usePathname();
+  const hash = useLocationHash();
   const [open, setOpen] = useState(false);
-  const [infoOpen, setInfoOpen] = useState(false);
+  const [openSection, setOpenSection] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const panelId = useId();
-  const infoPanelId = useId();
 
   useEffect(() => {
     setMounted(true);
@@ -37,7 +41,7 @@ export function MobileMenu({ onHero = false }: MobileMenuProps) {
 
   useEffect(() => {
     setOpen(false);
-    setInfoOpen(false);
+    setOpenSection(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -190,22 +194,34 @@ export function MobileMenu({ onHero = false }: MobileMenuProps) {
                   <ul className="flex w-full max-w-sm flex-col items-center gap-1 text-center">
                     {mainNavigation.map((item) => {
                       const hasChildren = Boolean(item.children?.length);
+                      const sectionOpen = openSection === item.href;
                       const isActive =
                         item.href === "/"
                           ? pathname === "/"
                           : pathname === item.href ||
-                            item.children?.some(
-                              (child) => pathname === child.href,
-                            );
+                            pathname.startsWith(`${item.href}/`) ||
+                            item.children?.some((child) => {
+                              const pathOnly =
+                                child.href.split("#")[0] || child.href;
+                              return (
+                                pathname === pathOnly ||
+                                pathname.startsWith(`${pathOnly}/`)
+                              );
+                            });
 
                       if (hasChildren) {
+                        const sectionPanelId = `${panelId}-${item.href.replace(/\W/g, "")}`;
                         return (
                           <li key={item.href} className="w-full">
                             <button
                               type="button"
-                              aria-expanded={infoOpen}
-                              aria-controls={infoPanelId}
-                              onClick={() => setInfoOpen((value) => !value)}
+                              aria-expanded={sectionOpen}
+                              aria-controls={sectionPanelId}
+                              onClick={() =>
+                                setOpenSection((value) =>
+                                  value === item.href ? null : item.href,
+                                )
+                              }
                               className={cn(
                                 "font-heading mx-auto flex items-center justify-center gap-2 py-3.5 text-center text-[1.75rem] font-medium tracking-[0.1em] text-forest uppercase sm:text-3xl",
                                 "transition-opacity duration-300",
@@ -216,16 +232,16 @@ export function MobileMenu({ onHero = false }: MobileMenuProps) {
                               <ChevronDown
                                 className={cn(
                                   "size-4 shrink-0 text-editorial transition-transform duration-400 ease-luxury sm:size-5",
-                                  infoOpen && "rotate-180",
+                                  sectionOpen && "rotate-180",
                                 )}
                                 strokeWidth={1.5}
                               />
                             </button>
 
                             <AnimatePresence initial={false}>
-                              {infoOpen && (
+                              {sectionOpen && (
                                 <motion.ul
-                                  id={infoPanelId}
+                                  id={sectionPanelId}
                                   initial={{ height: 0, opacity: 0 }}
                                   animate={{ height: "auto", opacity: 1 }}
                                   exit={{ height: 0, opacity: 0 }}
@@ -233,21 +249,27 @@ export function MobileMenu({ onHero = false }: MobileMenuProps) {
                                   className="overflow-hidden"
                                 >
                                   <div className="flex flex-col items-center gap-0.5 pb-3 pt-1">
-                                    {item.children?.map((child) => (
-                                      <li key={child.href}>
-                                        <Link
-                                          href={child.href}
-                                          onClick={() => setOpen(false)}
-                                          className={cn(
-                                            "font-editorial block py-2.5 text-base tracking-[0.06em] text-forest/55 transition-colors duration-300 hover:text-editorial sm:text-lg",
-                                            pathname === child.href &&
-                                              "text-editorial",
-                                          )}
-                                        >
-                                          {child.label}
-                                        </Link>
-                                      </li>
-                                    ))}
+                                    {item.children?.map((child) => {
+                                      const childActive = isHashNavActive(
+                                        child.href,
+                                        pathname,
+                                        hash,
+                                      );
+                                      return (
+                                        <li key={child.href}>
+                                          <Link
+                                            href={child.href}
+                                            onClick={() => setOpen(false)}
+                                            className={cn(
+                                              "font-editorial block py-2.5 text-base tracking-[0.06em] text-forest/55 transition-colors duration-300 hover:text-editorial sm:text-lg",
+                                              childActive && "text-editorial",
+                                            )}
+                                          >
+                                            {child.label}
+                                          </Link>
+                                        </li>
+                                      );
+                                    })}
                                   </div>
                                 </motion.ul>
                               )}

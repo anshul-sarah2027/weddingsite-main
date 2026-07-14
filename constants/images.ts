@@ -1,5 +1,6 @@
 export const IMAGES = {
-  hero: "/hero/hero8.png",
+  hero: "/hero/hero9web.png",
+  heroMobile: "/hero/hero10mobile.png",
   heroAlt: {
     primary: "/hero/hero1.png",
     sunset: "/hero/hero2.png",
@@ -19,6 +20,7 @@ export const IMAGES = {
     main: "/logo/mainLogo.png",
     paypal: "/logos/paypal.svg",
     revolut: "/logos/revolut.svg",
+    whatsapp: "/logos/whatsapp.svg",
   },
   decor: {
     sandDollar: "/images/decor/line-art-sand-dollar.avif",

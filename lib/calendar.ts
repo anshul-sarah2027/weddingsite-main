@@ -2,7 +2,7 @@ import { SITE, WEDDING } from "@/lib/constants";
 
 /** All-day wedding weekend · 30–31 January 2027 (IST) */
 export const WEDDING_WEEKEND_CALENDAR = {
-  title: `${SITE.couple.groom} & ${SITE.couple.bride} Wedding Weekend`,
+  title: `${SITE.couple.bride} & ${SITE.couple.groom} Wedding Weekend`,
   description: `Wedding weekend celebrations at ${WEDDING.venue}, ${SITE.location}.`,
   location: `${WEDDING.venue}, ${SITE.location}`,
   /** ICS all-day: exclusive end date */

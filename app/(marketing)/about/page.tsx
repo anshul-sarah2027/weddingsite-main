@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata(
   "Our Story",
-  "The story of Anshul and Sarah — from a London bookshop to the backwaters of Kerala.",
+  "The story of Sarah and Anshul — from a London bookshop to the backwaters of Kerala.",
 );
 
 export default function AboutPage() {
@@ -23,13 +23,13 @@ export default function AboutPage() {
 
         <div className="editorial-grid mt-16 items-start lg:grid-cols-2">
           <FadeIn className="image-breathe">
-            <ImageReveal src={IMAGES.couple.primary} alt="Anshul and Sarah" />
+            <ImageReveal src={IMAGES.couple.primary} alt="Sarah and Anshul" />
           </FadeIn>
 
           <div className="space-y-6">
             <FadeIn delay={0.1}>
               <p className="text-body-lg text-muted-foreground">
-                Anshul and Sarah&apos;s story began with a chance encounter and
+                Sarah and Anshul&apos;s story began with a chance encounter and
                 grew through years of patience, adventure, and unwavering
                 devotion. Their wedding in Kumarakom is a celebration of
                 everything they hold dear — family, culture, and the beauty of

@@ -3,7 +3,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata(
   "Contact",
-  "Get in touch with Anshul Nama or Sarah Ninan about the wedding weekend.",
+  "Get in touch with Sarah Ninan or Anshul Nama about the wedding weekend.",
 );
 
 export default function ContactPage() {

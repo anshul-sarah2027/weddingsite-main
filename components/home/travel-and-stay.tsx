@@ -62,7 +62,7 @@ function TravelBoardingPassCta() {
       </div>
 
       <Link
-        href="/accommodation"
+        href="/events"
         className="flex w-full shrink-0 rotate-[1.25deg] flex-row items-stretch overflow-hidden border border-[#596B55]/12 bg-[rgba(250,246,239,0.72)] transition-transform duration-700 ease-out group-hover/boarding:rotate-0 lg:max-w-3xl"
       >
       {/* Boarding pass details */}

@@ -14,6 +14,15 @@ const baseFields = {
     .min(1, "Please enter your full name")
     .max(120, "Name is too long"),
   email: z.email("Please enter a valid email address"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Please enter your phone number")
+    .max(40, "Phone number is too long")
+    .regex(
+      /^[+0-9()\s.-]{7,40}$/,
+      "Please enter a valid phone number",
+    ),
   notes: notesField,
 };
 
@@ -67,6 +76,7 @@ export type RsvpInput = z.infer<typeof rsvpSchema>;
 export type RsvpFormValues = {
   fullName: string;
   email: string;
+  phone: string;
   attending: boolean | null;
   partySize: number;
   guestNames: string[];
@@ -77,6 +87,7 @@ export type RsvpFormValues = {
 export const rsvpFormDefaults: RsvpFormValues = {
   fullName: "",
   email: "",
+  phone: "",
   attending: null,
   partySize: 1,
   guestNames: [""],
@@ -94,6 +105,7 @@ export function parseRsvpForm(values: RsvpFormValues): RsvpInput {
     return rsvpAttendingSchema.parse({
       fullName: values.fullName,
       email: values.email,
+      phone: values.phone,
       attending: true,
       partySize: values.partySize,
       guestNames: values.guestNames,
@@ -105,6 +117,7 @@ export function parseRsvpForm(values: RsvpFormValues): RsvpInput {
   return rsvpDecliningSchema.parse({
     fullName: values.fullName,
     email: values.email,
+    phone: values.phone,
     attending: false,
     notes: values.notes || undefined,
   });

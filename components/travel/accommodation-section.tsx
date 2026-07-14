@@ -116,13 +116,13 @@ export function AccommodationSection() {
             />
           </div>
 
-          <p
+          {/* <p
             className={cn(
             "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             Lakeside Living
-          </p>
+          </p> */}
 
           <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.18em] text-forest md:text-4xl lg:text-5xl">
             Accommodation

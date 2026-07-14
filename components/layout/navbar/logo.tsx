@@ -55,7 +55,7 @@ export function Logo({ onHero = false, className, onClick }: LogoProps) {
           >
             <Image
               src={IMAGES.logo.main}
-              alt="Anshul & Sarah Wedding"
+              alt="Sarah & Anshul Wedding"
               width={1254}
               height={1254}
               sizes="(max-width: 768px) 128px, 144px"

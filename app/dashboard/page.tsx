@@ -17,7 +17,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata(
   "RSVP Dashboard",
-  "Private RSVP overview for Anshul and Sarah.",
+  "Private RSVP overview for Sarah and Anshul.",
 );
 
 export const dynamic = "force-dynamic";
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
           />
 
           <p className="font-editorial text-editorial text-center text-2xl md:text-[1.75rem]">
-            Anshul & Sarah
+            Sarah & Anshul
           </p>
           <h1 className="font-heading mt-3 text-center text-2xl font-medium tracking-[0.16em] text-[#2F3A2E] uppercase">
             Private Dashboard

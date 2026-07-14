@@ -70,7 +70,8 @@ export const dressCodeEvents: DressCodeEvent[] = [
     name: "Reception",
     poeticTitle: "Under a Thousand Lights",
     description:
-      "Elegant evening wear. For women, evening gowns or dressy sarees. For men, suit or tuxedo.",
+      "Elegant evening wear. For women, evening gowns or dressy sarees. Kindly avoid white or cream. For men, suit or tuxedo.",
+      
     images: [
       {
         src: "/dresscode/Reception(Women).jpeg",
@@ -96,3 +97,28 @@ export const timelineEventsWithDressCode = new Set([
   "muhurtham",
   "reception",
 ]);
+
+/**
+ * Maps a wedding-weekend timeline event id → dress-code chapter id.
+ * Several ceremonies share one look (e.g. Baraat + Sangeet).
+ */
+export const timelineToDressCodeId: Record<string, string> = {
+  nichayathartham: "nichayathartam",
+  baraat: "baraat-sangeet",
+  sangeet: "baraat-sangeet",
+  upanayanam: "muhurtham",
+  "kashi-yatra": "muhurtham",
+  muhurtham: "muhurtham",
+  reception: "reception",
+};
+
+export function dressCodeAnchorId(dressCodeEventId: string) {
+  return `dress-code-${dressCodeEventId}`;
+}
+
+/** Hash href for a timeline event’s matching dress-code chapter */
+export function getTimelineDressCodeHref(timelineEventId: string): string | null {
+  const dressCodeId = timelineToDressCodeId[timelineEventId];
+  if (!dressCodeId) return null;
+  return `#${dressCodeAnchorId(dressCodeId)}`;
+}

@@ -5,6 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { IMAGES } from "@/constants/images";
+import {
+  isHashNavActive,
+  useLocationHash,
+} from "@/hooks/use-location-hash";
 import type { NavItem } from "@/types/navigation";
 import { cn } from "@/lib/utils";
 
@@ -28,13 +32,16 @@ export function NavDropdown({
   linkClassName,
 }: NavDropdownProps) {
   const pathname = usePathname();
+  const hash = useLocationHash();
   const [open, setOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuId = useId();
   const children = item.children ?? [];
 
   const isActive =
-    children.some((child) => pathname === child.href) || pathname === item.href;
+    pathname === item.href ||
+    pathname.startsWith(`${item.href}/`) ||
+    children.some((child) => isHashNavActive(child.href, pathname, hash));
 
   const clearCloseTimeout = () => {
     if (timeoutRef.current) {
@@ -107,7 +114,7 @@ export function NavDropdown({
             exit={{ opacity: 0, y: 6, filter: "blur(4px)" }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className={cn(
-              "absolute top-full left-1/2 z-50 mt-6 min-w-[15rem] -translate-x-1/2",
+              "absolute top-full left-1/2 z-50 mt-6 min-w-[17rem] -translate-x-1/2",
               "overflow-hidden rounded-[22px] border border-ivory/20",
               "bg-forest/92 backdrop-blur-[10px]",
               "shadow-[0_12px_40px_rgba(45,74,62,0.18)]",
@@ -131,12 +138,17 @@ export function NavDropdown({
 
             <ul className="relative z-10 flex flex-col px-5 py-4">
               {children.map((child, index) => {
-                const childActive = pathname === child.href;
+                const childActive = isHashNavActive(
+                  child.href,
+                  pathname,
+                  hash,
+                );
                 return (
                   <li key={child.href} role="none">
                     <Link
                       href={child.href}
                       role="menuitem"
+                      onClick={() => setOpen(false)}
                       className={cn(
                         "group/item font-heading relative block py-3 text-[0.9375rem] font-semibold tracking-[0.12em]",
                         "text-ivory/70 transition-all duration-500 ease-luxury",

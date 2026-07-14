@@ -1,8 +1,8 @@
 export const SITE = {
-  name: "Anshul & Sarah",
+  name: "Sarah & Anshul",
   tagline: "A celebration in Kumarakom",
   description:
-    "Join Anshul and Sarah for an unforgettable wedding celebration on the serene backwaters of Kumarakom, Kerala — January 2027.",
+    "Join Sarah and Anshul for an unforgettable wedding celebration on the serene backwaters of Kumarakom, Kerala — January 2027.",
   url: "https://anshulandsarah.com",
   locale: "en_IE",
   weddingDate: "2027-01-30",
@@ -19,17 +19,22 @@ export const SITE = {
     bride: "Sarah",
     groomFullName: "Anshul Nama",
     brideFullName: "Sarah Ninan",
+    /** Brand order — always Sarah first */
+    displayName: "Sarah & Anshul",
+    displayNamePlain: "Sarah and Anshul",
   },
   contact: {
-    anshul: {
-      fullName: "Anshul Nama",
-      phoneDisplay: "+353 87 168 4811",
-      phoneHref: "tel:+353871684811",
-    },
     sarah: {
       fullName: "Sarah Ninan",
       phoneDisplay: "+353 85 831 4664",
       phoneHref: "tel:+353858314664",
+      whatsappHref: "https://wa.me/353858314664",
+    },
+    anshul: {
+      fullName: "Anshul Nama",
+      phoneDisplay: "+353 87 168 4811",
+      phoneHref: "tel:+353871684811",
+      whatsappHref: "https://wa.me/353871684811",
     },
   },
 } as const;

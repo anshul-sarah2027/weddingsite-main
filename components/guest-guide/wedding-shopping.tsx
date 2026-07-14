@@ -43,7 +43,7 @@ export function WeddingShopping() {
       id="wedding-shopping"
       ariaLabel="Wedding Attire Shopping"
       eyebrow="Dressing for the Celebrations"
-      title="Wedding Attire Shopping"
+      title="Wedding Wardrobe Guide"
       tone="sage"
     >
       <div className="space-y-10 md:space-y-12">

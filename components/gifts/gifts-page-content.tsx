@@ -106,7 +106,7 @@ export function GiftsPageContent() {
           <div className="relative mx-auto aspect-square w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px]">
             <Image
               src={IMAGES.logo.wedding}
-              alt="Anshul and Sarah wedding — Pints and Pappadams"
+              alt="Sarah and Anshul wedding — Pints and Pappadams"
               fill
               sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 360px"
               className="object-contain"

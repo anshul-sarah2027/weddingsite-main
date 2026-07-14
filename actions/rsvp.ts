@@ -21,6 +21,7 @@ function toInsert(data: RsvpInput): RsvpInsert {
     return {
       full_name: data.fullName,
       email: data.email.toLowerCase(),
+      phone: data.phone.trim(),
       attending: true,
       party_size: data.partySize,
       guest_names: data.guestNames,
@@ -32,6 +33,7 @@ function toInsert(data: RsvpInput): RsvpInsert {
   return {
     full_name: data.fullName,
     email: data.email.toLowerCase(),
+    phone: data.phone.trim(),
     attending: false,
     party_size: null,
     guest_names: null,

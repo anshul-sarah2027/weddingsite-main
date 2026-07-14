@@ -31,28 +31,22 @@ const BOTANICALS = [
 function FadedResortArt() {
   return (
     <div className="relative mx-auto w-full max-w-[340px] md:max-w-[560px] lg:max-w-[640px]">
-      <div className="relative w-full">
-        <img
-          src={IMAGES.kerala.kumarakomArt}
-          alt="Handcrafted illustration of Kumarakom Lake Resort on the shores of Vembanad Lake"
-          width={1536}
-          height={1024}
-          decoding="async"
-          loading="lazy"
-          draggable={false}
-          className={cn(
-            "h-auto w-full object-contain",
-            "[mask-image:linear-gradient(to_right,transparent_0%,#000_10%,#000_90%,transparent_100%),linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]",
-            "[mask-composite:intersect]",
-            "[webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_10%,#000_90%,transparent_100%),linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]",
-            "[webkit-mask-composite:source-in]",
-          )}
-        />
-
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_85%_at_50%_50%,transparent_38%,#FAF7F2_100%)] opacity-80"
-          aria-hidden="true"
-        />
+      <Image
+        src={IMAGES.kerala.kumarakomArt}
+        alt="Handcrafted illustration of Kumarakom Lake Resort on the shores of Vembanad Lake"
+        width={1536}
+        height={1024}
+        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 560px, 640px"
+        quality={75}
+        className="h-auto w-full object-contain"
+        priority
+      />
+      {/* Soft rectangular edge fade into bg — all four sides, no rounded vignette */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute inset-y-0 left-0 w-[12%] bg-gradient-to-r from-[#FAF7F2] to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-[12%] bg-gradient-to-l from-[#FAF7F2] to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-[12%] bg-gradient-to-b from-[#FAF7F2] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-[12%] bg-gradient-to-t from-[#FAF7F2] to-transparent" />
       </div>
     </div>
   );
@@ -123,7 +117,7 @@ export function KumarakomLakeResort() {
   return (
     <section
       id="kumarakom-lake-resort"
-      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] pt-14 pb-4 md:pt-16 md:pb-6 [content-visibility:auto] [contain-intrinsic-size:auto_700px]"
+      className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] pt-14 pb-4 md:pt-16 md:pb-6"
       aria-label="Kumarakom Lake Resort"
     >
       <div
@@ -183,13 +177,6 @@ export function KumarakomLakeResort() {
             />
           </div>
 
-          <p
-            className={cn(
-            "font-editorial text-editorial text-xl md:text-2xl",
-            )}
-          >
-            Our Wedding Home
-          </p>
 
           <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.18em] text-forest md:text-4xl lg:text-5xl">
             Kumarakom Lake Resort
@@ -262,9 +249,9 @@ export function KumarakomLakeResort() {
           <FadeIn
             duration={0.7}
             delay={0.12}
-            className="flex justify-center md:justify-start"
+            className="flex w-full justify-center md:justify-start"
           >
-            <div className="animate-editorial-float">
+            <div className="animate-editorial-float w-full max-w-[340px] md:max-w-[560px] lg:max-w-[640px]">
               <FadedResortArt />
             </div>
           </FadeIn>

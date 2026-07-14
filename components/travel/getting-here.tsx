@@ -199,13 +199,13 @@ export function GettingHere() {
             />
           </div>
 
-          <p
+          {/* <p
             className={cn(
             "font-editorial text-editorial text-xl md:text-2xl",
             )}
           >
             Your Journey Begins
-          </p>
+          </p> */}
 
           <h2 className="font-heading mt-4 text-3xl font-medium uppercase tracking-[0.18em] text-[#2F3A2E] md:text-4xl lg:text-5xl">
             Getting Here

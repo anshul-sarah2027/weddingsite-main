@@ -194,7 +194,7 @@ export async function fetchRsvpsPage(options: {
     if (search) {
       const pattern = `"%${search}%"`;
       queryBuilder = queryBuilder.or(
-        `full_name.ilike.${pattern},email.ilike.${pattern},allergies.ilike.${pattern},notes.ilike.${pattern}`,
+        `full_name.ilike.${pattern},email.ilike.${pattern},phone.ilike.${pattern},allergies.ilike.${pattern},notes.ilike.${pattern}`,
       );
     }
 
@@ -227,5 +227,101 @@ export async function fetchRsvpsPage(options: {
       pageSize,
       error: "Something went wrong loading RSVPs.",
     };
+  }
+}
+
+export type RsvpUpdateResult =
+  | { ok: true; row: RsvpRow }
+  | { ok: false; error: string };
+
+export async function updateRsvpAttendanceInDb(input: {
+  id: string;
+  attending: boolean;
+}): Promise<RsvpUpdateResult> {
+  if (!getSupabaseAdminEnv()) {
+    return { ok: false, error: adminUnavailable() };
+  }
+
+  try {
+    const supabase = createSupabaseAdminClient();
+    const { data: existing, error: loadError } = await supabase
+      .from("rsvps")
+      .select("*")
+      .eq("id", input.id)
+      .maybeSingle();
+
+    if (loadError || !existing) {
+      return { ok: false, error: "Could not find that RSVP." };
+    }
+
+    const patch: Record<string, unknown> = {
+      attending: input.attending,
+    };
+
+    // Restoring a decline: ensure they count as at least one guest
+    if (input.attending) {
+      const party =
+        typeof existing.party_size === "number" && existing.party_size >= 1
+          ? existing.party_size
+          : 1;
+      const names = Array.isArray(existing.guest_names)
+        ? existing.guest_names.filter(
+            (name: unknown): name is string =>
+              typeof name === "string" && Boolean(name.trim()),
+          )
+        : [];
+
+      patch.party_size = party;
+      patch.guest_names =
+        names.length > 0 ? names : [existing.full_name as string];
+    }
+
+    const { data, error } = await supabase
+      .from("rsvps")
+      .update(patch)
+      .eq("id", input.id)
+      .select("*")
+      .single();
+
+    if (error || !data) {
+      console.error("[updateRsvpAttendanceInDb]", error?.message);
+      return { ok: false, error: "Could not update attendance." };
+    }
+
+    return { ok: true, row: data as RsvpRow };
+  } catch (error) {
+    console.error("[updateRsvpAttendanceInDb]", error);
+    return { ok: false, error: "Something went wrong updating attendance." };
+  }
+}
+
+export async function updateRsvpAllergiesInDb(input: {
+  id: string;
+  allergies: string;
+}): Promise<RsvpUpdateResult> {
+  if (!getSupabaseAdminEnv()) {
+    return { ok: false, error: adminUnavailable() };
+  }
+
+  const allergies = input.allergies.trim();
+
+  try {
+    const supabase = createSupabaseAdminClient();
+    const { data, error } = await supabase
+      .from("rsvps")
+      .update({ allergies: allergies || null })
+      .eq("id", input.id)
+      .select("*")
+      .single();
+
+    if (error || !data) {
+      console.error("[updateRsvpAllergiesInDb]", error?.message);
+      return { ok: false, error: "Could not update dietary notes." };
+    }
+
+    return { ok: true, row: data as RsvpRow };
+  } catch (error) {
+    console.error("[updateRsvpAllergiesInDb]", error);
+    return { ok: false, error: "Something went wrong updating dietary notes." };
   }
 }

@@ -117,7 +117,7 @@ export function RsvpForm() {
             const message = messages[0];
             if (!message) continue;
 
-            if (path === "fullName" || path === "email" || path === "attending") {
+            if (path === "fullName" || path === "email" || path === "phone" || path === "attending") {
               setError(path, { message });
             } else if (path === "partySize") {
               setError("partySize", { message });
@@ -190,6 +190,24 @@ export function RsvpForm() {
             {...register("email", { required: "Please enter your email" })}
           />
           <FieldError message={errors.email?.message} />
+        </div>
+
+        <div className="md:col-span-2 md:max-w-md">
+          <FieldLabel htmlFor="phone" required>
+            Phone number
+          </FieldLabel>
+          <Input
+            id="phone"
+            type="tel"
+            autoComplete="tel"
+            className={fieldClassName}
+            placeholder="+353 85 000 0000"
+            aria-invalid={Boolean(errors.phone)}
+            {...register("phone", {
+              required: "Please enter your phone number",
+            })}
+          />
+          <FieldError message={errors.phone?.message} />
         </div>
       </div>
 

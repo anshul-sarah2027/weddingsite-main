@@ -21,7 +21,7 @@ export function NavLinks({ onHero = false }: NavLinksProps) {
 
   return (
     <ul
-      className="flex items-center gap-8 xl:gap-11"
+      className="flex items-center gap-6 xl:gap-9"
       onMouseLeave={() => setHoveredHref(null)}
     >
       {mainNavigation.map((item) => {
@@ -31,7 +31,12 @@ export function NavLinks({ onHero = false }: NavLinksProps) {
             ? pathname === "/"
             : pathname === item.href ||
               pathname.startsWith(`${item.href}/`) ||
-              item.children?.some((child) => pathname === child.href);
+              item.children?.some((child) => {
+                const pathOnly = child.href.split("#")[0] || child.href;
+                return (
+                  pathname === pathOnly || pathname.startsWith(`${pathOnly}/`)
+                );
+              });
 
         const isHovered = hoveredHref === item.href;
         const isDimmed = isGroupHovered && !isHovered;

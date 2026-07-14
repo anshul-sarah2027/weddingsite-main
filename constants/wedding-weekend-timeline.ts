@@ -12,9 +12,18 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         time: "10:30 AM",
         name: "Nichayathartam",
         description:
-          "Our celebrations begin with the Nichayathartam, the traditional engagement ceremony where our families come together to formally exchange blessings. A welcome lunch will follow shortly after, giving everyone a chance to relax and get to know one another before the festivities continue.",
+          "Our celebrations begin with the traditional engagement ceremony featuring the exchange of rings, traditional gifts, and the reading of the Lagna Patrika (wedding agreement) by the priest.",
         venue: "Banquet Hall",
         illustration: `${T}/Nichayathartham.png`,
+      },
+      {
+        id: "welcome-lunch",
+        time: "12:30 PM",
+        name: "Welcome Lunch",
+        description:
+          "Join us as we kick off our wedding celebrations with a relaxed Welcome Lunch. Enjoy delicious local cuisine before the festivities begin.",
+        venue: "Ettukettu Restaurant",
+        illustration: `${T}/welcomelunchimage.png`,
       },
       {
         id: "hotel-check-in",
@@ -30,7 +39,7 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         time: "5:00 PM",
         name: "Baraat",
         description:
-          "The Baraat begins, a lively procession that marks the arrival of the couple, filled with music, dancing, and the joyful energy of family and friends escorting them to the venue. It's less a walk and more a celebration in motion, so come ready to dance your way there with us, and expect a surprise along the way. The Sangeet picks up right where the Baraat leaves off.",
+          "A lively procession that marks the arrival of the couple, filled with music, dancing, and the joyful energy of family and friends escorting them to the venue. It's less a walk and more a celebration in motion, so come ready to dance your way there with us, and expect a surprise along the way. The Sangeet picks up right where the Baraat leaves off.",
         venue: "Throughout the Resort",
         illustration: `${T}/Baraat.png`,
       },
@@ -64,7 +73,7 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         time: "8:30 AM",
         name: "Kashi Yatra",
         description:
-          "One of the more lighthearted moments of the celebrations. In a playful nod to tradition, the groom pretends to abandon married life altogether in favour of a pilgrimage to Kashi in pursuit of higher wisdom, only to be talked out of it by the bride's family, who convince him that a life of love is the better path after all. It is a small piece of theatre, equal parts humour and heritage, and always a crowd favourite.",
+          "In a playful nod to tradition, the groom pretends to abandon married life altogether in favour of a pilgrimage to Kashi in pursuit of higher wisdom, only to be talked out of it by the bride's family, who convince him that a life of love is the better path after all. It is a small piece of theatre, equal parts humour and heritage, and always a crowd favourite.",
         venue: "Tea Lawn",
         illustration: `${T}/KaashiYatra.png`,
       },
@@ -85,7 +94,7 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         name: "Sadhya Lunch",
         description:
           "Following the Muhurtham, the celebrations move to the table for Sadhya, Kerala's traditional feast, served the way it has been for generations, on a banana leaf, with dish after dish arriving in careful sequence. It is less a meal than an experience, sweet, spicy, tangy and comforting all at once, and a proper introduction to Kerala on a plate. Come with an appetite, because this is a lunch meant to be savoured slowly, surrounded by the people who made the morning's ceremony so meaningful.",
-        venue: "Vembanad Lawn",
+        venue: "Ettukettu Restaurant",
         illustration: `${T}/SadyaLunch.png`,
       },
       {
@@ -103,7 +112,7 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         name: "Reception",
         poeticTitle: "Under a Thousand Lights",
         description:
-          "The evening moves into our reception, where the day opens up into something a little more glamorous, with toasts, a first dance, and a night dedicated purely to celebration. It is our chance to properly thank everyone who made the journey to be here, and to celebrate the two of us officially becoming one, surrounded by the people who mean the most to us.",
+          "The evening transitions into a more glamorous affair, with toasts, a first dance, and a night dedicated purely to celebration. It is our chance to properly thank everyone who made the journey to be here, and to celebrate the two of us officially becoming one, surrounded by the people who mean the most to us.",
         venue: "Vembanad Lawn",
         illustration: `${T}/Reception(Under a Thousand Lights).png`,
       },
@@ -111,7 +120,7 @@ export const weddingWeekendTimeline: TimelineDay[] = [
         id: "after-party",
         time: "11:00 PM",
         name: "After Party",
-        poeticTitle: "The After Hours Club",
+        poeticTitle: "Nightcap",
         description:
           "For those who have decided that sleep is a tomorrow problem. There will be music, there will be questionable dance moves, and there is a very real chance someone's uncle steals the show. Enter at your own risk.",
         venue: "Banquet Hall",

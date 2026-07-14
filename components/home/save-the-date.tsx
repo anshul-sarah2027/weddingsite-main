@@ -130,16 +130,6 @@ export function SaveTheDate() {
               aria-hidden="true"
             />
           </div>
-
-          <blockquote
-            className={cn(
-            "font-editorial text-editorial-quote mx-auto mt-6 max-w-md text-xl leading-snug md:mt-7 md:text-2xl",
-            )}
-          >
-            Every great journey begins
-            <br />
-            with something worth waiting for.
-          </blockquote>
         </FadeIn>
 
         <FadeIn duration={0.85} delay={0.12} className="mx-auto mt-9 max-w-2xl md:mt-11">

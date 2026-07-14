@@ -45,7 +45,7 @@ function TipCard({
 export function WeatherTravelTips() {
   return (
     <section
-      id="weather-travel-tips"
+      id="tips"
       className="relative scroll-mt-32 overflow-hidden bg-[#FAF7F2] pt-2 pb-16 md:pt-3 md:pb-20 lg:pt-4 lg:pb-24 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
       aria-label="Weather & Travel Tips"
     >

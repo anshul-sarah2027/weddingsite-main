@@ -2,6 +2,7 @@ export type RsvpRow = {
   id: string;
   full_name: string;
   email: string;
+  phone: string | null;
   attending: boolean;
   party_size: number | null;
   guest_names: string[] | null;
@@ -13,6 +14,7 @@ export type RsvpRow = {
 export type RsvpInsert = {
   full_name: string;
   email: string;
+  phone: string;
   attending: boolean;
   party_size?: number | null;
   guest_names?: string[] | null;
