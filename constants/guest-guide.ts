@@ -406,6 +406,7 @@ export const weddingShoppingGroups: ShoppingGroup[] = [
       {
         name: "Paris De Boutique",
         note: "Premium designer lehengas, gowns and festive wear.",
+        url: "https://www.parisdeboutique.com",
       },
       {
         name: "BIBA",
@@ -512,7 +513,9 @@ export const weddingShoppingGroups: ShoppingGroup[] = [
         note: "Men & Women",
         url: "https://www.myntra.com/",
       },
-      { name: "Lashkaraa", url: "https://www.lashkaraa.com/" },
+      { name: "Lashkaraa", 
+        note: "Men & Women",
+        url: "https://www.lashkaraa.com/" },
       {
         name: "Andaaz Fashion",
         note: "Men & Women",
