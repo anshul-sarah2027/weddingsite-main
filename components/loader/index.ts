@@ -1,2 +1,5 @@
 export { OpeningLoader } from "./opening-loader";
-export { OpeningLoaderProvider } from "./opening-loader-provider";
+export {
+  OpeningLoaderProvider,
+  LOADER_PENDING_KEY,
+} from "./opening-loader-provider";

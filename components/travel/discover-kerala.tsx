@@ -107,8 +107,23 @@ function CompactHighlights({
             {item.detail && (
               <p className="font-heading mt-1 text-sm leading-[1.65] text-forest/78">
                 {item.detail}
+                {item.location ? (
+                  <>
+                    {" "}
+                    <span className="font-semibold text-forest/78">
+                      Location: {item.location}
+                    </span>
+                  </>
+                ) : null}
               </p>
             )}
+            {!item.detail && item.location ? (
+              <p className="font-heading mt-1 text-sm leading-[1.65] text-forest/78">
+                <span className="font-semibold">
+                  Location: {item.location}
+                </span>
+              </p>
+            ) : null}
           </li>
         ))}
       </ul>

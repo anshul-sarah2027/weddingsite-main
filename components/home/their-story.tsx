@@ -91,7 +91,7 @@ export function TheirStory() {
           <FadeIn delay={0.15} duration={0.9} className="text-left">
             <div className="space-y-5 text-justify font-heading text-base leading-relaxed text-ivory/80 md:text-lg">
               <p>
-                Sarah and Anshul are proof that opposites attract. She talks, he
+                We&apos;re proof that opposites attract. Sarah talks, Anshul
                 listens (someone has to), and somehow it works. Bonus points if
                 there&apos;s a good film, a witty comeback, or dessert involved,
                 ideally all three.
@@ -113,7 +113,7 @@ export function TheirStory() {
                 celebrate with you.
               </p>
               <div className="pt-2">
-                <p className="text-ivory/75 italic">With love,</p>
+                <p className="text-ivory/75 italic">With love</p>
                 <p
                   className={cn(
                     "font-editorial text-editorial mt-1 text-2xl",

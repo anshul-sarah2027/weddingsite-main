@@ -5,7 +5,10 @@ import { useCallback, useLayoutEffect, useState, type ReactNode } from "react";
 import { OpeningLoader } from "@/components/loader/opening-loader";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-const STORAGE_KEY = "wedding-opening-loader-seen";
+/** Set once per tab after the loader finishes — skip on in-site navigations. */
+const SEEN_KEY = "wedding-opening-loader-seen";
+/** Set on password unlock so the loader always plays when entering the site. */
+export const LOADER_PENDING_KEY = "wedding-opening-loader-pending";
 const CONTENT_FADE_DURATION = 0.8;
 
 export function OpeningLoaderProvider({ children }: { children: ReactNode }) {
@@ -15,9 +18,13 @@ export function OpeningLoaderProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
 
   useLayoutEffect(() => {
-    const seen = sessionStorage.getItem(STORAGE_KEY);
+    const pending = sessionStorage.getItem(LOADER_PENDING_KEY) === "1";
+    const seen = sessionStorage.getItem(SEEN_KEY) === "1";
 
-    if (reducedMotion || seen) {
+    // Always play after unlock; otherwise once per tab for returning guests.
+    const shouldShow = !reducedMotion && (pending || !seen);
+
+    if (!shouldShow) {
       setShowLoader(false);
       setContentVisible(true);
       setReady(true);
@@ -39,7 +46,8 @@ export function OpeningLoaderProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const handleComplete = useCallback(() => {
-    sessionStorage.setItem(STORAGE_KEY, "1");
+    sessionStorage.removeItem(LOADER_PENDING_KEY);
+    sessionStorage.setItem(SEEN_KEY, "1");
     setShowLoader(false);
     document.documentElement.style.overflow = "";
   }, []);

@@ -1,6 +1,8 @@
 export type DestinationHighlight = {
   title: string;
   detail?: string;
+  /** Optional venue — rendered in gold for easy scanning */
+  location?: string;
   sarahFavourite?: boolean;
 };
 
@@ -48,7 +50,7 @@ export const keralaDestinations: KeralaDestination[] = [
       {
         title: "Anokhi",
         detail:
-          "One of my favourite places to browse beautiful hand block-printed clothing, home textiles and thoughtful gifts. I never leave without discovering something special. Fort Kochi.",
+          "One of my favourite places to browse beautiful hand block-printed clothing, home textiles and thoughtful gifts. I never leave without discovering something special in Fort Kochi.",
         sarahFavourite: true,
       },
       {
@@ -60,7 +62,8 @@ export const keralaDestinations: KeralaDestination[] = [
       {
         title: "Sunset Harbour Cruise",
         detail:
-          "A slow cruise across Kochi Harbour as the sun sets behind the Chinese fishing nets. It's one of those evenings you'll remember long after you leave. Brunton Boatyard.",
+          "A slow cruise across Kochi Harbour as the sun sets behind the Chinese fishing nets. It's one of those evenings you'll remember long after you leave.",
+        location: "Brunton Boatyard / Taj Malabar Resort & Spa Cochin",
         sarahFavourite: true,
       },
       {
@@ -92,12 +95,6 @@ export const keralaDestinations: KeralaDestination[] = [
         title: "Kathakali & Kalaripayattu",
         detail:
           "If it's your first visit to Kerala, this is a wonderful introduction to its art, storytelling and martial traditions.",
-        sarahFavourite: true,
-      },
-      {
-        title: "Sunrise by the Backwaters",
-        detail:
-          "Sometimes the best plan is no plan at all. Find a quiet spot by the water with a coffee and simply enjoy the peaceful surroundings.",
         sarahFavourite: true,
       },
     ],
