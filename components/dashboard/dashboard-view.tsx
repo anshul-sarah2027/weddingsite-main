@@ -4,21 +4,19 @@ import Image from "next/image";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 import {
-  CheckCircle2,
+  Plus,
   Search,
   UtensilsCrossed,
-  UserCheck,
-  UserX,
   X,
-  XCircle,
 } from "lucide-react";
 import { logoutDashboard } from "@/actions/dashboard-auth";
 import {
   loadRsvpPage,
   refreshDashboardData,
-  updateRsvpAttendance,
   updateRsvpDietaryNotes,
 } from "@/actions/dashboard-rsvps";
+import { AddRsvpModal } from "@/components/dashboard/add-rsvp-modal";
+import { RsvpEntry } from "@/components/dashboard/rsvp-entry";
 import { IMAGES } from "@/constants/images";
 import {
   DASHBOARD_PAGE_SIZE,
@@ -31,19 +29,6 @@ import type { RsvpRow } from "@/types/database";
 import { cn } from "@/lib/utils";
 
 type NotesModalKind = "allergies" | "notes" | null;
-type ManagePanel = "attendance" | "diet" | null;
-
-function formatDate(iso: string) {
-  try {
-    return new Intl.DateTimeFormat("en-GB", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }).format(new Date(iso));
-  } catch {
-    return iso;
-  }
-}
 
 function SummaryCard({
   value,
@@ -96,313 +81,6 @@ function SummaryCard({
   }
 
   return <div className={className}>{content}</div>;
-}
-
-function RsvpEntry({
-  row,
-  onChanged,
-}: {
-  row: RsvpRow;
-  onChanged: (row: RsvpRow) => void;
-}) {
-  const guests = row.guest_names?.filter(Boolean) ?? [];
-  const partyCount = row.party_size ?? guests.length;
-  const allergies = row.allergies?.trim();
-  const notes = row.notes?.trim();
-  const [panel, setPanel] = useState<ManagePanel>(null);
-  const [dietDraft, setDietDraft] = useState(row.allergies ?? "");
-  const [actionError, setActionError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
-
-  useEffect(() => {
-    setDietDraft(row.allergies ?? "");
-  }, [row.allergies, row.id]);
-
-  function closePanel() {
-    setPanel(null);
-    setActionError(null);
-    setDietDraft(row.allergies ?? "");
-  }
-
-  function saveAttendance(nextAttending: boolean) {
-    setActionError(null);
-    startTransition(async () => {
-      const result = await updateRsvpAttendance({
-        id: row.id,
-        attending: nextAttending,
-      });
-      if (!result.ok) {
-        setActionError(result.error);
-        return;
-      }
-      onChanged(result.row);
-      closePanel();
-    });
-  }
-
-  function saveDiet() {
-    setActionError(null);
-    startTransition(async () => {
-      const result = await updateRsvpDietaryNotes({
-        id: row.id,
-        allergies: dietDraft,
-      });
-      if (!result.ok) {
-        setActionError(result.error);
-        return;
-      }
-      onChanged(result.row);
-      closePanel();
-    });
-  }
-
-  return (
-    <article
-      className={cn(
-        "rounded-sm border bg-[#FFFCFA]/95 p-5 shadow-[0_8px_30px_rgba(47,58,46,0.04)] md:p-6",
-        row.attending
-          ? "border-[#B59A63]/25 border-l-[3px] border-l-[#3E5643]"
-          : "border-forest/10 border-l-[3px] border-l-[#8B3A3A]/55",
-      )}
-    >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <h3 className="font-heading text-xl font-medium text-[#2F3A2E] md:text-2xl">
-              {row.full_name}
-            </h3>
-            <span
-              className={cn(
-                "font-heading inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1 text-[0.65rem] tracking-[0.12em] uppercase",
-                row.attending
-                  ? "bg-[#3E5643]/10 text-[#3E5643]"
-                  : "bg-[#8B3A3A]/10 text-[#8B3A3A]",
-              )}
-            >
-              {row.attending ? (
-                <CheckCircle2 className="size-3.5" strokeWidth={1.75} />
-              ) : (
-                <XCircle className="size-3.5" strokeWidth={1.75} />
-              )}
-              {row.attending ? "Attending" : "Not attending"}
-            </span>
-          </div>
-          <a
-            href={`mailto:${row.email}`}
-            className="font-heading mt-1.5 inline-block text-sm text-[#2F3A2E]/50 transition-colors hover:text-[#2F3A2E] hover:underline"
-          >
-            {row.email}
-          </a>
-          {row.phone?.trim() ? (
-            <a
-              href={`tel:${row.phone.replace(/\s+/g, "")}`}
-              className="font-heading mt-1 block text-sm text-[#2F3A2E]/50 transition-colors hover:text-[#2F3A2E] hover:underline"
-            >
-              {row.phone}
-            </a>
-          ) : null}
-        </div>
-
-        <div className="shrink-0 sm:pt-1 sm:text-right">
-          {row.attending ? (
-            <p className="font-heading text-lg font-medium text-[#2F3A2E]">
-              {partyCount}{" "}
-              <span className="text-sm font-normal tracking-[0.06em] text-[#2F3A2E]/45 uppercase">
-                {partyCount === 1 ? "guest" : "guests"}
-              </span>
-            </p>
-          ) : null}
-          <p className="font-heading mt-1 text-xs tracking-[0.04em] text-[#2F3A2E]/40">
-            Replied {formatDate(row.created_at)}
-          </p>
-        </div>
-      </div>
-
-      {row.attending && guests.length > 0 && (
-        <div className="mt-5 border-t border-forest/8 pt-4">
-          <p className="font-heading text-[0.65rem] tracking-[0.16em] text-[#B59A63] uppercase">
-            In this party
-          </p>
-          <p className="font-heading mt-2 text-base leading-relaxed text-[#2F3A2E]/80">
-            {guests.join("  ·  ")}
-          </p>
-        </div>
-      )}
-
-      {(allergies || notes) && (
-        <div
-          className={cn(
-            "mt-4 grid gap-4",
-            allergies && notes && "md:grid-cols-2",
-            !guests.length && "border-t border-forest/8 pt-4",
-          )}
-        >
-          {allergies ? (
-            <div className="rounded-sm bg-[#FAF7F2]/90 px-3.5 py-3">
-              <p className="font-heading flex items-center gap-1.5 text-[0.65rem] tracking-[0.16em] text-[#B59A63] uppercase">
-                <UtensilsCrossed className="size-3.5" strokeWidth={1.75} />
-                Dietary notes
-              </p>
-              <p className="font-heading mt-1.5 text-sm leading-relaxed whitespace-pre-wrap text-[#2F3A2E]/75">
-                {allergies}
-              </p>
-            </div>
-          ) : null}
-          {notes ? (
-            <div className="rounded-sm bg-[#FAF7F2]/90 px-3.5 py-3">
-              <p className="font-heading text-[0.65rem] tracking-[0.16em] text-[#B59A63] uppercase">
-                Note
-              </p>
-              <p className="font-heading mt-1.5 text-sm leading-relaxed whitespace-pre-wrap text-[#2F3A2E]/75">
-                {notes}
-              </p>
-            </div>
-          ) : null}
-        </div>
-      )}
-
-      <div className="mt-5 flex flex-col gap-2 border-t border-forest/8 pt-4 sm:flex-row sm:flex-wrap">
-        {row.attending ? (
-          <button
-            type="button"
-            onClick={() =>
-              setPanel((value) => (value === "attendance" ? null : "attendance"))
-            }
-            className={cn(
-              "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-              panel === "attendance"
-                ? "border-[#8B3A3A]/35 bg-[#8B3A3A]/08 text-[#8B3A3A]"
-                : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#8B3A3A]/30 hover:text-[#8B3A3A]",
-            )}
-          >
-            <UserX className="size-3.5" strokeWidth={1.75} />
-            Mark as not attending
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() =>
-              setPanel((value) => (value === "attendance" ? null : "attendance"))
-            }
-            className={cn(
-              "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-              panel === "attendance"
-                ? "border-[#3E5643]/35 bg-[#3E5643]/08 text-[#3E5643]"
-                : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#3E5643]/30 hover:text-[#3E5643]",
-            )}
-          >
-            <UserCheck className="size-3.5" strokeWidth={1.75} />
-            Mark as attending
-          </button>
-        )}
-
-        <button
-          type="button"
-          onClick={() =>
-            setPanel((value) => (value === "diet" ? null : "diet"))
-          }
-          className={cn(
-            "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-            panel === "diet"
-              ? "border-[#B59A63]/45 bg-[#B59A63]/10 text-[#2F3A2E]"
-              : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#B59A63]/40 hover:text-[#2F3A2E]",
-          )}
-        >
-          <UtensilsCrossed className="size-3.5" strokeWidth={1.75} />
-          {allergies ? "Update dietary notes" : "Add dietary notes"}
-        </button>
-      </div>
-
-      {panel === "attendance" && (
-        <div className="mt-4 rounded-sm border border-forest/10 bg-[#FAF7F2]/95 px-4 py-4">
-          <p className="font-heading text-sm leading-relaxed text-[#2F3A2E]/70">
-            {row.attending
-              ? `Confirm that ${row.full_name} can no longer attend. Guest totals will update immediately.`
-              : `Confirm that ${row.full_name} will now attend. Guest totals will update immediately.`}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              disabled={isPending}
-              onClick={() => saveAttendance(!row.attending)}
-              className={cn(
-                "font-heading inline-flex items-center gap-2 rounded-sm px-4 py-2.5 text-xs tracking-[0.12em] text-[#FAF7F2] uppercase transition-opacity disabled:opacity-40",
-                row.attending ? "bg-[#8B3A3A]" : "bg-[#3E5643]",
-              )}
-            >
-              {row.attending ? (
-                <UserX className="size-3.5" strokeWidth={1.75} />
-              ) : (
-                <UserCheck className="size-3.5" strokeWidth={1.75} />
-              )}
-              {isPending
-                ? "Saving…"
-                : row.attending
-                  ? "Confirm — not attending"
-                  : "Confirm — attending"}
-            </button>
-            <button
-              type="button"
-              disabled={isPending}
-              onClick={closePanel}
-              className="font-heading rounded-sm border border-forest/15 px-4 py-2.5 text-xs tracking-[0.12em] text-[#2F3A2E]/65 uppercase transition-colors hover:border-forest/30 disabled:opacity-40"
-            >
-              Keep current status
-            </button>
-          </div>
-          {actionError ? (
-            <p className="font-heading mt-3 text-sm text-[#8B3A3A]" role="alert">
-              {actionError}
-            </p>
-          ) : null}
-        </div>
-      )}
-
-      {panel === "diet" && (
-        <div className="mt-4 rounded-sm border border-forest/10 bg-[#FAF7F2]/95 px-4 py-4">
-          <label
-            htmlFor={`diet-${row.id}`}
-            className="font-heading flex items-center gap-1.5 text-[0.65rem] tracking-[0.16em] text-[#B59A63] uppercase"
-          >
-            <UtensilsCrossed className="size-3.5" strokeWidth={1.75} />
-            Food allergies & dietary needs
-          </label>
-          <textarea
-            id={`diet-${row.id}`}
-            value={dietDraft}
-            onChange={(event) => setDietDraft(event.target.value)}
-            rows={4}
-            placeholder="e.g. vegetarian, peanut allergy, no shellfish"
-            className="font-heading mt-3 w-full resize-y rounded-sm border border-forest/12 bg-[#FFFCFA] px-3.5 py-3 text-sm leading-relaxed text-[#2F3A2E] outline-none placeholder:text-[#2F3A2E]/35 focus:border-[#B59A63]/45"
-          />
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              disabled={isPending}
-              onClick={saveDiet}
-              className="font-heading inline-flex items-center gap-2 rounded-sm bg-[#2F3A2E] px-4 py-2.5 text-xs tracking-[0.12em] text-[#FAF7F2] uppercase transition-opacity disabled:opacity-40"
-            >
-              <UtensilsCrossed className="size-3.5" strokeWidth={1.75} />
-              {isPending ? "Saving…" : "Save dietary notes"}
-            </button>
-            <button
-              type="button"
-              disabled={isPending}
-              onClick={closePanel}
-              className="font-heading rounded-sm border border-forest/15 px-4 py-2.5 text-xs tracking-[0.12em] text-[#2F3A2E]/65 uppercase transition-colors hover:border-forest/30 disabled:opacity-40"
-            >
-              Cancel
-            </button>
-          </div>
-          {actionError ? (
-            <p className="font-heading mt-3 text-sm text-[#8B3A3A]" role="alert">
-              {actionError}
-            </p>
-          ) : null}
-        </div>
-      )}
-    </article>
-  );
 }
 
 function NotesModal({
@@ -654,6 +332,7 @@ export function DashboardView({
   const [notes, setNotes] = useState(initialNotes);
   const [listError, setListError] = useState(initialError);
   const [notesModal, setNotesModal] = useState<NotesModalKind>(null);
+  const [addModalOpen, setAddModalOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const skipFirstFetch = useRef(true);
 
@@ -720,6 +399,38 @@ export function DashboardView({
       return current.map((row) => (row.id === updated.id ? updated : row));
     });
 
+    refreshSnapshot();
+  }
+
+  function handleRowDeleted(id: string) {
+    setRows((current) => current.filter((row) => row.id !== id));
+    setMatchedCount((count) => Math.max(0, count - 1));
+    refreshSnapshot();
+  }
+
+  function handleRsvpCreated(_row: RsvpRow) {
+    setPage(1);
+    setFilter("all");
+    setQuery("");
+    setDebouncedQuery("");
+    setAddModalOpen(false);
+    startTransition(async () => {
+      const snapshot = await refreshDashboardData({
+        page: 1,
+        filter: "all",
+        query: "",
+      });
+      setStats(snapshot.stats);
+      setNotes(snapshot.notes);
+      if (!snapshot.page.error) {
+        setRows(snapshot.page.rows);
+        setMatchedCount(snapshot.page.matchedCount);
+        setListError(null);
+      }
+    });
+  }
+
+  function refreshSnapshot() {
     startTransition(async () => {
       const snapshot = await refreshDashboardData({
         page,
@@ -876,23 +587,39 @@ export function DashboardView({
             ))}
           </div>
 
-          <div className="relative w-full md:max-w-[240px]">
-            <Search
-              className="pointer-events-none absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#2F3A2E]/35"
-              aria-hidden="true"
-            />
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setPage(1);
-              }}
-              placeholder="Search names…"
-              className="font-heading h-10 w-full rounded-sm border border-forest/12 bg-[#FFFCFA]/90 pr-3 pl-9 text-sm text-[#2F3A2E] outline-none placeholder:text-[#2F3A2E]/35 focus:border-[#B59A63]/45"
-            />
+          <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center md:w-auto md:justify-end">
+            <button
+              type="button"
+              onClick={() => setAddModalOpen(true)}
+              className="font-heading inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-sm border border-forest/15 bg-[#FFFCFA]/90 px-3.5 text-xs tracking-[0.14em] text-[#2F3A2E]/70 uppercase transition-colors hover:border-[#B59A63]/45 hover:text-[#2F3A2E] sm:w-auto"
+            >
+              <Plus className="size-3.5" strokeWidth={1.75} />
+              Add RSVP
+            </button>
+            <div className="relative w-full sm:max-w-[240px]">
+              <Search
+                className="pointer-events-none absolute top-1/2 left-3 size-3.5 -translate-y-1/2 text-[#2F3A2E]/35"
+                aria-hidden="true"
+              />
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setPage(1);
+                }}
+                placeholder="Search names…"
+                className="font-heading h-10 w-full rounded-sm border border-forest/12 bg-[#FFFCFA]/90 pr-3 pl-9 text-sm text-[#2F3A2E] outline-none placeholder:text-[#2F3A2E]/35 focus:border-[#B59A63]/45"
+              />
+            </div>
           </div>
         </div>
+
+        <AddRsvpModal
+          open={addModalOpen}
+          onClose={() => setAddModalOpen(false)}
+          onCreated={handleRsvpCreated}
+        />
 
         {listError && (
           <p
@@ -923,7 +650,12 @@ export function DashboardView({
           )}
         >
           {rows.map((row) => (
-            <RsvpEntry key={row.id} row={row} onChanged={handleRowChanged} />
+            <RsvpEntry
+              key={row.id}
+              row={row}
+              onChanged={handleRowChanged}
+              onDeleted={handleRowDeleted}
+            />
           ))}
         </div>
 

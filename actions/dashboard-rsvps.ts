@@ -1,11 +1,15 @@
 "use server";
 
 import {
+  createRsvpInDb,
   DASHBOARD_PAGE_SIZE,
+  deleteRsvpInDb,
   fetchRsvpStats,
   fetchRsvpsPage,
   updateRsvpAllergiesInDb,
   updateRsvpAttendanceInDb,
+  updateRsvpPartyInDb,
+  type RsvpDeleteResult,
   type RsvpFilter,
   type RsvpNoteLists,
   type RsvpPageResult,
@@ -15,6 +19,10 @@ import {
 import { isDashboardAuthenticated } from "@/lib/dashboard-auth";
 
 async function unauthorizedUpdate(): Promise<RsvpUpdateResult> {
+  return { ok: false, error: "Please sign in again to make changes." };
+}
+
+async function unauthorizedDelete(): Promise<RsvpDeleteResult> {
   return { ok: false, error: "Please sign in again to make changes." };
 }
 
@@ -109,4 +117,35 @@ export async function updateRsvpDietaryNotes(input: {
   const ok = await isDashboardAuthenticated();
   if (!ok) return unauthorizedUpdate();
   return updateRsvpAllergiesInDb(input);
+}
+
+export async function updateRsvpParty(input: {
+  id: string;
+  partySize: number;
+  guestNames: string[];
+}): Promise<RsvpUpdateResult> {
+  const ok = await isDashboardAuthenticated();
+  if (!ok) return unauthorizedUpdate();
+  return updateRsvpPartyInDb(input);
+}
+
+export async function deleteRsvp(id: string): Promise<RsvpDeleteResult> {
+  const ok = await isDashboardAuthenticated();
+  if (!ok) return unauthorizedDelete();
+  return deleteRsvpInDb(id);
+}
+
+export async function createDashboardRsvp(input: {
+  fullName: string;
+  email: string;
+  phone: string;
+  attending: boolean;
+  partySize?: number;
+  guestNames?: string[];
+  allergies?: string;
+  notes?: string;
+}): Promise<RsvpUpdateResult> {
+  const ok = await isDashboardAuthenticated();
+  if (!ok) return unauthorizedUpdate();
+  return createRsvpInDb(input);
 }
