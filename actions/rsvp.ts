@@ -5,6 +5,7 @@ import {
   type RsvpFormValues,
   type RsvpInput,
 } from "@/lib/validations/rsvp";
+import { sendRsvpConfirmationEmail } from "@/lib/email/rsvp-confirmation";
 import {
   createSupabaseServerClient,
   getSupabaseEnv,
@@ -84,6 +85,9 @@ export async function submitRsvp(
         error: "We couldn't save your RSVP. Please try again in a moment.",
       };
     }
+
+    // Confirmation is best-effort — don't fail the RSVP if email can't send.
+    await sendRsvpConfirmationEmail(data);
 
     return { ok: true, attending: data.attending };
   } catch (error) {

@@ -156,8 +156,8 @@ export function RsvpForm() {
         <div className="mx-auto mt-5 h-px w-16 bg-[#B59A63]/45" />
         <p className="font-heading mx-auto mt-5 max-w-sm text-base leading-[1.85] text-forest/85 md:text-lg">
           {success === "yes"
-            ? "We've saved your details, including your party and any dietary notes. If anything changes, write to us anytime."
-            : "We're sorry you can't join us in Kumarakom. If your plans change before 14 August, you're always welcome to update us."}
+            ? "We've saved your details, including your party and any dietary notes. A confirmation email is on its way — if anything changes, write to us anytime."
+            : "We're sorry you can't join us in Kumarakom. A confirmation email is on its way. If your plans change before 14 August, you're always welcome to update us."}
         </p>
       </div>
     );
