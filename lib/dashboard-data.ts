@@ -326,6 +326,37 @@ export async function updateRsvpAllergiesInDb(input: {
   }
 }
 
+export async function updateRsvpNotesInDb(input: {
+  id: string;
+  notes: string;
+}): Promise<RsvpUpdateResult> {
+  if (!getSupabaseAdminEnv()) {
+    return { ok: false, error: adminUnavailable() };
+  }
+
+  const notes = input.notes.trim();
+
+  try {
+    const supabase = createSupabaseAdminClient();
+    const { data, error } = await supabase
+      .from("rsvps")
+      .update({ notes: notes || null })
+      .eq("id", input.id)
+      .select("*")
+      .single();
+
+    if (error || !data) {
+      console.error("[updateRsvpNotesInDb]", error?.message);
+      return { ok: false, error: "Could not update the note." };
+    }
+
+    return { ok: true, row: data as RsvpRow };
+  } catch (error) {
+    console.error("[updateRsvpNotesInDb]", error);
+    return { ok: false, error: "Something went wrong updating the note." };
+  }
+}
+
 function normalizeGuestNames(names: string[], partySize: number) {
   const cleaned = names
     .map((name) => name.trim())

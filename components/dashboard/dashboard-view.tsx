@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { createPortal } from "react-dom";
 import {
+  Pencil,
   Plus,
   Search,
   UtensilsCrossed,
@@ -14,6 +15,7 @@ import {
   loadRsvpPage,
   refreshDashboardData,
   updateRsvpDietaryNotes,
+  updateRsvpNotes,
 } from "@/actions/dashboard-rsvps";
 import { AddRsvpModal } from "@/components/dashboard/add-rsvp-modal";
 import { RsvpEntry } from "@/components/dashboard/rsvp-entry";
@@ -89,16 +91,16 @@ function NotesModal({
   kind,
   items,
   onClose,
-  onDietaryUpdated,
+  onUpdated,
 }: {
   kind: "allergies" | "notes";
   items: RsvpNoteItem[];
   onClose: () => void;
-  onDietaryUpdated?: (row: RsvpRow) => void;
+  onUpdated?: (row: RsvpRow) => void;
 }) {
   const [mounted, setMounted] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [dietDraft, setDietDraft] = useState("");
+  const [draft, setDraft] = useState("");
   const [actionError, setActionError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -127,28 +129,28 @@ function NotesModal({
 
   function startEdit(item: RsvpNoteItem) {
     setEditingId(item.id);
-    setDietDraft(item.detail);
+    setDraft(item.detail);
     setActionError(null);
   }
 
   function cancelEdit() {
     setEditingId(null);
-    setDietDraft("");
+    setDraft("");
     setActionError(null);
   }
 
-  function saveDiet(id: string) {
+  function saveDraft(id: string) {
     setActionError(null);
     startTransition(async () => {
-      const result = await updateRsvpDietaryNotes({
-        id,
-        allergies: dietDraft,
-      });
+      const result =
+        kind === "allergies"
+          ? await updateRsvpDietaryNotes({ id, allergies: draft })
+          : await updateRsvpNotes({ id, notes: draft });
       if (!result.ok) {
         setActionError(result.error);
         return;
       }
-      onDietaryUpdated?.(result.row);
+      onUpdated?.(result.row);
       cancelEdit();
     });
   }
@@ -195,7 +197,7 @@ function NotesModal({
         >
           <ul className="space-y-4 pb-2">
             {items.map((item) => {
-              const isEditing = kind === "allergies" && editingId === item.id;
+              const isEditing = editingId === item.id;
 
               return (
                 <li
@@ -229,18 +231,30 @@ function NotesModal({
                       </a>
                     </div>
 
-                    {kind === "allergies" && !isEditing ? (
+                    {!isEditing ? (
                       <button
                         type="button"
                         onClick={() => startEdit(item)}
                         className="inline-flex shrink-0 items-center gap-1.5 rounded-sm border border-forest/12 bg-[#FFFCFA] px-2.5 py-1.5 text-[#2F3A2E]/65 transition-colors hover:border-[#B59A63]/40 hover:text-[#2F3A2E]"
-                        aria-label={`Update dietary notes for ${item.fullName}`}
-                        title="Update dietary notes"
+                        aria-label={
+                          kind === "allergies"
+                            ? `Update dietary notes for ${item.fullName}`
+                            : `Update note for ${item.fullName}`
+                        }
+                        title={
+                          kind === "allergies"
+                            ? "Update dietary notes"
+                            : "Update note"
+                        }
                       >
-                        <UtensilsCrossed
-                          className="size-3.5"
-                          strokeWidth={1.75}
-                        />
+                        {kind === "allergies" ? (
+                          <UtensilsCrossed
+                            className="size-3.5"
+                            strokeWidth={1.75}
+                          />
+                        ) : (
+                          <Pencil className="size-3.5" strokeWidth={1.75} />
+                        )}
                         <span className="font-heading text-[0.65rem] tracking-[0.1em] uppercase">
                           Update
                         </span>
@@ -258,24 +272,36 @@ function NotesModal({
                   {isEditing ? (
                     <div className="mt-2">
                       <textarea
-                        value={dietDraft}
-                        onChange={(event) => setDietDraft(event.target.value)}
+                        value={draft}
+                        onChange={(event) => setDraft(event.target.value)}
                         rows={4}
-                        placeholder="e.g. vegetarian, peanut allergy, no shellfish"
+                        placeholder={
+                          kind === "allergies"
+                            ? "e.g. vegetarian, peanut allergy, no shellfish"
+                            : "Add a note for this guest"
+                        }
                         className="font-heading w-full resize-y rounded-sm border border-forest/12 bg-[#FFFCFA] px-3 py-2.5 text-sm leading-relaxed text-[#2F3A2E] outline-none placeholder:text-[#2F3A2E]/35 focus:border-[#B59A63]/45"
                       />
                       <div className="mt-3 flex flex-wrap gap-2">
                         <button
                           type="button"
                           disabled={isPending}
-                          onClick={() => saveDiet(item.id)}
+                          onClick={() => saveDraft(item.id)}
                           className="font-heading inline-flex items-center gap-2 rounded-sm bg-[#2F3A2E] px-3.5 py-2 text-xs tracking-[0.12em] text-[#FAF7F2] uppercase transition-opacity disabled:opacity-40"
                         >
-                          <UtensilsCrossed
-                            className="size-3.5"
-                            strokeWidth={1.75}
-                          />
-                          {isPending ? "Saving…" : "Save dietary notes"}
+                          {kind === "allergies" ? (
+                            <UtensilsCrossed
+                              className="size-3.5"
+                              strokeWidth={1.75}
+                            />
+                          ) : (
+                            <Pencil className="size-3.5" strokeWidth={1.75} />
+                          )}
+                          {isPending
+                            ? "Saving…"
+                            : kind === "allergies"
+                              ? "Save dietary notes"
+                              : "Save note"}
                         </button>
                         <button
                           type="button"
@@ -552,7 +578,7 @@ export function DashboardView({
           kind="allergies"
           items={notes.allergyNotes}
           onClose={() => setNotesModal(null)}
-          onDietaryUpdated={handleRowChanged}
+          onUpdated={handleRowChanged}
         />
       )}
       {notesModal === "notes" && (
@@ -560,6 +586,7 @@ export function DashboardView({
           kind="notes"
           items={notes.extraNotes}
           onClose={() => setNotesModal(null)}
+          onUpdated={handleRowChanged}
         />
       )}
 

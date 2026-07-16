@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   ChevronDown,
   Pencil,
+  StickyNote,
   Trash2,
   UtensilsCrossed,
   UserCheck,
@@ -15,6 +16,7 @@ import {
   deleteRsvp,
   updateRsvpAttendance,
   updateRsvpDietaryNotes,
+  updateRsvpNotes,
   updateRsvpParty,
 } from "@/actions/dashboard-rsvps";
 import {
@@ -26,7 +28,7 @@ import {
 import type { RsvpRow } from "@/types/database";
 import { cn } from "@/lib/utils";
 
-type ManagePanel = "attendance" | "diet" | "party" | "delete" | null;
+type ManagePanel = "attendance" | "diet" | "notes" | "party" | "delete" | null;
 
 function formatDate(iso: string) {
   try {
@@ -66,6 +68,7 @@ export function RsvpEntry({
   const notes = row.notes?.trim();
   const [panel, setPanel] = useState<ManagePanel>(null);
   const [dietDraft, setDietDraft] = useState(row.allergies ?? "");
+  const [notesDraft, setNotesDraft] = useState(row.notes ?? "");
   const [partySizeInput, setPartySizeInput] = useState(() =>
     String(initialPartySize(row)),
   );
@@ -78,6 +81,7 @@ export function RsvpEntry({
   useEffect(() => {
     const size = initialPartySize(row);
     setDietDraft(row.allergies ?? "");
+    setNotesDraft(row.notes ?? "");
     setPartySizeInput(String(size));
     setGuestNamesDraft(
       resizeGuestNames(row.guest_names ?? [row.full_name], size),
@@ -89,6 +93,7 @@ export function RsvpEntry({
     setActionError(null);
     const size = initialPartySize(row);
     setDietDraft(row.allergies ?? "");
+    setNotesDraft(row.notes ?? "");
     setPartySizeInput(String(size));
     setGuestNamesDraft(
       resizeGuestNames(row.guest_names ?? [row.full_name], size),
@@ -143,6 +148,22 @@ export function RsvpEntry({
       const result = await updateRsvpDietaryNotes({
         id: row.id,
         allergies: dietDraft,
+      });
+      if (!result.ok) {
+        setActionError(result.error);
+        return;
+      }
+      onChanged(result.row);
+      closePanel();
+    });
+  }
+
+  function saveNotes() {
+    setActionError(null);
+    startTransition(async () => {
+      const result = await updateRsvpNotes({
+        id: row.id,
+        notes: notesDraft,
       });
       if (!result.ok) {
         setActionError(result.error);
@@ -348,6 +369,16 @@ export function RsvpEntry({
             </DropdownMenuItem>
 
             <DropdownMenuItem
+              onSelect={() =>
+                setPanel((value) => (value === "notes" ? null : "notes"))
+              }
+              className="font-heading gap-2 py-2 text-[0.8rem] tracking-[0.02em] text-[#2F3A2E]"
+            >
+              <StickyNote className="size-4" strokeWidth={1.75} />
+              {notes ? "Update notes" : "Add notes"}
+            </DropdownMenuItem>
+
+            <DropdownMenuItem
               variant="destructive"
               onSelect={() =>
                 setPanel((value) => (value === "delete" ? null : "delete"))
@@ -505,6 +536,50 @@ export function RsvpEntry({
             >
               <UtensilsCrossed className="size-3.5" strokeWidth={1.75} />
               {isPending ? "Saving…" : "Save dietary notes"}
+            </button>
+            <button
+              type="button"
+              disabled={isPending}
+              onClick={closePanel}
+              className="font-heading rounded-sm border border-forest/15 px-4 py-2.5 text-xs tracking-[0.12em] text-[#2F3A2E]/65 uppercase transition-colors hover:border-forest/30 disabled:opacity-40"
+            >
+              Cancel
+            </button>
+          </div>
+          {actionError ? (
+            <p className="font-heading mt-3 text-sm text-[#8B3A3A]" role="alert">
+              {actionError}
+            </p>
+          ) : null}
+        </div>
+      )}
+
+      {panel === "notes" && (
+        <div className="mt-4 rounded-sm border border-forest/10 bg-[#FAF7F2]/95 px-4 py-4">
+          <label
+            htmlFor={`notes-${row.id}`}
+            className="font-heading flex items-center gap-1.5 text-[0.65rem] tracking-[0.16em] text-[#B59A63] uppercase"
+          >
+            <StickyNote className="size-3.5" strokeWidth={1.75} />
+            Extra note
+          </label>
+          <textarea
+            id={`notes-${row.id}`}
+            value={notesDraft}
+            onChange={(event) => setNotesDraft(event.target.value)}
+            rows={4}
+            placeholder="Any other message from the guest"
+            className="font-heading mt-3 w-full resize-y rounded-sm border border-forest/12 bg-[#FFFCFA] px-3.5 py-3 text-sm leading-relaxed text-[#2F3A2E] outline-none placeholder:text-[#2F3A2E]/35 focus:border-[#B59A63]/45"
+          />
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={isPending}
+              onClick={saveNotes}
+              className="font-heading inline-flex items-center gap-2 rounded-sm bg-[#2F3A2E] px-4 py-2.5 text-xs tracking-[0.12em] text-[#FAF7F2] uppercase transition-opacity disabled:opacity-40"
+            >
+              <StickyNote className="size-3.5" strokeWidth={1.75} />
+              {isPending ? "Saving…" : "Save note"}
             </button>
             <button
               type="button"

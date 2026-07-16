@@ -8,6 +8,7 @@ import {
   fetchRsvpsPage,
   updateRsvpAllergiesInDb,
   updateRsvpAttendanceInDb,
+  updateRsvpNotesInDb,
   updateRsvpPartyInDb,
   type RsvpDeleteResult,
   type RsvpFilter,
@@ -117,6 +118,15 @@ export async function updateRsvpDietaryNotes(input: {
   const ok = await isDashboardAuthenticated();
   if (!ok) return unauthorizedUpdate();
   return updateRsvpAllergiesInDb(input);
+}
+
+export async function updateRsvpNotes(input: {
+  id: string;
+  notes: string;
+}): Promise<RsvpUpdateResult> {
+  const ok = await isDashboardAuthenticated();
+  if (!ok) return unauthorizedUpdate();
+  return updateRsvpNotesInDb(input);
 }
 
 export async function updateRsvpParty(input: {
