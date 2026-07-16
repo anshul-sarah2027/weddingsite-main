@@ -3,6 +3,7 @@
 import { useEffect, useState, useTransition } from "react";
 import {
   CheckCircle2,
+  ChevronDown,
   Pencil,
   Trash2,
   UtensilsCrossed,
@@ -16,6 +17,12 @@ import {
   updateRsvpDietaryNotes,
   updateRsvpParty,
 } from "@/actions/dashboard-rsvps";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import type { RsvpRow } from "@/types/database";
 import { cn } from "@/lib/utils";
 
@@ -285,90 +292,73 @@ export function RsvpEntry({
         </div>
       )}
 
-      <div className="mt-5 flex flex-col gap-2 border-t border-forest/8 pt-4 sm:flex-row sm:flex-wrap">
-        {row.attending ? (
-          <button
-            type="button"
-            onClick={() =>
-              setPanel((value) => (value === "attendance" ? null : "attendance"))
-            }
-            className={cn(
-              "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-              panel === "attendance"
-                ? "border-[#8B3A3A]/35 bg-[#8B3A3A]/08 text-[#8B3A3A]"
-                : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#8B3A3A]/30 hover:text-[#8B3A3A]",
-            )}
-          >
-            <UserX className="size-3.5" strokeWidth={1.75} />
-            Mark as not attending
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() =>
-              setPanel((value) => (value === "attendance" ? null : "attendance"))
-            }
-            className={cn(
-              "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-              panel === "attendance"
-                ? "border-[#3E5643]/35 bg-[#3E5643]/08 text-[#3E5643]"
-                : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#3E5643]/30 hover:text-[#3E5643]",
-            )}
-          >
-            <UserCheck className="size-3.5" strokeWidth={1.75} />
-            Mark as attending
-          </button>
-        )}
+      <div className="mt-5 flex items-center justify-end border-t border-forest/8 pt-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="font-heading inline-flex items-center gap-1.5 rounded-sm border border-forest/15 bg-[#FAF7F2]/80 px-3.5 py-2.5 text-xs tracking-[0.12em] text-[#2F3A2E]/70 uppercase transition-colors hover:border-[#B59A63]/40 hover:text-[#2F3A2E]"
+            >
+              Manage
+              <ChevronDown className="size-3.5" strokeWidth={1.75} />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="min-w-[13rem]">
+            <DropdownMenuItem
+              onSelect={() =>
+                setPanel((value) =>
+                  value === "attendance" ? null : "attendance",
+                )
+              }
+              className="font-heading gap-2 py-2 text-[0.8rem] tracking-[0.02em] text-[#2F3A2E]"
+            >
+              {row.attending ? (
+                <>
+                  <UserX className="size-4" strokeWidth={1.75} />
+                  Mark as not attending
+                </>
+              ) : (
+                <>
+                  <UserCheck className="size-4" strokeWidth={1.75} />
+                  Mark as attending
+                </>
+              )}
+            </DropdownMenuItem>
 
-        {row.attending ? (
-          <button
-            type="button"
-            onClick={() =>
-              setPanel((value) => (value === "party" ? null : "party"))
-            }
-            className={cn(
-              "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-              panel === "party"
-                ? "border-[#B59A63]/45 bg-[#B59A63]/10 text-[#2F3A2E]"
-                : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#B59A63]/40 hover:text-[#2F3A2E]",
-            )}
-          >
-            <Pencil className="size-3.5" strokeWidth={1.75} />
-            Edit party
-          </button>
-        ) : null}
+            {row.attending ? (
+              <DropdownMenuItem
+                onSelect={() =>
+                  setPanel((value) => (value === "party" ? null : "party"))
+                }
+                className="font-heading gap-2 py-2 text-[0.8rem] tracking-[0.02em] text-[#2F3A2E]"
+              >
+                <Pencil className="size-4" strokeWidth={1.75} />
+                Edit party
+              </DropdownMenuItem>
+            ) : null}
 
-        <button
-          type="button"
-          onClick={() =>
-            setPanel((value) => (value === "diet" ? null : "diet"))
-          }
-          className={cn(
-            "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-            panel === "diet"
-              ? "border-[#B59A63]/45 bg-[#B59A63]/10 text-[#2F3A2E]"
-              : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#B59A63]/40 hover:text-[#2F3A2E]",
-          )}
-        >
-          <UtensilsCrossed className="size-3.5" strokeWidth={1.75} />
-          {allergies ? "Update dietary notes" : "Add dietary notes"}
-        </button>
+            <DropdownMenuItem
+              onSelect={() =>
+                setPanel((value) => (value === "diet" ? null : "diet"))
+              }
+              className="font-heading gap-2 py-2 text-[0.8rem] tracking-[0.02em] text-[#2F3A2E]"
+            >
+              <UtensilsCrossed className="size-4" strokeWidth={1.75} />
+              {allergies ? "Update dietary notes" : "Add dietary notes"}
+            </DropdownMenuItem>
 
-        <button
-          type="button"
-          onClick={() =>
-            setPanel((value) => (value === "delete" ? null : "delete"))
-          }
-          className={cn(
-            "font-heading inline-flex items-center justify-center gap-2 rounded-sm border px-3.5 py-2.5 text-xs tracking-[0.12em] uppercase transition-colors",
-            panel === "delete"
-              ? "border-[#8B3A3A]/35 bg-[#8B3A3A]/08 text-[#8B3A3A]"
-              : "border-forest/15 bg-[#FAF7F2]/80 text-[#2F3A2E]/70 hover:border-[#8B3A3A]/30 hover:text-[#8B3A3A]",
-          )}
-        >
-          <Trash2 className="size-3.5" strokeWidth={1.75} />
-          Delete
-        </button>
+            <DropdownMenuItem
+              variant="destructive"
+              onSelect={() =>
+                setPanel((value) => (value === "delete" ? null : "delete"))
+              }
+              className="font-heading gap-2 py-2 text-[0.8rem] tracking-[0.02em]"
+            >
+              <Trash2 className="size-4" strokeWidth={1.75} />
+              Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {panel === "attendance" && (
