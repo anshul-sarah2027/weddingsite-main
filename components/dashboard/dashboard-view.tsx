@@ -46,7 +46,7 @@ function SummaryCard({
   onClick?: () => void;
 }) {
   const className = cn(
-    "rounded-sm border bg-[#FFFCFA]/95 px-4 py-5 text-left shadow-[0_8px_28px_rgba(47,58,46,0.05)] transition-[border-color,box-shadow,transform] md:px-5 md:py-6",
+    "rounded-sm border bg-[#FFFCFA]/95 px-3 py-3.5 text-left shadow-[0_8px_28px_rgba(47,58,46,0.05)] transition-[border-color,box-shadow,transform] sm:px-4 sm:py-5 md:px-5 md:py-6",
     emphasize ? "border-[#B59A63]/35" : "border-forest/10",
     active && "border-[#B59A63]/55 ring-1 ring-[#B59A63]/30",
     onClick &&
@@ -57,17 +57,19 @@ function SummaryCard({
     <>
       <p
         className={cn(
-          "font-heading text-3xl font-medium tracking-tight md:text-4xl",
+          "font-heading text-xl font-medium tracking-tight sm:text-3xl md:text-4xl",
           emphasize ? "text-[#B59A63]" : "text-[#2F3A2E]",
         )}
       >
         {value}
       </p>
-      <p className="font-heading mt-2 text-[0.7rem] tracking-[0.16em] text-[#2F3A2E]/55 uppercase md:text-xs">
+      <p className="font-heading mt-1 text-[0.62rem] tracking-[0.1em] text-[#2F3A2E]/55 uppercase sm:mt-2 sm:text-[0.7rem] sm:tracking-[0.16em] md:text-xs">
         {label}
       </p>
       {hint ? (
-        <p className="font-heading mt-1.5 text-sm text-[#2F3A2E]/45">{hint}</p>
+        <p className="font-heading mt-1 hidden text-sm text-[#2F3A2E]/45 sm:mt-1.5 sm:block">
+          {hint}
+        </p>
       ) : null}
     </>
   );
@@ -476,7 +478,7 @@ export function DashboardView({
 
       <section
         aria-label="Full RSVP totals"
-        className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4"
+        className="grid grid-cols-3 gap-2 sm:gap-4"
       >
         <SummaryCard
           value={stats.totalGuests}
@@ -501,21 +503,24 @@ export function DashboardView({
       </section>
 
       {(stats.withAllergies > 0 || stats.withNotes > 0) && (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {stats.withAllergies > 0 && (
             <button
               type="button"
               onClick={() => setNotesModal("allergies")}
-              className="rounded-sm border border-forest/10 bg-[#FFFCFA]/90 px-4 py-4 text-left transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[#B59A63]/40 hover:shadow-[0_12px_32px_rgba(47,58,46,0.08)]"
+              className="rounded-sm border border-forest/10 bg-[#FFFCFA]/90 px-3 py-3 text-left transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[#B59A63]/40 hover:shadow-[0_12px_32px_rgba(47,58,46,0.08)] sm:px-4 sm:py-4"
             >
-              <p className="font-heading text-2xl font-medium text-[#2F3A2E]">
+              <p className="font-heading text-lg font-medium text-[#2F3A2E] sm:text-2xl">
                 {stats.withAllergies}
               </p>
-              <p className="font-heading mt-1 text-[0.7rem] tracking-[0.14em] text-[#2F3A2E]/50 uppercase">
+              <p className="font-heading mt-1 text-[0.62rem] tracking-[0.1em] text-[#2F3A2E]/50 uppercase sm:text-[0.7rem] sm:tracking-[0.14em]">
                 Food / allergy notes
               </p>
-              <p className="font-heading mt-2 text-sm text-[#B59A63]">
-                Tap to view names & details →
+              <p className="font-heading mt-1.5 text-xs text-[#B59A63] sm:mt-2 sm:text-sm">
+                <span className="sm:hidden">View details →</span>
+                <span className="hidden sm:inline">
+                  Tap to view names &amp; details →
+                </span>
               </p>
             </button>
           )}
@@ -523,16 +528,19 @@ export function DashboardView({
             <button
               type="button"
               onClick={() => setNotesModal("notes")}
-              className="rounded-sm border border-forest/10 bg-[#FFFCFA]/90 px-4 py-4 text-left transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[#B59A63]/40 hover:shadow-[0_12px_32px_rgba(47,58,46,0.08)]"
+              className="rounded-sm border border-forest/10 bg-[#FFFCFA]/90 px-3 py-3 text-left transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[#B59A63]/40 hover:shadow-[0_12px_32px_rgba(47,58,46,0.08)] sm:px-4 sm:py-4"
             >
-              <p className="font-heading text-2xl font-medium text-[#2F3A2E]">
+              <p className="font-heading text-lg font-medium text-[#2F3A2E] sm:text-2xl">
                 {stats.withNotes}
               </p>
-              <p className="font-heading mt-1 text-[0.7rem] tracking-[0.14em] text-[#2F3A2E]/50 uppercase">
+              <p className="font-heading mt-1 text-[0.62rem] tracking-[0.1em] text-[#2F3A2E]/50 uppercase sm:text-[0.7rem] sm:tracking-[0.14em]">
                 Extra notes
               </p>
-              <p className="font-heading mt-2 text-sm text-[#B59A63]">
-                Tap to view names & details →
+              <p className="font-heading mt-1.5 text-xs text-[#B59A63] sm:mt-2 sm:text-sm">
+                <span className="sm:hidden">View details →</span>
+                <span className="hidden sm:inline">
+                  Tap to view names &amp; details →
+                </span>
               </p>
             </button>
           )}
