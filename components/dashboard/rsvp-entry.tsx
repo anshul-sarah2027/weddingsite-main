@@ -59,8 +59,8 @@ export function RsvpEntry({
   const notes = row.notes?.trim();
   const [panel, setPanel] = useState<ManagePanel>(null);
   const [dietDraft, setDietDraft] = useState(row.allergies ?? "");
-  const [partySizeDraft, setPartySizeDraft] = useState(() =>
-    initialPartySize(row),
+  const [partySizeInput, setPartySizeInput] = useState(() =>
+    String(initialPartySize(row)),
   );
   const [guestNamesDraft, setGuestNamesDraft] = useState(() =>
     resizeGuestNames(row.guest_names ?? [row.full_name], initialPartySize(row)),
@@ -71,7 +71,7 @@ export function RsvpEntry({
   useEffect(() => {
     const size = initialPartySize(row);
     setDietDraft(row.allergies ?? "");
-    setPartySizeDraft(size);
+    setPartySizeInput(String(size));
     setGuestNamesDraft(
       resizeGuestNames(row.guest_names ?? [row.full_name], size),
     );
@@ -82,16 +82,36 @@ export function RsvpEntry({
     setActionError(null);
     const size = initialPartySize(row);
     setDietDraft(row.allergies ?? "");
-    setPartySizeDraft(size);
+    setPartySizeInput(String(size));
     setGuestNamesDraft(
       resizeGuestNames(row.guest_names ?? [row.full_name], size),
     );
   }
 
-  function updatePartySizeDraft(next: number) {
-    const size = Math.min(10, Math.max(1, next));
-    setPartySizeDraft(size);
+  function parsePartySize(raw: string) {
+    const size = Math.min(10, Math.max(1, Number(raw) || 1));
+    return size;
+  }
+
+  function handlePartySizeChange(raw: string) {
+    // Allow clearing while typing on mobile (don't force back to 1).
+    if (raw === "") {
+      setPartySizeInput("");
+      return;
+    }
+    if (!/^\d{1,2}$/.test(raw)) return;
+    setPartySizeInput(raw);
+    const size = Number(raw);
+    if (size >= 1 && size <= 10) {
+      setGuestNamesDraft((current) => resizeGuestNames(current, size));
+    }
+  }
+
+  function commitPartySize() {
+    const size = parsePartySize(partySizeInput);
+    setPartySizeInput(String(size));
     setGuestNamesDraft((current) => resizeGuestNames(current, size));
+    return size;
   }
 
   function saveAttendance(nextAttending: boolean) {
@@ -128,11 +148,15 @@ export function RsvpEntry({
 
   function saveParty() {
     setActionError(null);
+    const partySize = parsePartySize(partySizeInput);
+    const names = resizeGuestNames(guestNamesDraft, partySize);
+    setPartySizeInput(String(partySize));
+    setGuestNamesDraft(names);
     startTransition(async () => {
       const result = await updateRsvpParty({
         id: row.id,
-        partySize: partySizeDraft,
-        guestNames: guestNamesDraft,
+        partySize,
+        guestNames: names,
       });
       if (!result.ok) {
         setActionError(result.error);
@@ -406,13 +430,13 @@ export function RsvpEntry({
             </label>
             <input
               id={`party-size-${row.id}`}
-              type="number"
-              min={1}
-              max={10}
-              value={partySizeDraft}
-              onChange={(event) =>
-                updatePartySizeDraft(Number(event.target.value) || 1)
-              }
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="off"
+              value={partySizeInput}
+              onChange={(event) => handlePartySizeChange(event.target.value)}
+              onBlur={commitPartySize}
               className="font-heading h-10 w-24 rounded-sm border border-forest/12 bg-[#FFFCFA] px-3 text-sm text-[#2F3A2E] outline-none focus:border-[#B59A63]/45"
             />
           </div>

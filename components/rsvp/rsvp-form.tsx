@@ -50,10 +50,10 @@ function FieldError({ message }: { message?: string }) {
 function resizeGuestNames(names: string[], size: number, primaryName: string) {
   const next = names.slice(0, size);
   while (next.length < size) {
-    next.push(next.length === 0 ? primaryName : "");
+    next.push("");
   }
-  if (size > 0 && !next[0]?.trim() && primaryName.trim()) {
-    next[0] = primaryName;
+  if (size > 0) {
+    next[0] = primaryName.trim();
   }
   return next;
 }
@@ -82,33 +82,38 @@ export function RsvpForm() {
   const partySize = watch("partySize");
   const fullName = watch("fullName");
   const guestNames = watch("guestNames");
+  const partyCount = Math.min(10, Math.max(1, Number(partySize) || 1));
 
+  // Keep guest list length in sync with party size, and slot 0 = full name.
   useEffect(() => {
     if (attending !== true) return;
-    const size = Math.min(10, Math.max(1, Number(partySize) || 1));
-    const current = getValues("guestNames");
     const primary = getValues("fullName");
-    if (current.length === size) return;
-    setValue("guestNames", resizeGuestNames(current, size, primary), {
-      shouldValidate: false,
-    });
-  }, [attending, partySize, getValues, setValue]);
-
-  useEffect(() => {
-    if (attending !== true || !fullName.trim()) return;
     const current = getValues("guestNames");
-    if (current[0]?.trim()) return;
-    const next = [...current];
-    next[0] = fullName;
+    const next = resizeGuestNames(current, partyCount, primary);
+    const unchanged =
+      next.length === current.length &&
+      next.every((name, index) => name === current[index]);
+    if (unchanged) return;
     setValue("guestNames", next, { shouldValidate: false });
-  }, [fullName, attending, getValues, setValue]);
+  }, [attending, partyCount, fullName, getValues, setValue]);
 
   const onSubmit = handleSubmit((values) => {
     setFormError(null);
     clearErrors();
 
+    const size = Math.min(10, Math.max(1, Number(values.partySize) || 1));
+    const syncedGuestNames = resizeGuestNames(
+      values.guestNames,
+      size,
+      values.fullName,
+    );
+
     startTransition(async () => {
-      const result = await submitRsvp(values);
+      const result = await submitRsvp({
+        ...values,
+        partySize: size,
+        guestNames: syncedGuestNames,
+      });
 
       if (!result.ok) {
         setFormError(result.error);
@@ -263,19 +268,26 @@ export function RsvpForm() {
             </FieldLabel>
             <Input
               id="partySize"
-              type="number"
-              min={1}
-              max={10}
+              type="text"
               inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="off"
               className={fieldClassName}
               aria-invalid={Boolean(errors.partySize)}
               {...register("partySize", {
-                valueAsNumber: true,
                 required: "Please enter your party size",
-                min: { value: 1, message: "Party size must be at least 1" },
-                max: {
-                  value: 10,
-                  message: "Please contact us for parties larger than 10",
+                setValueAs: (value) => {
+                  if (value === "" || value == null) return NaN;
+                  return Number(value);
+                },
+                validate: (value) => {
+                  if (!Number.isFinite(value) || value < 1) {
+                    return "Party size must be at least 1";
+                  }
+                  if (value > 10) {
+                    return "Please contact us for parties larger than 10";
+                  }
+                  return true;
                 },
               })}
             />
@@ -286,28 +298,47 @@ export function RsvpForm() {
             <p className="font-heading mb-4 text-[0.7rem] tracking-[0.2em] text-forest/78 uppercase">
               Guest names <span className="text-[#B59A63]">*</span>
             </p>
-            <div className="space-y-5">
-              {guestNames.map((_, index) => (
-                <div key={`guest-${index}`}>
-                  <Input
-                    aria-label={
-                      index === 0
-                        ? "Primary guest name"
-                        : `Guest ${index + 1} name`
-                    }
-                    className={fieldClassName}
-                    placeholder={
-                      index === 0
-                        ? "Your name"
-                        : `Guest ${index + 1} full name`
-                    }
-                    {...register(`guestNames.${index}` as const, {
-                      required: "Please enter each guest's name",
-                    })}
-                  />
-                </div>
-              ))}
+
+            <div className="border-b border-[#2F3A2E]/18 py-3">
+              <p className="font-heading text-[0.65rem] tracking-[0.14em] text-[#B59A63] uppercase">
+                You
+              </p>
+              <p className="font-heading mt-1 text-base text-forest md:text-[1.05rem]">
+                {fullName.trim() || "Enter your full name above"}
+              </p>
             </div>
+
+            {partyCount > 1 ? (
+              <div className="mt-5 space-y-5">
+                <p className="font-heading text-sm text-forest/85">
+                  Add the other {partyCount - 1}{" "}
+                  {partyCount === 2 ? "guest" : "guests"} in your party.
+                </p>
+                {guestNames.slice(1).map((_, offset) => {
+                  const index = offset + 1;
+                  return (
+                    <div key={`guest-${index}`}>
+                      <FieldLabel htmlFor={`guest-${index}`} required>
+                        Guest {index + 1}
+                      </FieldLabel>
+                      <Input
+                        id={`guest-${index}`}
+                        className={fieldClassName}
+                        placeholder={`Guest ${index + 1} full name`}
+                        {...register(`guestNames.${index}` as const, {
+                          required: "Please enter each guest's name",
+                        })}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="font-heading mt-4 text-sm text-forest/85">
+                You&apos;re counted as the one guest from your name above.
+              </p>
+            )}
+
             <FieldError
               message={
                 typeof errors.guestNames?.message === "string"

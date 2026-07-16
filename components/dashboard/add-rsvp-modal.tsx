@@ -25,7 +25,7 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [attending, setAttending] = useState(true);
-  const [partySize, setPartySize] = useState(1);
+  const [partySizeInput, setPartySizeInput] = useState("1");
   const [guestNames, setGuestNames] = useState([""]);
   const [allergies, setAllergies] = useState("");
   const [notes, setNotes] = useState("");
@@ -58,7 +58,7 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
     setEmail("");
     setPhone("");
     setAttending(true);
-    setPartySize(1);
+    setPartySizeInput("1");
     setGuestNames([""]);
     setAllergies("");
     setNotes("");
@@ -70,9 +70,12 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
     reset();
   }
 
-  function updatePartySize(next: number) {
-    const size = Math.min(10, Math.max(1, next));
-    setPartySize(size);
+  function parsePartySize(raw: string) {
+    return Math.min(10, Math.max(1, Number(raw) || 1));
+  }
+
+  function applyPartySize(size: number) {
+    setPartySizeInput(String(size));
     setGuestNames((current) => {
       const resized = resizeGuestNames(current, size);
       if (size >= 1 && !resized[0]?.trim() && fullName.trim()) {
@@ -80,6 +83,31 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
       }
       return resized;
     });
+  }
+
+  function handlePartySizeChange(raw: string) {
+    if (raw === "") {
+      setPartySizeInput("");
+      return;
+    }
+    if (!/^\d{1,2}$/.test(raw)) return;
+    setPartySizeInput(raw);
+    const size = Number(raw);
+    if (size >= 1 && size <= 10) {
+      setGuestNames((current) => {
+        const resized = resizeGuestNames(current, size);
+        if (!resized[0]?.trim() && fullName.trim()) {
+          resized[0] = fullName.trim();
+        }
+        return resized;
+      });
+    }
+  }
+
+  function commitPartySize() {
+    const size = parsePartySize(partySizeInput);
+    applyPartySize(size);
+    return size;
   }
 
   if (!open || !mounted) return null;
@@ -130,13 +158,24 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
             event.preventDefault();
             setError(null);
             startTransition(async () => {
+              const partySize = attending
+                ? parsePartySize(partySizeInput)
+                : undefined;
+              const names =
+                attending && partySize
+                  ? resizeGuestNames(guestNames, partySize)
+                  : undefined;
+              if (attending && partySize) {
+                setPartySizeInput(String(partySize));
+                setGuestNames(names ?? guestNames);
+              }
               const result = await createDashboardRsvp({
                 fullName,
                 email,
                 phone,
                 attending,
-                partySize: attending ? partySize : undefined,
-                guestNames: attending ? guestNames : undefined,
+                partySize,
+                guestNames: names,
                 allergies: attending ? allergies : undefined,
                 notes,
               });
@@ -200,7 +239,7 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
                       onClick={() => {
                         setAttending(option.value);
                         if (option.value) {
-                          updatePartySize(Math.max(1, partySize));
+                          applyPartySize(parsePartySize(partySizeInput));
                         }
                       }}
                       className={cn(
@@ -227,13 +266,15 @@ export function AddRsvpModal({ open, onClose, onCreated }: AddRsvpModalProps) {
                     </label>
                     <input
                       id="add-party-size"
-                      type="number"
-                      min={1}
-                      max={10}
-                      value={partySize}
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      autoComplete="off"
+                      value={partySizeInput}
                       onChange={(event) =>
-                        updatePartySize(Number(event.target.value) || 1)
+                        handlePartySizeChange(event.target.value)
                       }
+                      onBlur={commitPartySize}
                       className="font-heading h-11 w-24 rounded-sm border border-forest/12 bg-[#FFFCFA] px-3 text-sm text-[#2F3A2E] outline-none focus:border-[#B59A63]/45"
                     />
                   </div>
