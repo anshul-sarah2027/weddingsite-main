@@ -188,7 +188,7 @@ function buildDecliningHtml(data: Extract<RsvpInput, { attending: false }>) {
       Thank you for letting us know. We're sorry you won't be able to join us in Kumarakom, and we're grateful you took a moment to reply.
     </p>
     <p style="margin:20px 0 0;color:${FOREST_SOFT};">
-      If your plans change before 14 August 2026, we'd love to hear from you.
+      If your plans change before 31 August 2026, we'd love to hear from you.
     </p>
   `;
 

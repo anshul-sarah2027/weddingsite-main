@@ -302,7 +302,7 @@ export function RsvpSection({
           {/* Deadline */}
           <FadeIn duration={0.8} delay={STAGGER * 6}>
             <p className="font-heading mt-5 text-[0.9375rem] font-medium uppercase tracking-[2.5px] text-[#3E5643]/90 sm:text-sm sm:tracking-[3px]">
-              Kindly RSVP by 14 August 2026
+              Kindly RSVP by 31 August 2026
             </p>
           </FadeIn>
 

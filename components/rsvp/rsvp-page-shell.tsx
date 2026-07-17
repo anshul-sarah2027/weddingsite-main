@@ -124,7 +124,7 @@ export function RsvpPageShell() {
 
             <FadeIn duration={0.9} delay={STAGGER * 4}>
               <p className="font-heading mt-5 text-[0.8125rem] font-medium tracking-[0.22em] text-[#3E5643]/85 uppercase">
-                Please reply by 14 August 2026
+                Please reply by 31 August 2026
               </p>
             </FadeIn>
 

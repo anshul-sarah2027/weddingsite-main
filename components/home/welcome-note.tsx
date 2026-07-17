@@ -161,7 +161,7 @@ export function WelcomeNote() {
 
             <p className="font-heading text-body-lg text-forest/85 leading-relaxed">
               We kindly ask that you RSVP by{" "}
-              <span className={highlight}>14th August 2026</span>.
+              <span className={highlight}>31st August 2026</span>.
             </p>
 
             <div className="pt-4">
