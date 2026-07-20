@@ -70,7 +70,7 @@ export const dressCodeEvents: DressCodeEvent[] = [
     name: "Reception",
     poeticTitle: "Under a Thousand Lights",
     description:
-      "Elegant evening wear. For women, evening gowns or dressy sarees. We kindly ask women to avoid white or cream. For men, suit or tuxedo.",
+      "Elegant evening wear. For women, evening gowns or dressy sarees. We kindly ask women to avoid white or cream. For men, suit, tuxedo or bandhgala.",
       
     images: [
       {
