@@ -20,6 +20,11 @@ function linkList() {
     { label: "Wedding Weekend", detail: "Full schedule & dress code", href: "/events" },
     { label: "Venue", detail: "Kumarakom Lake Resort & getting there", href: "/venue" },
     { label: "Accommodation", detail: "Where to stay nearby", href: "/accommodation" },
+    {
+      label: "Wedding Wardrobe",
+      detail: "What to wear & where to shop",
+      href: "/guest-guide#wedding-shopping",
+    },
     { label: "Guest Guide", detail: "Kerala tips, food & FAQs", href: "/guest-guide" },
   ];
 
