@@ -9,6 +9,7 @@ export type RsvpRow = {
   allergies: string | null;
   notes: string | null;
   created_at: string;
+  reminder_sent_at: string | null;
 };
 
 export type RsvpInsert = {

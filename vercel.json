@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/health",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/rsvp-reminder",
+      "schedule": "30 3 * * *"
+    }
+  ]
+}
