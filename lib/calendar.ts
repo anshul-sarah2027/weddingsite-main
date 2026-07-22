@@ -30,7 +30,7 @@ export function buildWeddingWeekendIcs(): string {
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
-    `UID:wedding-weekend-${WEDDING_WEEKEND_CALENDAR.startDate}@anshulandsarah.com`,
+    `UID:wedding-weekend-${WEDDING_WEEKEND_CALENDAR.startDate}@sarahandanshul.com`,
     `DTSTAMP:${stamp}`,
     `DTSTART;VALUE=DATE:${WEDDING_WEEKEND_CALENDAR.startDate}`,
     `DTEND;VALUE=DATE:${WEDDING_WEEKEND_CALENDAR.endDate}`,

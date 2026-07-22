@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "A celebration in Kumarakom",
   description:
     "Join Sarah and Anshul for an unforgettable wedding celebration on the serene backwaters of Kumarakom, Kerala — January 2027.",
-  url: "https://anshulandsarah.com",
+  url: "https://sarahandanshul.com",
   locale: "en_IE",
   weddingDate: "2027-01-30",
   /** Single-day format (countdown anchors, etc.) */
